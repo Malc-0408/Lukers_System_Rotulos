@@ -103,6 +103,15 @@
             transform: translateY(-2px);
         }
 
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
         .btn-danger {
             background: #dc3545;
             color: white;
@@ -147,6 +156,204 @@
             display: none;
         }
 
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .tab.active {
+            background: #1e88e5;
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background: #e3f2fd;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .mode-selector {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            border: 2px solid #1e88e5;
+            border-radius: 5px;
+            background: white;
+            color: #1e88e5;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: #1e88e5;
+            color: white;
+        }
+
+        .proveedor-section {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .proveedor-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .proveedor-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.1em;
+            color: #333;
+            background: white;
+        }
+
+        .selection-options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .option-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .option-tab {
+            flex: 1;
+            padding: 12px 10px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .option-tab.active {
+            background: #1e88e5;
+            color: white;
+        }
+
+        .option-content {
+            display: none;
+            background: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        .option-content.active {
+            display: block;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .checkbox-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .checkbox-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .checkbox-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .checkbox-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox-item input {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #1e88e5;
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .selection-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
         .status-message {
             margin-top: 20px;
             padding: 15px;
@@ -182,9 +389,190 @@
             font-size: 0.9em;
         }
 
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1e88e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .rotulos-container {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .rotulo-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .rotulo-header {
+            background: #1e88e5;
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rotulo-content {
+            padding: 20px;
+        }
+
+        .rotulo {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            border: 2px solid #333;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+
+        .rotulo-titulo {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 5px;
+            background: white;
+            color: black;
+            border-bottom: 1px solid #333;
+        }
+
+        .rotulo-info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+        }
+
+        .rotulo-info-table td {
+            border: 1px solid #666;
+            padding: 5px;
+            vertical-align: middle;
+        }
+
+        .rotulo-info-header {
+            background: #4472C4;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .rotulo-ubicacion-header {
+            background: #E74C3C;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .rotulo-section-title {
+            text-align: center;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .rotulo-producto-title {
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .rotulo-codigo-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0;
+            font-size: 9px;
+        }
+
+        .rotulo-codigo-table td {
+            padding: 3px;
+            vertical-align: middle;
+        }
+
+        .rotulo-tallas-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #333;
+            font-size: 9px;
+        }
+
+        .rotulo-tallas-table th {
+            background: #F0F0F0;
+            border: 1px solid #333;
+            padding: 3px;
+            text-align: center;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .rotulo-tallas-table td {
+            border: 1px solid #333;
+            padding: 3px;
+            text-align: center;
+            height: 70px;
+            vertical-align: center;
+            font-size: 12px;
+        }
+
+        .rotulo-sticker-col {
+            background: #FFFFFF;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .print-area, .print-area * {
+                visibility: visible;
+            }
+            
+            .print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            
+            .rotulo-header, .action-buttons {
+                display: none !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .config-form {
                 grid-template-columns: 1fr;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs, .option-tabs {
+                flex-direction: column;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .mode-buttons {
+                flex-direction: column;
             }
         }
     </style>
@@ -223,19 +611,121 @@
         </div>
 
         <div id="mainContent" class="main-content">
-            <h2>Sistema OAuth Conectado</h2>
-            <p>Aquí se cargarán los datos de la hoja de cálculo.</p>
-        </div>
+            <div class="mode-selector">
+                <h3>Tipo de Rótulo</h3>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="original">RÓTULO ORIGINAL</button>
+                    <button class="mode-btn" data-mode="concodigo">RÓTULO CON CÓDIGO + COLOR</button>
+                </div>
+            </div>
 
-        <div id="statusMessage" class="status-message"></div>
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab(event, 'generator')">GENERADOR DE RÓTULOS</button>
+                <button class="tab" onclick="switchTab(event, 'analysis')">ANÁLISIS</button>
+            </div>
+
+            <div id="generatorTab" class="tab-content active">
+                <div class="proveedor-section">
+                    <div class="proveedor-label">SELECCIONAR PROVEEDOR</div>
+                    <select class="proveedor-select" id="proveedorSelect">
+                        <option value="">-- Selecciona un proveedor --</option>
+                    </select>
+                </div>
+
+                <div id="selectionOptions" class="selection-options">
+                    <div class="option-tabs">
+                        <button class="option-tab active" onclick="switchOption(1)">SELECCIÓN DIRECTA</button>
+                        <button class="option-tab" onclick="switchOption(2)">POR INTERVALO</button>
+                        <button class="option-tab" onclick="switchOption(3)">LISTA MÚLTIPLE</button>
+                    </div>
+
+                    <div class="option-content active" id="option1">
+                        <div class="two-column">
+                            <div class="form-group">
+                                <label class="form-label">Parihuela:</label>
+                                <select class="form-select" id="parihuela1">
+                                    <option value="">-- Selecciona parihuela --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Caja:</label>
+                                <select class="form-select" id="caja1">
+                                    <option value="">-- Selecciona caja --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-content" id="option2">
+                        <div class="form-group">
+                            <label class="form-label">Parihuela:</label>
+                            <select class="form-select" id="parihuela2">
+                                <option value="">-- Selecciona parihuela --</option>
+                            </select>
+                        </div>
+                        <div class="two-column">
+                            <div class="form-group">
+                                <label class="form-label">Caja Desde:</label>
+                                <select class="form-select" id="cajaDesde">
+                                    <option value="">-- Caja inicial --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Caja Hasta:</label>
+                                <select class="form-select" id="cajaHasta">
+                                    <option value="">-- Caja final --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-content" id="option3">
+                        <div class="form-group">
+                            <label class="form-label">Selecciona las combinaciones:</label>
+                            <div class="selection-controls">
+                                <div>
+                                    <button type="button" class="btn btn-primary" onclick="selectAll()">SELECCIONAR TODOS</button>
+                                    <button type="button" class="btn" onclick="selectNone()">DESELECCIONAR</button>
+                                </div>
+                                <div id="selectionCounter">0 elementos seleccionados</div>
+                            </div>
+                            <div class="checkbox-list" id="checkboxList"></div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="generateBtn" class="btn btn-success" onclick="generarRotulos()">GENERAR VISTA PREVIA</button>
+                        <button id="clearBtn" class="btn" onclick="limpiarRotulos()">LIMPIAR VISTA</button>
+                    </div>
+                </div>
+
+                <div id="statusMessage" class="status-message"></div>
+
+                <div id="rotulosContainer" class="rotulos-container">
+                    <h3>Rótulos Generados</h3>
+                    <div id="rotulosList"></div>
+                </div>
+            </div>
+
+            <div id="analysisTab" class="tab-content">
+                <h3>Análisis de Datos</h3>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="analizarDatos()">ANALIZAR CLASIFICACIÓN</button>
+                </div>
+                <div id="analysisResults"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Variables globales para las APIs de Google
+        // Variables globales
         let gapiInited = false;
         let gisInited = false;
         let tokenClient;
         let currentSpreadsheetId = '';
+        let datosCompletos = null;
+        let opcionActiva = 1;
+        let modoActivo = 'original';
 
         // Configuración
         const API_CONFIG = {
@@ -245,12 +735,12 @@
 
         // Funciones globales que Google APIs requiere
         function gapiLoaded() {
-            console.log('✅ GAPI loaded');
+            console.log('GAPI loaded');
             gapi.load('client', initializeGapiClient);
         }
 
         function gisLoaded() {
-            console.log('✅ GIS loaded');
+            console.log('GIS loaded');
             gisInited = true;
             maybeEnableButtons();
         }
@@ -262,10 +752,10 @@
                     discoveryDocs: [API_CONFIG.DISCOVERY_DOC],
                 });
                 gapiInited = true;
-                console.log('✅ GAPI client initialized');
+                console.log('GAPI client initialized');
                 maybeEnableButtons();
             } catch (error) {
-                console.error('❌ Error inicializando GAPI:', error);
+                console.error('Error inicializando GAPI:', error);
                 showStatus('Error inicializando Google API', 'error');
             }
         }
@@ -273,19 +763,18 @@
         // Habilitar botones cuando ambas APIs estén listas
         function maybeEnableButtons() {
             if (gapiInited && gisInited) {
-                console.log('✅ Ambas APIs listas, habilitando botones');
+                console.log('Ambas APIs listas, habilitando botones');
                 document.getElementById('signInBtn').disabled = false;
             }
         }
 
         // Función de autenticación
         function handleSignIn() {
-            console.log('🔑 Iniciando proceso de autenticación...');
+            console.log('Iniciando proceso de autenticación...');
             
             const clientId = document.getElementById('clientId').value.trim();
             const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
 
-            // Validaciones básicas
             if (!clientId || !clientId.includes('.apps.googleusercontent.com')) {
                 showStatus('Por favor ingresa un Client ID válido', 'error');
                 return;
@@ -298,7 +787,6 @@
 
             currentSpreadsheetId = spreadsheetId;
 
-            // Crear cliente OAuth
             try {
                 tokenClient = google.accounts.oauth2.initTokenClient({
                     client_id: clientId,
@@ -307,11 +795,11 @@
                     error_callback: handleAuthError
                 });
 
-                console.log('🔐 Solicitando token de acceso...');
+                console.log('Solicitando token de acceso...');
                 tokenClient.requestAccessToken({ prompt: 'consent' });
                 
             } catch (error) {
-                console.error('❌ Error creando token client:', error);
+                console.error('Error creando token client:', error);
                 showStatus('Error configurando autenticación: ' + error.message, 'error');
             }
         }
@@ -319,25 +807,22 @@
         // Manejar éxito de autenticación
         function handleAuthSuccess(resp) {
             if (resp.error !== undefined) {
-                console.error('❌ Auth callback error:', resp.error);
+                console.error('Auth callback error:', resp.error);
                 showStatus('Error de autenticación: ' + resp.error, 'error');
                 return;
             }
 
-            console.log('✅ Autenticación exitosa');
+            console.log('Autenticación exitosa');
             updateAuthStatus(true);
             showStatus('Autenticación exitosa con Google', 'success');
             
-            // Mostrar contenido principal
             document.getElementById('mainContent').style.display = 'block';
-            
-            // Test de acceso a Sheets
-            testSheetsAccess();
+            cargarProveedores();
         }
 
         // Manejar errores de autenticación
         function handleAuthError(error) {
-            console.error('❌ Auth error callback:', error);
+            console.error('Auth error callback:', error);
             let userMessage = 'Error de autenticación: ';
             
             switch(error.type) {
@@ -356,30 +841,6 @@
             
             showStatus(userMessage, 'error');
             updateAuthStatus(false);
-        }
-
-        // Test de acceso a Google Sheets
-        async function testSheetsAccess() {
-            try {
-                console.log('🧪 Probando acceso a Google Sheets...');
-                const response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: currentSpreadsheetId,
-                    range: 'A1:Z1',
-                });
-
-                console.log('✅ Acceso a Sheets exitoso:', response.result);
-                showStatus('Conexión exitosa con Google Sheets', 'success');
-                
-            } catch (error) {
-                console.error('❌ Error accediendo a Sheets:', error);
-                if (error.status === 403) {
-                    showStatus('Error: No tienes permisos para acceder a esta hoja', 'error');
-                } else if (error.status === 404) {
-                    showStatus('Error: Hoja de cálculo no encontrada. Verifica el ID.', 'error');
-                } else {
-                    showStatus('Error accediendo a Google Sheets: ' + error.message, 'error');
-                }
-            }
         }
 
         // Cerrar sesión
@@ -426,29 +887,707 @@
             }, 5000);
         }
 
+        // Cargar datos de proveedores
+        async function cargarProveedores() {
+            try {
+                showStatus('Cargando datos de proveedores...', 'success');
+
+                const response = await gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: currentSpreadsheetId,
+                    range: 'Clasificación!A:Z'
+                });
+
+                const values = response.result.values;
+                if (!values || values.length <= 1) {
+                    showStatus('No hay datos en la hoja de Clasificación', 'warning');
+                    return;
+                }
+
+                const encabezados = values[0];
+                const cols = {};
+                encabezados.forEach(function(header, index) {
+                    cols[header] = index;
+                });
+
+                if (cols['PARIHUELA'] === undefined || cols['CAJA'] === undefined || cols['ID Proveedor'] === undefined) {
+                    showStatus('Error: No se encontraron las columnas requeridas', 'error');
+                    return;
+                }
+
+                const proveedores = new Set();
+                const combinacionesPorProveedor = {};
+
+                for (let i = 1; i < values.length; i++) {
+                    const proveedor = String(values[i][cols['ID Proveedor']] || '').trim();
+                    const parihuela = String(values[i][cols['PARIHUELA']] || '').trim();
+                    const caja = String(values[i][cols['CAJA']] || '').trim();
+
+                    if (proveedor && parihuela && caja) {
+                        proveedores.add(proveedor);
+
+                        if (!combinacionesPorProveedor[proveedor]) {
+                            combinacionesPorProveedor[proveedor] = new Set();
+                        }
+                        combinacionesPorProveedor[proveedor].add(parihuela + '|' + caja);
+                    }
+                }
+
+                datosCompletos = {
+                    values: values,
+                    cols: cols,
+                    proveedores: Array.from(proveedores).sort(),
+                    combinacionesPorProveedor: {}
+                };
+
+                Object.keys(combinacionesPorProveedor).forEach(function(proveedor) {
+                    datosCompletos.combinacionesPorProveedor[proveedor] = Array.from(combinacionesPorProveedor[proveedor])
+                        .map(function(combo) {
+                            const parts = combo.split('|');
+                            return { parihuela: parts[0], caja: parts[1] };
+                        })
+                        .sort(function(a, b) {
+                            const numParihuelaA = parseInt(a.parihuela);
+                            const numParihuelaB = parseInt(b.parihuela);
+                            
+                            if (numParihuelaA === numParihuelaB) {
+                                return parseInt(a.caja) - parseInt(b.caja);
+                            }
+                            return numParihuelaA - numParihuelaB;
+                        });
+                });
+
+                const select = document.getElementById('proveedorSelect');
+                select.innerHTML = '<option value="">-- Selecciona un proveedor --</option>';
+                
+                datosCompletos.proveedores.forEach(function(proveedor) {
+                    const option = document.createElement('option');
+                    option.value = proveedor;
+                    option.textContent = proveedor;
+                    select.appendChild(option);
+                });
+
+                showStatus('Datos cargados: ' + proveedores.size + ' proveedores encontrados', 'success');
+
+            } catch (error) {
+                console.error('Error cargando proveedores:', error);
+                showStatus('Error cargando proveedores: ' + error.message, 'error');
+            }
+        }
+
+        // Funciones de UI
+        function switchTab(event, tabName) {
+            document.querySelectorAll('.tab').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(function(content) {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        function switchOption(optionNum) {
+            opcionActiva = optionNum;
+            
+            document.querySelectorAll('.option-tab').forEach(function(tab, index) {
+                tab.classList.toggle('active', index + 1 === optionNum);
+            });
+            
+            document.querySelectorAll('.option-content').forEach(function(content, index) {
+                content.classList.toggle('active', index + 1 === optionNum);
+            });
+        }
+
+        function cambiarProveedor() {
+            const proveedor = document.getElementById('proveedorSelect').value;
+            const optionsContainer = document.getElementById('selectionOptions');
+            
+            if (proveedor && datosCompletos) {
+                optionsContainer.style.display = 'block';
+                cargarCombinacionesProveedor(proveedor);
+            } else {
+                optionsContainer.style.display = 'none';
+            }
+        }
+
+        function cargarCombinacionesProveedor(proveedor) {
+            const combinaciones = datosCompletos.combinacionesPorProveedor[proveedor] || [];
+            
+            const parihuelas = [...new Set(combinaciones.map(function(c) { return c.parihuela; }))]
+                .sort(function(a, b) { return parseInt(a) - parseInt(b); });
+            const cajas = [...new Set(combinaciones.map(function(c) { return c.caja; }))]
+                .sort(function(a, b) { return parseInt(a) - parseInt(b); });
+            
+            cargarSelect('parihuela1', parihuelas);
+            cargarSelect('caja1', cajas);
+            cargarSelect('parihuela2', parihuelas);
+            cargarSelect('cajaDesde', cajas);
+            cargarSelect('cajaHasta', cajas);
+            
+            cargarListaMultiple(combinaciones);
+        }
+
+        function cargarSelect(id, opciones) {
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">-- Selecciona --</option>';
+            
+            opciones.forEach(function(opcion) {
+                const option = document.createElement('option');
+                option.value = opcion;
+                option.textContent = opcion;
+                select.appendChild(option);
+            });
+        }
+
+        function cargarListaMultiple(combinaciones) {
+            const lista = document.getElementById('checkboxList');
+            lista.innerHTML = '';
+            
+            combinaciones.forEach(function(combo, index) {
+                const item = document.createElement('div');
+                item.className = 'checkbox-item';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'combo_' + index;
+                checkbox.value = combo.parihuela + '|' + combo.caja;
+                checkbox.onchange = actualizarContador;
+                
+                const label = document.createElement('label');
+                label.htmlFor = 'combo_' + index;
+                label.textContent = 'Parihuela: ' + combo.parihuela + ' - Caja: ' + combo.caja;
+                
+                item.appendChild(checkbox);
+                item.appendChild(label);
+                lista.appendChild(item);
+            });
+            
+            actualizarContador();
+        }
+
+        function selectAll() {
+            const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = true;
+            });
+            actualizarContador();
+        }
+
+        function selectNone() {
+            const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+            actualizarContador();
+        }
+
+        function actualizarContador() {
+            const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
+            const contador = checkboxes.length;
+            document.getElementById('selectionCounter').textContent = 
+                contador + ' elemento' + (contador !== 1 ? 's' : '') + ' seleccionado' + (contador !== 1 ? 's' : '');
+        }
+
+        function obtenerSelecciones() {
+            const proveedor = document.getElementById('proveedorSelect').value;
+            const selecciones = [];
+
+            if (opcionActiva === 1) {
+                const parihuela = document.getElementById('parihuela1').value;
+                const caja = document.getElementById('caja1').value;
+                if (parihuela && caja) {
+                    selecciones.push({ proveedor: proveedor, parihuela: parihuela, caja: caja });
+                }
+            } else if (opcionActiva === 2) {
+                const parihuela = document.getElementById('parihuela2').value;
+                const cajaDesde = document.getElementById('cajaDesde').value;
+                const cajaHasta = document.getElementById('cajaHasta').value;
+                
+                if (parihuela && cajaDesde && cajaHasta) {
+                    const combinaciones = datosCompletos.combinacionesPorProveedor[proveedor];
+                    const cajasEnRango = combinaciones
+                        .filter(function(c) { return c.parihuela === parihuela; })
+                        .map(function(c) { return c.caja; })
+                        .filter(function(c) { return parseInt(c) >= parseInt(cajaDesde) && parseInt(c) <= parseInt(cajaHasta); });
+                    
+                    cajasEnRango.forEach(function(caja) {
+                        selecciones.push({ proveedor: proveedor, parihuela: parihuela, caja: caja });
+                    });
+                }
+            } else if (opcionActiva === 3) {
+                const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
+                checkboxes.forEach(function(checkbox) {
+                    const parts = checkbox.value.split('|');
+                    selecciones.push({ proveedor: proveedor, parihuela: parts[0], caja: parts[1] });
+                });
+            }
+
+            return selecciones;
+        }
+
+        // Funciones de generación de rótulos
+        async function generarRotulos() {
+            try {
+                const proveedor = document.getElementById('proveedorSelect').value;
+                if (!proveedor) {
+                    showStatus('Selecciona un proveedor', 'error');
+                    return;
+                }
+
+                const selecciones = obtenerSelecciones();
+                if (selecciones.length === 0) {
+                    showStatus('No hay selecciones válidas para procesar', 'warning');
+                    return;
+                }
+
+                const generateBtn = document.getElementById('generateBtn');
+                const originalText = generateBtn.textContent;
+                generateBtn.innerHTML = '<span class="loading"></span> GENERANDO...';
+                generateBtn.disabled = true;
+
+                document.getElementById('rotulosList').innerHTML = '';
+
+                let rotulosGenerados = 0;
+
+                for (const seleccion of selecciones) {
+                    try {
+                        await generarRotuloIndividual(seleccion);
+                        rotulosGenerados++;
+                    } catch (error) {
+                        console.error('Error generando rótulo:', error);
+                    }
+                }
+
+                if (rotulosGenerados > 0) {
+                    showStatus(rotulosGenerados + ' rótulos generados correctamente', 'success');
+                    document.getElementById('rotulosContainer').style.display = 'block';
+                } else {
+                    showStatus('No se pudieron generar rótulos', 'error');
+                }
+
+            } catch (error) {
+                console.error('Error en generación:', error);
+                showStatus('Error en generación: ' + error.message, 'error');
+            } finally {
+                const generateBtn = document.getElementById('generateBtn');
+                generateBtn.textContent = 'GENERAR VISTA PREVIA';
+                generateBtn.disabled = false;
+            }
+        }
+
+        async function generarRotuloIndividual(seleccion) {
+            const datosFiltrados = filtrarDatosPorSeleccion(seleccion, datosCompletos.values, datosCompletos.cols);
+            
+            if (datosFiltrados.length === 0) {
+                throw new Error('No se encontraron datos para la selección');
+            }
+
+            const grupos = agruparDatosParaRotulo(datosFiltrados, datosCompletos.cols);
+            
+            if (Object.keys(grupos).length === 0) {
+                throw new Error('No se pudieron agrupar los datos');
+            }
+
+            const rotuloHtml = construirRotuloHTML(seleccion, grupos);
+            
+            const container = document.getElementById('rotulosList');
+            container.appendChild(rotuloHtml);
+        }
+
+        function construirRotuloHTML(seleccion, grupos) {
+            const card = document.createElement('div');
+            card.className = 'rotulo-card';
+
+            const tipoTexto = modoActivo === 'original' ? 'Original' : 'Con Código + Color';
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'rotulo-header';
+            headerDiv.innerHTML = '<h4>Rótulo ' + tipoTexto + ' - P' + seleccion.parihuela + ' C' + seleccion.caja + ' (' + seleccion.proveedor + ')</h4><div><button class="btn btn-primary" onclick="imprimirRotulo(this)">IMPRIMIR</button></div>';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'rotulo-content print-area';
+            contentDiv.innerHTML = construirRotuloContenido(seleccion, grupos);
+
+            card.appendChild(headerDiv);
+            card.appendChild(contentDiv);
+
+            return card;
+        }
+
+        function construirRotuloContenido(seleccion, grupos) {
+            const totalStock = calcularStockTotal(grupos);
+            const fechaActual = new Date().toLocaleDateString('es-ES', { month: '2-digit', year: 'numeric' });
+            const validador = obtenerValidador(grupos);
+
+            let html = '<div class="rotulo"><div class="rotulo-titulo">📦 RÓTULO DE CAJA - ALMACÉN RD50 📦</div>';
+            html += '<table class="rotulo-info-table"><tr><td class="rotulo-info-header">INFORMACIÓN DE LA CAJA</td><td class="rotulo-ubicacion-header">UBICACIÓN DEL PRODUCTO</td></tr></table>';
+            html += '<table class="rotulo-info-table">';
+            html += '<tr><td>Proveedor: ' + seleccion.proveedor + '</td><td style="background: #FFFFFF;">Parihuela: ' + seleccion.parihuela + '</td></tr>';
+            html += '<tr><td>Validador: ' + validador + '</td><td style="background: #FFFFFF;">Caja: ' + seleccion.caja + '</td></tr>';
+            html += '<tr><td>Fecha: ' + fechaActual + '</td><td>Total Stock: ' + totalStock + '</td></tr>';
+            html += '</table>';
+
+            const porGenero = agruparPorGenero(grupos, datosCompletos.cols);
+
+            Object.keys(porGenero).forEach(function(genero) {
+                html += '<div class="rotulo-section-title">=== ' + genero + ' ===</div>';
+
+                const productosUnicos = agruparProductosUnicos(porGenero[genero], datosCompletos.cols);
+
+                Object.keys(productosUnicos).forEach(function(claveProducto) {
+                    const producto = productosUnicos[claveProducto];
+                    
+                    html += '<div class="rotulo-producto-title">▸ ' + producto.descripcion + ' | ' + producto.mundo + ' | ' + producto.marca + '</div>';
+
+                    if (modoActivo === 'concodigo' && (producto.codigo || producto.color)) {
+                        html += '<table class="rotulo-codigo-table"><tr><td>CÓDIGO: ' + (producto.codigo || 'N/A') + '</td><td style="text-align: right;">COLOR: ' + (producto.color || 'N/A') + '</td></tr></table>';
+                    }
+
+                    html += construirTablaTallas(producto.tallas);
+                });
+            });
+
+            html += '</div>';
+            return html;
+        }
+
+        function construirTablaTallas(tallas) {
+            let html = '<table class="rotulo-tallas-table"><tr><th>T-1</th><th>T-2</th><th>CANT</th><th>Sticker</th><th>T-1</th><th>T-2</th><th>CANT</th><th>Sticker</th></tr>';
+
+            if (tallas.length === 0) {
+                html += '<tr><td>-</td><td>-</td><td>-</td><td class="rotulo-sticker-col"> </td><td>-</td><td>-</td><td>-</td><td class="rotulo-sticker-col"> </td></tr>';
+            } else {
+                for (let i = 0; i < tallas.length; i += 2) {
+                    const talla1 = tallas[i];
+                    const talla2 = i + 1 < tallas.length ? tallas[i + 1] : null;
+
+                    let filaHtml = '<tr><td>' + (talla1.talla1 || '-') + '</td><td>' + (talla1.talla2 || '-') + '</td><td>' + (talla1.cantidad || '0') + '</td><td class="rotulo-sticker-col"> </td>';
+                    
+                    if (talla2) {
+                        filaHtml += '<td>' + (talla2.talla1 || '-') + '</td><td>' + (talla2.talla2 || '-') + '</td><td>' + (talla2.cantidad || '0') + '</td><td class="rotulo-sticker-col"> </td>';
+                    } else {
+                        filaHtml += '<td> </td><td> </td><td> </td><td class="rotulo-sticker-col"> </td>';
+                    }
+                    
+                    filaHtml += '</tr>';
+                    html += filaHtml;
+                }
+            }
+
+            html += '</table>';
+            return html;
+        }
+
+        function filtrarDatosPorSeleccion(seleccion, datos, cols) {
+            const datosFiltrados = [];
+            
+            for (let i = 1; i < datos.length; i++) {
+                const fila = datos[i];
+                
+                const proveedorFila = String(fila[cols['ID Proveedor']] || '').trim();
+                const parihuelaFila = String(fila[cols['PARIHUELA']] || '').trim();
+                const cajaFila = String(fila[cols['CAJA']] || '').trim();
+                
+                const coincide = proveedorFila === seleccion.proveedor &&
+                                parihuelaFila === seleccion.parihuela &&
+                                cajaFila === seleccion.caja;
+                
+                if (coincide) {
+                    datosFiltrados.push(fila);
+                }
+            }
+            
+            return datosFiltrados;
+        }
+
+        function agruparDatosParaRotulo(datosFiltrados, cols) {
+            const grupos = {};
+            
+            datosFiltrados.forEach(function(fila) {
+                const clave = modoActivo === 'concodigo' ? [
+                    String(fila[cols['DESCRIPCIÓN']] || '').trim(),
+                    String(fila[cols['MUNDO']] || '').trim(),
+                    String(fila[cols['MARCA']] || '').trim(),
+                    String(fila[cols['GENERO']] || '').trim(),
+                    String(fila[cols['PARIHUELA']] || '').trim(),
+                    String(fila[cols['CAJA']] || '').trim(),
+                    String(fila[cols['CODIGO']] || '').trim(),
+                    String(fila[cols['COLOR']] || '').trim()
+                ].join('|') : [
+                    String(fila[cols['DESCRIPCIÓN']] || '').trim(),
+                    String(fila[cols['MUNDO']] || '').trim(),
+                    String(fila[cols['MARCA']] || '').trim(),
+                    String(fila[cols['GENERO']] || '').trim(),
+                    String(fila[cols['PARIHUELA']] || '').trim(),
+                    String(fila[cols['CAJA']] || '').trim()
+                ].join('|');
+                
+                if (!grupos[clave]) {
+                    grupos[clave] = {
+                        info: {
+                            proveedor: fila[cols['ID Proveedor']] || '',
+                            marca: fila[cols['MARCA']] || '',
+                            genero: fila[cols['GENERO']] || '',
+                            descripcion: fila[cols['DESCRIPCIÓN']] || '',
+                            mundo: fila[cols['MUNDO']] || '',
+                            parihuela: fila[cols['PARIHUELA']] || '',
+                            caja: fila[cols['CAJA']] || '',
+                            codigo: fila[cols['CODIGO']] || '',
+                            color: fila[cols['COLOR']] || '',
+                            validador: fila[cols['VALIDADOR']] || ''
+                        },
+                        tallas: []
+                    };
+                }
+                
+                const talla1 = String(fila[cols['TALLA 1']] || '').trim();
+                const talla2 = String(fila[cols['TALLA 2']] || '').trim();
+                const cantidad = String(fila[cols['CANTIDAD']] || '').trim();
+                
+                if (talla1 || talla2 || cantidad) {
+                    const tallaExistente = grupos[clave].tallas.find(function(t) {
+                        return String(t.talla1 || '').trim() === talla1 && 
+                               String(t.talla2 || '').trim() === talla2;
+                    });
+                    
+                    if (tallaExistente) {
+                        tallaExistente.cantidad = (parseFloat(tallaExistente.cantidad) || 0) + (parseFloat(cantidad) || 0);
+                    } else {
+                        grupos[clave].tallas.push({
+                            talla1: talla1 || '',
+                            talla2: talla2 || '',
+                            cantidad: cantidad || ''
+                        });
+                    }
+                }
+            });
+            
+            return grupos;
+        }
+
+        function agruparPorGenero(grupos, cols) {
+            const porGenero = {};
+            
+            Object.keys(grupos).forEach(function(clave) {
+                const grupo = grupos[clave];
+                const genero = grupo.info.genero || 'SIN GÉNERO';
+                
+                if (!porGenero[genero]) {
+                    porGenero[genero] = [];
+                }
+                porGenero[genero].push(grupo);
+            });
+            
+            return porGenero;
+        }
+
+        function agruparProductosUnicos(gruposGenero, cols) {
+            const productosUnicos = {};
+            
+            gruposGenero.forEach(function(grupo) {
+                const claveProducto = modoActivo === 'concodigo' ? 
+                    grupo.info.descripcion + '|' + grupo.info.mundo + '|' + grupo.info.marca + '|' + grupo.info.codigo + '|' + grupo.info.color :
+                    grupo.info.descripcion + '|' + grupo.info.mundo + '|' + grupo.info.marca;
+                
+                if (!productosUnicos[claveProducto]) {
+                    productosUnicos[claveProducto] = {
+                        descripcion: grupo.info.descripcion,
+                        mundo: grupo.info.mundo,
+                        marca: grupo.info.marca,
+                        codigo: grupo.info.codigo,
+                        color: grupo.info.color,
+                        tallas: []
+                    };
+                }
+                
+                productosUnicos[claveProducto].tallas.push(...grupo.tallas);
+            });
+            
+            return productosUnicos;
+        }
+
+        function calcularStockTotal(grupos) {
+            let total = 0;
+            Object.values(grupos).forEach(function(grupo) {
+                grupo.tallas.forEach(function(talla) {
+                    total += parseFloat(talla.cantidad) || 0;
+                });
+            });
+            return total;
+        }
+
+        function obtenerValidador(grupos) {
+            const validadores = Object.values(grupos)
+                .map(function(g) { return g.info.validador; })
+                .filter(function(v) { return v; });
+            return validadores[0] || 'N/A';
+        }
+
+        function imprimirRotulo(button) {
+            const card = button.closest('.rotulo-card');
+            const printArea = card.querySelector('.print-area');
+            
+            const printWindow = window.open('', '_blank');
+            const printStyles = 'body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }' +
+                '.rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2px solid #333; font-family: Arial, sans-serif; color: black; }' +
+                '.rotulo-titulo { text-align: center; font-size: 14px; font-weight: bold; padding: 5px; background: white; color: black; border-bottom: 1px solid #333; }' +
+                '.rotulo-info-table { width: 100%; border-collapse: collapse; font-size: 9px; }' +
+                '.rotulo-info-table td { border: 1px solid #666; padding: 5px; vertical-align: middle; }' +
+                '.rotulo-info-header { background: #4472C4; color: white; font-weight: bold; text-align: center; font-size: 11px; }' +
+                '.rotulo-ubicacion-header { background: #E74C3C; color: white; font-weight: bold; text-align: center; font-size: 11px; }' +
+                '.rotulo-section-title { text-align: center; font-size: 11px; font-weight: bold; padding: 5px; margin: 5px 0; }' +
+                '.rotulo-producto-title { text-align: center; font-size: 10px; font-weight: bold; padding: 5px; margin: 5px 0; }' +
+                '.rotulo-codigo-table { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 9px; }' +
+                '.rotulo-codigo-table td { padding: 3px; vertical-align: middle; }' +
+                '.rotulo-tallas-table { width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 9px; }' +
+                '.rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 3px; text-align: center; font-size: 9px; font-weight: bold; }' +
+                '.rotulo-tallas-table td { border: 1px solid #333; padding: 3px; text-align: center; height: 70px; vertical-align: center; font-size: 12px; }' +
+                '.rotulo-sticker-col { background: #FFFFFF; }';
+            
+            printWindow.document.write('<!DOCTYPE html>');
+            printWindow.document.write('<html><head>');
+            printWindow.document.write('<meta charset="UTF-8">');
+            printWindow.document.write('<title>Rotulo Lukers</title>');
+            printWindow.document.write('<style>' + printStyles + '</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write('<div id="print-content"></div>');
+            printWindow.document.write('<scr' + 'ipt>');
+            printWindow.document.write('window.onload = function() {');
+            printWindow.document.write('  setTimeout(function() { window.print(); }, 100);');
+            printWindow.document.write('};');
+            printWindow.document.write('window.onafterprint = function() { window.close(); };');
+            printWindow.document.write('</scr' + 'ipt>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            
+            setTimeout(() => {
+                const printContent = printWindow.document.getElementById('print-content');
+                if (printContent && printArea) {
+                    const clonedContent = printArea.cloneNode(true);
+                    printContent.appendChild(clonedContent);
+                }
+            }, 50);
+        }
+
+        function limpiarRotulos() {
+            document.getElementById('rotulosList').innerHTML = '';
+            document.getElementById('rotulosContainer').style.display = 'none';
+            showStatus('Vista previa limpiada', 'success');
+        }
+
+        async function analizarDatos() {
+            try {
+                showStatus('Analizando datos...', 'success');
+                
+                if (!datosCompletos || !datosCompletos.values) {
+                    showStatus('Primero carga los datos', 'warning');
+                    return;
+                }
+
+                const values = datosCompletos.values;
+                const cols = datosCompletos.cols;
+                
+                const totalRegistros = values.length - 1;
+                const proveedores = new Set();
+                const grupos = {};
+
+                for (let i = 1; i < values.length; i++) {
+                    const fila = values[i];
+                    const proveedor = String(fila[cols['ID Proveedor']] || '').trim();
+                    if (proveedor) proveedores.add(proveedor);
+                    
+                    const clave = [
+                        fila[cols['DESCRIPCIÓN']],
+                        fila[cols['MUNDO']],
+                        fila[cols['MARCA']],
+                        fila[cols['GENERO']],
+                        fila[cols['PARIHUELA']],
+                        fila[cols['CAJA']]
+                    ].join('|');
+                    
+                    if (!grupos[clave]) {
+                        grupos[clave] = 0;
+                    }
+                    grupos[clave]++;
+                }
+
+                const totalGrupos = Object.keys(grupos).length;
+                const maxTallas = Math.max(...Object.values(grupos));
+                const gruposGrandes = Object.values(grupos).filter(function(count) { return count > 20; }).length;
+
+                const resultsDiv = document.getElementById('analysisResults');
+                resultsDiv.innerHTML = 
+                    '<div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px;">' +
+                        '<h4 style="color: #1e88e5; margin-bottom: 15px;">Análisis de Clasificación</h4>' +
+                        '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">' +
+                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745; text-align: center;">' +
+                                '<div style="font-size: 2em; font-weight: bold; color: #28a745;">' + totalRegistros.toLocaleString() + '</div>' +
+                                '<div style="color: #666;">Total Registros</div>' +
+                            '</div>' +
+                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #1e88e5; text-align: center;">' +
+                                '<div style="font-size: 2em; font-weight: bold; color: #1e88e5;">' + totalGrupos.toLocaleString() + '</div>' +
+                                '<div style="color: #666;">Grupos Únicos</div>' +
+                            '</div>' +
+                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; text-align: center;">' +
+                                '<div style="font-size: 2em; font-weight: bold; color: #ffc107;">' + proveedores.size + '</div>' +
+                                '<div style="color: #666;">Proveedores</div>' +
+                            '</div>' +
+                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #dc3545; text-align: center;">' +
+                                '<div style="font-size: 2em; font-weight: bold; color: #dc3545;">' + maxTallas + '</div>' +
+                                '<div style="color: #666;">Max Tallas/Grupo</div>' +
+                            '</div>' +
+                        '</div>' +
+                        (gruposGrandes > 0 ? 
+                            '<div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 15px; margin-top: 15px;">' +
+                                '<strong style="color: #856404;">⚠️ Atención:</strong> ' +
+                                gruposGrandes + ' grupos tienen más de 20 tallas (podrían requerir múltiples rótulos)' +
+                            '</div>' : '') +
+                    '</div>';
+                
+                showStatus('Análisis completado', 'success');
+
+            } catch (error) {
+                console.error('Error en análisis:', error);
+                showStatus('Error en análisis: ' + error.message, 'error');
+            }
+        }
+
         // Configurar event listeners cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📄 DOM loaded, configurando event listeners...');
+            console.log('DOM loaded, configurando event listeners...');
             
             const signInBtn = document.getElementById('signInBtn');
             const signOutBtn = document.getElementById('signOutBtn');
+            const proveedorSelect = document.getElementById('proveedorSelect');
             
             if (signInBtn) {
                 signInBtn.addEventListener('click', handleSignIn);
-                signInBtn.disabled = true; // Deshabilitado hasta que APIs estén listas
-                console.log('✅ Event listener para signIn configurado');
+                signInBtn.disabled = true;
+                console.log('Event listener para signIn configurado');
             }
             
             if (signOutBtn) {
                 signOutBtn.addEventListener('click', handleSignOut);
-                console.log('✅ Event listener para signOut configurado');
+                console.log('Event listener para signOut configurado');
             }
 
-            // Cargar credenciales guardadas
+            if (proveedorSelect) {
+                proveedorSelect.addEventListener('change', cambiarProveedor);
+            }
+            
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    modoActivo = this.dataset.mode;
+                    showStatus('Modo cambiado a: ' + this.textContent, 'success');
+                });
+            });
+
             loadSavedCredentials();
         });
 
-        // Cargar credenciales guardadas
         function loadSavedCredentials() {
             try {
                 if (typeof(Storage) !== "undefined") {
@@ -467,19 +1606,7 @@
             }
         }
 
-        // Guardar credenciales
-        function saveCredentials(clientId, spreadsheetId) {
-            try {
-                if (typeof(Storage) !== "undefined") {
-                    sessionStorage.setItem('lukers_client_id', btoa(clientId));
-                    sessionStorage.setItem('lukers_spreadsheet_id', btoa(spreadsheetId));
-                }
-            } catch (e) {
-                console.warn('No se pudieron guardar las credenciales');
-            }
-        }
-
-        console.log('🚀 Script cargado, esperando APIs de Google...');
+        console.log('Script cargado, esperando APIs de Google...');
     </script>
     
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
