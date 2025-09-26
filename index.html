@@ -860,6 +860,12 @@
                         return;
                     }
 
+                    // Verificar que las librerías estén cargadas
+                    if (!window.gapi || !window.google) {
+                        UI.showStatus('Error: Librerías de Google no cargadas. Recarga la página.', 'error');
+                        return;
+                    }
+
                     try {
                         if (typeof(Storage) !== "undefined") {
                             sessionStorage.setItem('lukers_client_id', btoa(clientId));
@@ -876,15 +882,20 @@
                             state.tokenClient = google.accounts.oauth2.initTokenClient({
                                 client_id: clientId,
                                 scope: CONFIG.SCOPES,
-                                callback: this.tokenCallback.bind(this)
+                                callback: this.tokenCallback.bind(this),
+                                error_callback: this.errorCallback.bind(this)
                             });
                         } catch (error) {
-                            UI.showStatus('Error configurando cliente OAuth', 'error');
+                            UI.showStatus('Error configurando cliente OAuth: ' + error.message, 'error');
                             return;
                         }
                     }
 
                     state.tokenClient.callback = this.tokenCallback.bind(this);
+                    state.tokenClient.error_callback = this.errorCallback.bind(this);
+
+                    // Detectar timeout
+                    const timeoutId = this.detectSilentFailure();
 
                     try {
                         if (gapi.client.getToken() === null) {
@@ -892,12 +903,78 @@
                         } else {
                             state.tokenClient.requestAccessToken({prompt: ''});
                         }
+                        
+                        // Limpiar timeout si la solicitud se procesa
+                        clearTimeout(timeoutId);
                     } catch (error) {
-                        UI.showStatus('Error solicitando token de acceso', 'error');
+                        clearTimeout(timeoutId);
+                        UI.showStatus('Error solicitando token de acceso: ' + error.message, 'error');
                     }
                 },
 
-                signOut: function() {
+                errorCallback: function(error) {
+                    console.error('OAuth Error Callback:', error);
+                    let userMessage = 'Error de autenticación: ';
+                    
+                    switch(error.type) {
+                        case 'popup_closed':
+                            userMessage += 'Ventana cerrada. Por favor, intenta de nuevo.';
+                            break;
+                        case 'popup_blocked':
+                            userMessage += 'Popup bloqueado. Por favor, habilita popups para este sitio.';
+                            break;
+                        case 'access_denied':
+                            userMessage += 'Acceso denegado. Por favor, autoriza el acceso.';
+                            break;
+                        default:
+                            userMessage += error.message || 'Error desconocido';
+                    }
+                    
+                    UI.showStatus(userMessage, 'error');
+                    UI.updateAuthStatus(false);
+                },
+
+                detectSilentFailure: function() {
+                    const timeout = setTimeout(() => {
+                        console.error('OAuth timeout - posible fallo silencioso detectado');
+                        UI.showStatus('Timeout de autenticación. Verifica la configuración OAuth.', 'error');
+                        UI.updateAuthStatus(false);
+                    }, 30000);
+                    
+                    return timeout;
+                },
+
+                errorCallback: function(error) {
+                    console.error('OAuth Error Callback:', error);
+                    let userMessage = 'Error de autenticación: ';
+                    
+                    switch(error.type) {
+                        case 'popup_closed':
+                            userMessage += 'Ventana cerrada. Por favor, intenta de nuevo.';
+                            break;
+                        case 'popup_blocked':
+                            userMessage += 'Popup bloqueado. Por favor, habilita popups para este sitio.';
+                            break;
+                        case 'access_denied':
+                            userMessage += 'Acceso denegado. Por favor, autoriza el acceso.';
+                            break;
+                        default:
+                            userMessage += error.message || 'Error desconocido';
+                    }
+                    
+                    UI.showStatus(userMessage, 'error');
+                    UI.updateAuthStatus(false);
+                },
+
+                detectSilentFailure: function() {
+                    const timeout = setTimeout(() => {
+                        console.error('OAuth timeout - posible fallo silencioso detectado');
+                        UI.showStatus('Timeout de autenticación. Verifica la configuración OAuth.', 'error');
+                        UI.updateAuthStatus(false);
+                    }, 30000);
+                    
+                    return timeout;
+                },
                     try {
                         const token = gapi.client.getToken();
                         if (token !== null) {
