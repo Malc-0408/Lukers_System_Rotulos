@@ -2055,26 +2055,38 @@
             // Exponer globalmente
             window.LukersApp = LukersApp;
 
-            // Funciones globales para compatibilidad con scripts externos
-            window.gapiLoaded = function() {
-                Auth.gapiLoaded();
-            };
-
-            window.gisLoaded = function() {
-                Auth.gisLoaded();
-            };
-
-            // Inicializar cuando el DOM esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function() {
-                    LukersApp.init();
-                });
-            } else {
-                LukersApp.init();
-            }
-
             return LukersApp;
         })();
+
+        // Funciones globales FUERA de la IIFE para que funcionen correctamente
+        function gapiLoaded() {
+            if (window.LukersApp && window.LukersApp.Auth) {
+                window.LukersApp.Auth.gapiLoaded();
+            } else {
+                console.error('LukersApp no está disponible');
+            }
+        }
+
+        function gisLoaded() {
+            if (window.LukersApp && window.LukersApp.Auth) {
+                window.LukersApp.Auth.gisLoaded();
+            } else {
+                console.error('LukersApp no está disponible');
+            }
+        }
+
+        // Exponer funciones globalmente
+        window.gapiLoaded = gapiLoaded;
+        window.gisLoaded = gisLoaded;
+
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                window.LukersApp.init();
+            });
+        } else {
+            window.LukersApp.init();
+        }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
