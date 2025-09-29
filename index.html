@@ -1906,10 +1906,10 @@
                     
                     let yPos = marginTop;
                     
-                    // HEADER PRINCIPAL
+                    // HEADER PRINCIPAL (sin emoji para compatibilidad)
                     pdf.setFontSize(14);
                     pdf.setFont('helvetica', 'bold');
-                    pdf.text('📦 RÓTULO DE CAJA - ALMACÉN RD50 📦', 297.5, yPos + 15, { align: 'center' });
+                    pdf.text('ROTULO DE CAJA - ALMACEN RD50', 297.5, yPos + 15, { align: 'center' });
                     yPos += 20;
                     
                     // TABLA DE INFORMACIÓN GENERAL (Header)
@@ -1975,16 +1975,21 @@
                         for (const product of Object.values(uniqueProducts)) {
                             // TÍTULO DE PRODUCTO
                             pdf.setFontSize(10);
-                            pdf.text(`▸ ${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
+                            pdf.text(`> ${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
                             yPos += 5;
                             
                             // TABLA CÓDIGO/COLOR (si aplica)
                             if (state.activeMode === 'concodigo' && (product.codigo || product.color)) {
                                 pdf.setFontSize(9);
                                 pdf.setFont('helvetica', 'normal');
-                                pdf.text(`CÓDIGO: ${product.codigo || 'N/A'}`, marginLeft, yPos);
-                                pdf.text(`COLOR: ${product.color || 'N/A'}`, marginLeft + 571, yPos, { align: 'right' });
+                                const codigoText = `CODIGO: ${product.codigo || 'N/A'}`;
+                                const colorText = `COLOR: ${product.color || 'N/A'}`;
+                                
+                                pdf.text(codigoText, marginLeft, yPos);
+                                pdf.text(colorText, marginLeft + 571, yPos, { align: 'right' });
                                 yPos += 12;
+                                
+                                pdf.setFont('helvetica', 'bold');
                             }
                             
                             // TABLA DE TALLAS
@@ -2512,6 +2517,7 @@
                 Search,
                 UI,
                 Utils,
+                state, // Exponer estado para acceso externo
 
                 async generateLabels() {
                     const provider = document.getElementById('proveedorSelect').value;
@@ -2526,12 +2532,17 @@
                         return;
                     }
 
+                    // Debug: Mostrar modo activo
+                    console.log('Modo activo:', state.activeMode);
+                    console.log('Columnas disponibles:', Object.keys(state.data.cols));
+
                     try {
                         UI.showSpinner(true);
                         const count = await LabelGenerator.generate(selections);
                         
                         if (count > 0) {
-                            UI.showStatus(`${count} rótulos generados`, 'success');
+                            const modoTexto = state.activeMode === 'concodigo' ? ' (CON CÓDIGO Y COLOR)' : ' (ORIGINAL)';
+                            UI.showStatus(`${count} rótulos generados${modoTexto}`, 'success');
                             document.getElementById('rotulosContainer').style.display = 'block';
                             document.getElementById('labelCount').textContent = count;
                             document.getElementById('exportAllPdfBtn').style.display = 'inline-block';
