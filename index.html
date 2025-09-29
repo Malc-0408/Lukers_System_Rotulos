@@ -855,25 +855,74 @@
 
         <div class="config-section">
             <div class="security-warning" role="alert">
-                <strong>Aviso de Seguridad:</strong> Solo usa este sistema en entornos seguros. No compartas tus credenciales de Google.
+                <strong>Aviso:</strong> Solo el administrador puede configurar las credenciales de Google Sheets. Una vez configuradas, cualquier usuario puede generar rótulos.
             </div>
-            <div class="config-grid">
-                <div class="form-group">
-                    <label class="form-label" for="clientId">Google OAuth Client ID:</label>
-                    <input type="text" id="clientId" class="form-input" placeholder="xxxxxx.apps.googleusercontent.com" maxlength="200" aria-required="true">
+            
+            <!-- Panel de Usuario Normal (mostrar siempre si hay config guardada) -->
+            <div id="userPanel" style="display: none;">
+                <div style="text-align: center; padding: 20px;">
+                    <h3>Sistema Configurado</h3>
+                    <p style="color: #666; margin: 10px 0;">Las credenciales están configuradas. Puedes iniciar sesión con Google.</p>
+                    <div style="margin-top: 20px;">
+                        <div class="auth-status" role="status" aria-live="polite" style="display: inline-flex;">
+                            <div id="statusIndicator" class="status-indicator disconnected" aria-hidden="true"></div>
+                            <span id="authStatus">No autenticado</span>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <button id="signInBtn" class="btn btn-primary" disabled aria-label="Iniciar sesión con Google">INICIAR SESIÓN CON GOOGLE</button>
+                            <button id="signOutBtn" class="btn btn-danger" style="display: none;" aria-label="Cerrar sesión">CERRAR SESIÓN</button>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-secondary" onclick="App.Auth.showAdminLogin()">Acceso Administrador</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="spreadsheetId">ID de la Hoja de Cálculo:</label>
-                    <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100" aria-required="true">
+            </div>
+
+            <!-- Panel de Admin Login -->
+            <div id="adminLoginPanel" style="text-align: center; padding: 30px;">
+                <h3>Configuración del Sistema</h3>
+                <p style="color: #666; margin-bottom: 20px;">Se requiere acceso administrativo para configurar las credenciales</p>
+                <div style="max-width: 400px; margin: 20px auto;">
+                    <div class="form-group">
+                        <label class="form-label" for="adminUser">Usuario Administrador:</label>
+                        <input type="text" id="adminUser" class="form-input" placeholder="Usuario admin" autocomplete="username">
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label class="form-label" for="adminPass">Contraseña:</label>
+                        <input type="password" id="adminPass" class="form-input" placeholder="Contraseña" autocomplete="current-password">
+                    </div>
+                    <button class="btn btn-primary" onclick="App.Auth.adminLogin()" style="margin-top: 20px;">ACCEDER</button>
                 </div>
-                <div>
-                    <div class="auth-status" role="status" aria-live="polite">
-                        <div id="statusIndicator" class="status-indicator disconnected" aria-hidden="true"></div>
-                        <span id="authStatus">No autenticado</span>
+            </div>
+
+            <!-- Panel de Configuración (solo visible para admin) -->
+            <div id="configPanel" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0;">Configuración de Google Sheets</h3>
+                    <button class="btn btn-secondary" onclick="App.Auth.closeConfigPanel()">Cerrar Configuración</button>
+                </div>
+                <div class="config-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="clientId">Google OAuth Client ID:</label>
+                        <input type="text" id="clientId" class="form-input" placeholder="xxxxxx.apps.googleusercontent.com" maxlength="200" aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="spreadsheetId">ID de la Hoja de Cálculo:</label>
+                        <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100" aria-required="true">
+                    </div>
+                    <div>
+                        <button class="btn btn-success" onclick="App.Auth.saveConfig()">GUARDAR Y APLICAR</button>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <div class="auth-status" role="status" aria-live="polite" style="display: inline-flex;">
+                        <div id="statusIndicatorAdmin" class="status-indicator disconnected" aria-hidden="true"></div>
+                        <span id="authStatusAdmin">No autenticado</span>
                     </div>
                     <div style="margin-top: 10px;">
-                        <button id="signInBtn" class="btn btn-primary" disabled aria-label="Iniciar sesión con Google">INICIAR SESIÓN</button>
-                        <button id="signOutBtn" class="btn btn-danger" style="display: none;" aria-label="Cerrar sesión">CERRAR SESIÓN</button>
+                        <button id="signInBtnAdmin" class="btn btn-primary" disabled aria-label="Iniciar sesión con Google">INICIAR SESIÓN CON GOOGLE</button>
+                        <button id="signOutBtnAdmin" class="btn btn-danger" style="display: none;" aria-label="Cerrar sesión">CERRAR SESIÓN</button>
                     </div>
                 </div>
             </div>
@@ -888,9 +937,14 @@
                             Última actualización: <strong id="updateTimestamp">No cargado</strong>
                         </div>
                     </div>
-                    <button class="btn btn-secondary" onclick="App.Data.refreshData()" id="refreshBtn" style="display: none;">
-                        🔄 REFRESCAR DATOS
-                    </button>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-secondary" onclick="App.Auth.showConfigPanel()" id="configBtn" style="display: none;">
+                            ⚙️ CONFIGURACIÓN
+                        </button>
+                        <button class="btn btn-secondary" onclick="App.Data.refreshData()" id="refreshBtn" style="display: none;">
+                            🔄 REFRESCAR DATOS
+                        </button>
+                    </div>
                 </div>
                 <div class="mode-buttons">
                     <button class="mode-btn active" data-mode="original" aria-pressed="true">RÓTULO ORIGINAL</button>
@@ -1009,7 +1063,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
         const App = (function() {
@@ -1018,18 +1071,22 @@
                 gisInited: false,
                 tokenClient: null,
                 spreadsheetId: '',
+                clientId: '',
                 data: null,
                 activeOption: 1,
                 activeMode: 'original',
                 generatedLabels: [],
                 dataIndex: null,
-                lastUpdate: null
+                lastUpdate: null,
+                isAdminLogged: false
             };
 
             const Config = {
                 DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
                 SCOPES: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-                RANGE: 'Clasificación!A:Z'
+                RANGE: 'Clasificación!A:Z',
+                ADMIN_USER: 'mluzquinos',
+                ADMIN_PASS: 'Malc-0408'
             };
 
             window.gapiLoaded = function() {
@@ -1057,32 +1114,126 @@
                         });
                         state.gapiInited = true;
                         maybeEnableButtons();
+                        Auth.checkSavedConfig();
                     } catch (error) {
                         UI.showStatus('Error inicializando Google API', 'error');
                         console.error(error);
                     }
                 },
 
-                signIn() {
+                checkSavedConfig() {
+                    try {
+                        const savedClientId = localStorage.getItem('lukers_client_id');
+                        const savedSpreadsheetId = localStorage.getItem('lukers_spreadsheet_id');
+                        
+                        if (savedClientId && savedSpreadsheetId) {
+                            // Hay configuración guardada, mostrar panel de usuario
+                            document.getElementById('adminLoginPanel').style.display = 'none';
+                            document.getElementById('userPanel').style.display = 'block';
+                            
+                            // Cargar las credenciales ocultas
+                            state.clientId = atob(savedClientId);
+                            state.spreadsheetId = atob(savedSpreadsheetId);
+                            
+                        } else {
+                            // No hay configuración, mostrar panel de admin
+                            document.getElementById('adminLoginPanel').style.display = 'block';
+                            document.getElementById('userPanel').style.display = 'none';
+                        }
+                    } catch (e) {
+                        console.warn('Error verificando configuración:', e);
+                        document.getElementById('adminLoginPanel').style.display = 'block';
+                    }
+                },
+
+                showAdminLogin() {
+                    document.getElementById('userPanel').style.display = 'none';
+                    document.getElementById('adminLoginPanel').style.display = 'block';
+                },
+
+                adminLogin() {
+                    const user = document.getElementById('adminUser').value.trim().toLowerCase();
+                    const pass = document.getElementById('adminPass').value;
+
+                    if (user === Config.ADMIN_USER && pass === Config.ADMIN_PASS) {
+                        state.isAdminLogged = true;
+                        
+                        document.getElementById('adminLoginPanel').style.display = 'none';
+                        document.getElementById('configPanel').style.display = 'block';
+                        
+                        // Cargar configuración actual en los campos
+                        Auth.loadConfigToFields();
+                        
+                        UI.showToast('Acceso administrativo concedido');
+                    } else {
+                        UI.showStatus('Usuario o contraseña incorrectos', 'error');
+                        document.getElementById('adminPass').value = '';
+                    }
+                },
+
+                closeConfigPanel() {
+                    document.getElementById('configPanel').style.display = 'none';
+                    
+                    // Verificar si hay config guardada para mostrar el panel correcto
+                    Auth.checkSavedConfig();
+                    
+                    UI.showToast('Panel de configuración cerrado');
+                },
+
+                loadConfigToFields() {
+                    try {
+                        const savedClientId = localStorage.getItem('lukers_client_id');
+                        const savedSpreadsheetId = localStorage.getItem('lukers_spreadsheet_id');
+                        
+                        if (savedClientId && savedSpreadsheetId) {
+                            document.getElementById('clientId').value = atob(savedClientId);
+                            document.getElementById('spreadsheetId').value = atob(savedSpreadsheetId);
+                        }
+                    } catch (e) {
+                        console.warn('Error cargando configuración:', e);
+                    }
+                },
+
+                saveConfig() {
                     const clientId = document.getElementById('clientId').value.trim();
                     const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
 
-                    if (!Validation.validateClientId(clientId)) {
-                        UI.showStatus('Por favor ingresa un Client ID válido', 'error');
-                        document.getElementById('clientId').classList.add('error');
+                    if (!Validation.validateClientId(clientId) || !Validation.validateSpreadsheetId(spreadsheetId)) {
+                        UI.showStatus('Por favor completa los campos correctamente', 'error');
                         return;
                     }
 
-                    if (!Validation.validateSpreadsheetId(spreadsheetId)) {
-                        UI.showStatus('Por favor ingresa un ID de hoja válido', 'error');
-                        document.getElementById('spreadsheetId').classList.add('error');
+                    try {
+                        // Guardar en localStorage
+                        localStorage.setItem('lukers_client_id', btoa(clientId));
+                        localStorage.setItem('lukers_spreadsheet_id', btoa(spreadsheetId));
+                        
+                        state.clientId = clientId;
+                        state.spreadsheetId = spreadsheetId;
+                        
+                        UI.showStatus('Configuración guardada correctamente', 'success');
+                        UI.showToast('✓ Credenciales guardadas');
+                        
+                        // Cerrar panel admin y mostrar panel usuario
+                        setTimeout(() => {
+                            document.getElementById('configPanel').style.display = 'none';
+                            document.getElementById('userPanel').style.display = 'block';
+                            UI.showToast('Ahora puedes iniciar sesión con Google');
+                        }, 1500);
+                        
+                    } catch (e) {
+                        UI.showStatus('Error guardando configuración: ' + e.message, 'error');
+                    }
+                },
+
+                signIn() {
+                    const clientId = state.clientId;
+                    const spreadsheetId = state.spreadsheetId;
+
+                    if (!clientId || !spreadsheetId) {
+                        UI.showStatus('Error: No hay credenciales configuradas', 'error');
                         return;
                     }
-
-                    document.getElementById('clientId').classList.remove('error');
-                    document.getElementById('spreadsheetId').classList.remove('error');
-
-                    state.spreadsheetId = spreadsheetId;
 
                     try {
                         state.tokenClient = google.accounts.oauth2.initTokenClient({
@@ -1098,14 +1249,57 @@
                     }
                 },
 
+                signInAdmin() {
+                    const clientId = document.getElementById('clientId').value.trim();
+                    const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
+
+                    if (!Validation.validateClientId(clientId)) {
+                        UI.showStatus('Por favor ingresa un Client ID válido', 'error');
+                        return;
+                    }
+
+                    if (!Validation.validateSpreadsheetId(spreadsheetId)) {
+                        UI.showStatus('Por favor ingresa un ID de hoja válido', 'error');
+                        return;
+                    }
+
+                    state.spreadsheetId = spreadsheetId;
+
+                    try {
+                        state.tokenClient = google.accounts.oauth2.initTokenClient({
+                            client_id: clientId,
+                            scope: Config.SCOPES,
+                            callback: Auth.handleAuthSuccessAdmin,
+                            error_callback: Auth.handleAuthError
+                        });
+
+                        state.tokenClient.requestAccessToken({ prompt: 'consent' });
+                    } catch (error) {
+                        UI.showStatus('Error configurando autenticación: ' + error.message, 'error');
+                    }
+                },
+
                 handleAuthSuccess(resp) {
                     if (resp.error !== undefined) {
                         UI.showStatus('Error de autenticación: ' + resp.error, 'error');
                         return;
                     }
 
-                    UI.updateAuthStatus(true);
+                    UI.updateAuthStatus(true, false);
                     UI.showStatus('Autenticación exitosa', 'success');
+                    UI.showToast('Conectado a Google Sheets');
+                    document.getElementById('mainContent').style.display = 'block';
+                    Data.loadProviders();
+                },
+
+                handleAuthSuccessAdmin(resp) {
+                    if (resp.error !== undefined) {
+                        UI.showStatus('Error de autenticación: ' + resp.error, 'error');
+                        return;
+                    }
+
+                    UI.updateAuthStatus(true, true);
+                    UI.showStatus('Autenticación exitosa (Admin)', 'success');
                     UI.showToast('Conectado a Google Sheets');
                     document.getElementById('mainContent').style.display = 'block';
                     Data.loadProviders();
@@ -1129,7 +1323,6 @@
                     }
                     
                     UI.showStatus(userMessage, 'error');
-                    UI.updateAuthStatus(false);
                 },
 
                 signOut() {
@@ -1138,7 +1331,20 @@
                         google.accounts.oauth2.revoke(token.access_token);
                         gapi.client.setToken('');
                     }
-                    UI.updateAuthStatus(false);
+                    UI.updateAuthStatus(false, false);
+                    UI.showStatus('Sesión cerrada', 'success');
+                    document.getElementById('mainContent').style.display = 'none';
+                    state.data = null;
+                    state.dataIndex = null;
+                },
+
+                signOutAdmin() {
+                    const token = gapi.client.getToken();
+                    if (token !== null) {
+                        google.accounts.oauth2.revoke(token.access_token);
+                        gapi.client.setToken('');
+                    }
+                    UI.updateAuthStatus(false, true);
                     UI.showStatus('Sesión cerrada', 'success');
                     document.getElementById('mainContent').style.display = 'none';
                     state.data = null;
@@ -1626,28 +1832,30 @@
                     try {
                         UI.showSpinner(true);
                         const card = button.closest('.rotulo-card');
-                        const content = card.querySelector('.rotulo-content');
                         
-                        const canvas = await html2canvas(content, {
-                            scale: 2,
-                            useCORS: true,
-                            logging: false
-                        });
-
-                        const { jsPDF } = window.jspdf;
-                        const pdf = new jsPDF('p', 'mm', 'a4');
+                        // Obtener los datos del rótulo desde el HTML
+                        const rotuloDiv = card.querySelector('.rotulo');
+                        const proveedor = rotuloDiv.querySelector('.rotulo-data-col1').textContent.replace('Proveedor: ', '').trim();
+                        const parihuela = rotuloDiv.querySelector('.rotulo-data-col2').textContent.replace('Parihuela: ', '').trim();
                         
-                        const imgData = canvas.toDataURL('image/png');
-                        const imgWidth = 210;
-                        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                        // Buscar los datos originales
+                        const selection = state.generatedLabels.find(l => 
+                            l.selection.proveedor === proveedor && 
+                            l.selection.parihuela === parihuela
+                        );
                         
-                        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-                        pdf.save(`rotulo-${Date.now()}.pdf`);
+                        if (!selection) {
+                            throw new Error('No se encontraron los datos del rótulo');
+                        }
+                        
+                        // Generar PDF directamente
+                        const pdf = await Export.generateDirectPDF(selection.selection);
+                        pdf.save(`rotulo-P${parihuela}-${Date.now()}.pdf`);
                         
                         UI.showToast('PDF exportado correctamente');
                     } catch (error) {
                         console.error('Error exportando PDF:', error);
-                        UI.showStatus('Error al exportar PDF', 'error');
+                        UI.showStatus('Error al exportar PDF: ' + error.message, 'error');
                     } finally {
                         UI.showSpinner(false);
                     }
@@ -1662,34 +1870,226 @@
                     try {
                         UI.showSpinner(true);
                         const { jsPDF } = window.jspdf;
-                        const pdf = new jsPDF('p', 'mm', 'a4');
+                        const pdf = new jsPDF('p', 'pt', 'a4');
                         
-                        const cards = document.querySelectorAll('.rotulo-card .rotulo-content');
-                        
-                        for (let i = 0; i < cards.length; i++) {
+                        for (let i = 0; i < state.generatedLabels.length; i++) {
                             if (i > 0) pdf.addPage();
-                            
-                            const canvas = await html2canvas(cards[i], {
-                                scale: 2,
-                                useCORS: true,
-                                logging: false
-                            });
-                            
-                            const imgData = canvas.toDataURL('image/png');
-                            const imgWidth = 210;
-                            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                            
-                            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                            await Export.drawPDFContent(pdf, state.generatedLabels[i].selection);
                         }
                         
                         pdf.save(`rotulos-lukers-${Date.now()}.pdf`);
-                        UI.showToast(`${cards.length} rótulos exportados a PDF`);
+                        UI.showToast(`${state.generatedLabels.length} rótulos exportados a PDF`);
                     } catch (error) {
                         console.error('Error:', error);
-                        UI.showStatus('Error exportando PDFs', 'error');
+                        UI.showStatus('Error exportando PDFs: ' + error.message, 'error');
                     } finally {
                         UI.showSpinner(false);
                     }
+                },
+
+                async generateDirectPDF(selection) {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'pt', 'a4');
+                    await Export.drawPDFContent(pdf, selection);
+                    return pdf;
+                },
+
+                async drawPDFContent(pdf, selection) {
+                    // Obtener los datos
+                    const filtered = Data.filterData(selection);
+                    const groups = LabelGenerator.groupData(filtered);
+                    
+                    // Márgenes según especificaciones
+                    const marginTop = 3;
+                    const marginLeft = 12;
+                    const marginRight = 12;
+                    
+                    let yPos = marginTop;
+                    
+                    // HEADER PRINCIPAL
+                    pdf.setFontSize(14);
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.text('📦 RÓTULO DE CAJA - ALMACÉN RD50 📦', 297.5, yPos + 15, { align: 'center' });
+                    yPos += 20;
+                    
+                    // TABLA DE INFORMACIÓN GENERAL (Header)
+                    pdf.setDrawColor(51, 51, 51);
+                    pdf.setLineWidth(1);
+                    
+                    // Header de tabla
+                    pdf.setFillColor(68, 114, 196);
+                    pdf.rect(marginLeft, yPos, 285, 20, 'FD');
+                    pdf.setFillColor(231, 76, 60);
+                    pdf.rect(marginLeft + 285, yPos, 286, 20, 'FD');
+                    
+                    pdf.setFontSize(11);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text('INFORMACIÓN DE LA CAJA', marginLeft + 142.5, yPos + 13, { align: 'center' });
+                    pdf.text('UBICACIÓN DEL PRODUCTO', marginLeft + 285 + 143, yPos + 13, { align: 'center' });
+                    yPos += 20;
+                    
+                    // TABLA DE DATOS DEL PROVEEDOR
+                    pdf.setTextColor(0, 0, 0);
+                    pdf.setFontSize(9);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setDrawColor(102, 102, 102);
+                    pdf.setLineWidth(0.5);
+                    
+                    const totalStock = LabelGenerator.calculateTotalStock(groups);
+                    const fecha = new Date().toLocaleDateString('es-ES', { month: '2-digit', year: 'numeric' });
+                    const validador = LabelGenerator.getValidator(groups);
+                    
+                    // Fila 1: Proveedor | Parihuela
+                    pdf.rect(marginLeft, yPos, 285, 18);
+                    pdf.rect(marginLeft + 285, yPos, 286, 18);
+                    pdf.text(`Proveedor: ${selection.proveedor}`, marginLeft + 5, yPos + 12);
+                    pdf.text(`Parihuela: ${selection.parihuela}`, marginLeft + 285 + 5, yPos + 12);
+                    yPos += 18;
+                    
+                    // Fila 2: Validador | Caja
+                    pdf.rect(marginLeft, yPos, 285, 18);
+                    pdf.rect(marginLeft + 285, yPos, 286, 18);
+                    pdf.text(`Validador: ${validador}`, marginLeft + 5, yPos + 12);
+                    pdf.text(`Caja: ${selection.caja}`, marginLeft + 285 + 5, yPos + 12);
+                    yPos += 18;
+                    
+                    // Fila 3: Fecha | Total Stock
+                    pdf.rect(marginLeft, yPos, 285, 18);
+                    pdf.rect(marginLeft + 285, yPos, 286, 18);
+                    pdf.text(`Fecha: ${fecha}`, marginLeft + 5, yPos + 12);
+                    pdf.text(`Total Stock: ${totalStock}`, marginLeft + 285 + 5, yPos + 12);
+                    yPos += 25;
+                    
+                    // PRODUCTOS POR GÉNERO
+                    const byGenero = LabelGenerator.groupByGenero(groups);
+                    
+                    for (const [genero, items] of Object.entries(byGenero)) {
+                        // SEPARADOR DE GÉNERO
+                        pdf.setFontSize(11);
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.text(`=== ${genero} ===`, 297.5, yPos, { align: 'center' });
+                        yPos += 8;
+                        
+                        const uniqueProducts = LabelGenerator.groupUniqueProducts(items);
+                        
+                        for (const product of Object.values(uniqueProducts)) {
+                            // TÍTULO DE PRODUCTO
+                            pdf.setFontSize(10);
+                            pdf.text(`▸ ${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
+                            yPos += 5;
+                            
+                            // TABLA CÓDIGO/COLOR (si aplica)
+                            if (state.activeMode === 'concodigo' && (product.codigo || product.color)) {
+                                pdf.setFontSize(9);
+                                pdf.setFont('helvetica', 'normal');
+                                pdf.text(`CÓDIGO: ${product.codigo || 'N/A'}`, marginLeft, yPos);
+                                pdf.text(`COLOR: ${product.color || 'N/A'}`, marginLeft + 571, yPos, { align: 'right' });
+                                yPos += 12;
+                            }
+                            
+                            // TABLA DE TALLAS
+                            yPos = Export.drawSizesTable(pdf, product.tallas, marginLeft, yPos);
+                            yPos += 10;
+                        }
+                    }
+                },
+
+                drawSizesTable(pdf, tallas, x, y) {
+                    pdf.setDrawColor(51, 51, 51);
+                    pdf.setLineWidth(1);
+                    
+                    // Anchos de columnas según especificaciones
+                    const colWidths = [45, 45, 44, 150, 45, 45, 44, 150];
+                    const totalWidth = 568;
+                    const rowHeight = 70;
+                    const headerHeight = 20;
+                    
+                    // ENCABEZADO
+                    pdf.setFillColor(240, 240, 240);
+                    pdf.setFontSize(9);
+                    pdf.setFont('helvetica', 'bold');
+                    
+                    const headers = ['T-1', 'T-2', 'CANT', 'Sticker', 'T-1', 'T-2', 'CANT', 'Sticker'];
+                    let xPos = x;
+                    
+                    for (let i = 0; i < headers.length; i++) {
+                        pdf.rect(xPos, y, colWidths[i], headerHeight, 'FD');
+                        pdf.text(headers[i], xPos + colWidths[i]/2, y + 13, { align: 'center' });
+                        xPos += colWidths[i];
+                    }
+                    y += headerHeight;
+                    
+                    // FILAS DE DATOS
+                    pdf.setFont('helvetica', 'normal');
+                    
+                    if (tallas.length === 0) {
+                        xPos = x;
+                        for (let i = 0; i < 8; i++) {
+                            pdf.rect(xPos, y, colWidths[i], rowHeight);
+                            if (i !== 3 && i !== 7) {
+                                pdf.setFontSize(12);
+                                pdf.text('-', xPos + colWidths[i]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            }
+                            xPos += colWidths[i];
+                        }
+                        y += rowHeight;
+                    } else {
+                        for (let i = 0; i < tallas.length; i += 2) {
+                            const t1 = tallas[i];
+                            const t2 = i + 1 < tallas.length ? tallas[i + 1] : null;
+                            
+                            xPos = x;
+                            
+                            // Primera mitad (columnas 0-3)
+                            pdf.rect(xPos, y, colWidths[0], rowHeight);
+                            pdf.setFontSize(12);
+                            pdf.text(t1.talla1 || '-', xPos + colWidths[0]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            xPos += colWidths[0];
+                            
+                            pdf.rect(xPos, y, colWidths[1], rowHeight);
+                            pdf.text(t1.talla2 || '-', xPos + colWidths[1]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            xPos += colWidths[1];
+                            
+                            pdf.rect(xPos, y, colWidths[2], rowHeight);
+                            pdf.text(String(t1.cantidad || '0'), xPos + colWidths[2]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            xPos += colWidths[2];
+                            
+                            pdf.setFillColor(255, 255, 255);
+                            pdf.rect(xPos, y, colWidths[3], rowHeight, 'FD');
+                            xPos += colWidths[3];
+                            
+                            // Segunda mitad (columnas 4-7)
+                            if (t2) {
+                                pdf.rect(xPos, y, colWidths[4], rowHeight);
+                                pdf.text(t2.talla1 || '-', xPos + colWidths[4]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                xPos += colWidths[4];
+                                
+                                pdf.rect(xPos, y, colWidths[5], rowHeight);
+                                pdf.text(t2.talla2 || '-', xPos + colWidths[5]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                xPos += colWidths[5];
+                                
+                                pdf.rect(xPos, y, colWidths[6], rowHeight);
+                                pdf.text(String(t2.cantidad || '0'), xPos + colWidths[6]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                xPos += colWidths[6];
+                                
+                                pdf.setFillColor(255, 255, 255);
+                                pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
+                            } else {
+                                pdf.rect(xPos, y, colWidths[4], rowHeight);
+                                xPos += colWidths[4];
+                                pdf.rect(xPos, y, colWidths[5], rowHeight);
+                                xPos += colWidths[5];
+                                pdf.rect(xPos, y, colWidths[6], rowHeight);
+                                xPos += colWidths[6];
+                                pdf.setFillColor(255, 255, 255);
+                                pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
+                            }
+                            
+                            y += rowHeight;
+                        }
+                    }
+                    
+                    return y;
                 }
             };
 
@@ -1864,22 +2264,43 @@
             };
 
             const UI = {
-                updateAuthStatus(isSignedIn) {
-                    const indicator = document.getElementById('statusIndicator');
-                    const status = document.getElementById('authStatus');
-                    const signInBtn = document.getElementById('signInBtn');
-                    const signOutBtn = document.getElementById('signOutBtn');
+                updateAuthStatus(isSignedIn, isAdmin = false) {
+                    if (isAdmin) {
+                        // Actualizar elementos del panel admin
+                        const indicator = document.getElementById('statusIndicatorAdmin');
+                        const status = document.getElementById('authStatusAdmin');
+                        const signInBtn = document.getElementById('signInBtnAdmin');
+                        const signOutBtn = document.getElementById('signOutBtnAdmin');
 
-                    if (isSignedIn) {
-                        indicator.className = 'status-indicator connected';
-                        status.textContent = 'Autenticado';
-                        signInBtn.style.display = 'none';
-                        signOutBtn.style.display = 'inline-block';
+                        if (isSignedIn) {
+                            indicator.className = 'status-indicator connected';
+                            status.textContent = 'Autenticado (Admin)';
+                            signInBtn.style.display = 'none';
+                            signOutBtn.style.display = 'inline-block';
+                        } else {
+                            indicator.className = 'status-indicator disconnected';
+                            status.textContent = 'No autenticado';
+                            signInBtn.style.display = 'inline-block';
+                            signOutBtn.style.display = 'none';
+                        }
                     } else {
-                        indicator.className = 'status-indicator disconnected';
-                        status.textContent = 'No autenticado';
-                        signInBtn.style.display = 'inline-block';
-                        signOutBtn.style.display = 'none';
+                        // Actualizar elementos del panel usuario
+                        const indicator = document.getElementById('statusIndicator');
+                        const status = document.getElementById('authStatus');
+                        const signInBtn = document.getElementById('signInBtn');
+                        const signOutBtn = document.getElementById('signOutBtn');
+
+                        if (isSignedIn) {
+                            indicator.className = 'status-indicator connected';
+                            status.textContent = 'Autenticado';
+                            signInBtn.style.display = 'none';
+                            signOutBtn.style.display = 'inline-block';
+                        } else {
+                            indicator.className = 'status-indicator disconnected';
+                            status.textContent = 'No autenticado';
+                            signInBtn.style.display = 'inline-block';
+                            signOutBtn.style.display = 'none';
+                        }
                     }
                 },
 
@@ -2185,14 +2606,99 @@
                 },
 
                 printAll() {
-                    window.print();
-                }
+                    if (state.generatedLabels.length === 0) {
+                        UI.showStatus('No hay rótulos para imprimir', 'warning');
+                        return;
+                    }
+
+                    const printWindow = window.open('', '_blank');
+                    const printStyles = `
+                        @page { margin: 3pt 12pt; }
+                        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+                        .rotulo { max-width: 210mm; margin: 0 auto 20pt auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; page-break-after: always; }
+                        .rotulo:last-child { page-break-after: auto; }
+                        .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
+                        .rotulo-info-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
+                        .rotulo-info-header { background: #4472C4; color: white; font-weight: bold; text-align: center; font-size: 11pt; width: 285pt; }
+                        .rotulo-ubicacion-header { background: #E74C3C; color: white; font-weight: bold; text-align: center; font-size: 11pt; width: 286pt; }
+                        .rotulo-data-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
+                        .rotulo-data-col1 { width: 285pt; }
+                        .rotulo-data-col2 { width: 286pt; background: #FFFFFF; }
+                        .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
+                        .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
+                        .rotulo-codigo-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-codigo-table td { padding: 2pt; border: none; }
+                        .rotulo-codigo-col1 { width: 285pt; }
+                        .rotulo-codigo-col2 { width: 286pt; text-align: right; }
+                        .rotulo-tallas-table { width: 568pt; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
+                        .rotulo-tallas-table th { background: #F0F0F0; border: 1pt solid #333; padding: 1pt; text-align: center; font-weight: bold; height: 20pt; }
+                        .rotulo-tallas-table .th-t1 { width: 45pt; }
+                        .rotulo-tallas-table .th-t2 { width: 45pt; }
+                        .rotulo-tallas-table .th-cant { width: 44pt; }
+                        .rotulo-tallas-table .th-sticker { width: 150pt; }
+                        .rotulo-tallas-table td { border: 1pt solid #333; padding: 1pt; text-align: center; height: 70pt; vertical-align: middle; font-size: 12pt; }
+                        .rotulo-sticker-col { background: #FFFFFF; }
+                    `;
+                    
+                    printWindow.document.write('<!DOCTYPE html>');
+                    printWindow.document.write('<html><head>');
+                    printWindow.document.write('<meta charset="UTF-8">');
+                    printWindow.document.write('<title>Rotulos Lukers - Impresión Múltiple</title>');
+                    printWindow.document.write('<style>' + printStyles + '</style>');
+                    printWindow.document.write('</head><body>');
+                    
+                    // Agregar todos los rótulos
+                    const cards = document.querySelectorAll('.rotulo-card .rotulo-content');
+                    cards.forEach(card => {
+                        printWindow.document.write(card.innerHTML);
+                    });
+                    
+                    printWindow.document.write('<scr' + 'ipt>');
+                    printWindow.document.write('window.onload = function() { setTimeout(function() { window.print(); }, 200); };');
+                    printWindow.document.write('window.onafterprint = function() { window.close(); };');
+                    printWindow.document.write('</scr' + 'ipt>');
+                    printWindow.document.write('</body></html>');
+                    printWindow.document.close();
+                },
             };
         })();
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('signInBtn').addEventListener('click', App.Auth.signIn);
-            document.getElementById('signOutBtn').addEventListener('click', App.Auth.signOut);
+            // Event listeners para panel de usuario normal
+            const signInBtn = document.getElementById('signInBtn');
+            const signOutBtn = document.getElementById('signOutBtn');
+            
+            if (signInBtn) {
+                signInBtn.addEventListener('click', App.Auth.signIn);
+            }
+            
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', App.Auth.signOut);
+            }
+
+            // Event listeners para panel de admin
+            const signInBtnAdmin = document.getElementById('signInBtnAdmin');
+            const signOutBtnAdmin = document.getElementById('signOutBtnAdmin');
+            
+            if (signInBtnAdmin) {
+                signInBtnAdmin.addEventListener('click', App.Auth.signInAdmin);
+            }
+            
+            if (signOutBtnAdmin) {
+                signOutBtnAdmin.addEventListener('click', App.Auth.signOutAdmin);
+            }
+            
+            // Event listener para login de admin con Enter
+            const adminPass = document.getElementById('adminPass');
+            if (adminPass) {
+                adminPass.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        App.Auth.adminLogin();
+                    }
+                });
+            }
             
             document.getElementById('proveedorSelect').addEventListener('change', (e) => {
                 const provider = e.target.value;
