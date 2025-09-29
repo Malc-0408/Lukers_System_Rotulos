@@ -525,28 +525,32 @@
             border: 2px solid #333;
             font-family: Arial, sans-serif;
             color: black;
+            padding: 3pt 12pt;
         }
 
         .rotulo-titulo {
             text-align: center;
-            font-size: 14px;
+            font-size: 14pt;
             font-weight: bold;
-            padding: 5px;
+            padding: 0;
+            margin: 0;
             background: white;
             color: black;
-            border-bottom: 1px solid #333;
+            border-bottom: none;
         }
 
         .rotulo-info-table {
-            width: 100%;
+            width: 571pt;
+            margin: 0 auto;
             border-collapse: collapse;
-            font-size: 9px;
+            font-size: 9pt;
         }
 
         .rotulo-info-table td {
-            border: 1px solid #666;
-            padding: 5px;
+            border: 1pt solid #333333;
+            padding: 2pt 5pt;
             vertical-align: middle;
+            height: 20pt;
         }
 
         .rotulo-info-header {
@@ -554,7 +558,8 @@
             color: white;
             font-weight: bold;
             text-align: center;
-            font-size: 11px;
+            font-size: 11pt;
+            width: 285pt;
         }
 
         .rotulo-ubicacion-header {
@@ -562,60 +567,112 @@
             color: white;
             font-weight: bold;
             text-align: center;
-            font-size: 11px;
+            font-size: 11pt;
+            width: 286pt;
+        }
+
+        .rotulo-data-table {
+            width: 571pt;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+
+        .rotulo-data-table td {
+            border: 0.5pt solid #666666;
+            padding: 2pt 5pt;
+            vertical-align: middle;
+            height: 18pt;
+        }
+
+        .rotulo-data-col1 {
+            width: 285pt;
+        }
+
+        .rotulo-data-col2 {
+            width: 286pt;
+            background: #FFFFFF;
         }
 
         .rotulo-section-title {
             text-align: center;
-            font-size: 11px;
+            font-size: 11pt;
             font-weight: bold;
-            padding: 5px;
-            margin: 5px 0;
+            padding: 3pt 0;
+            margin: 3pt 0;
         }
 
         .rotulo-producto-title {
             text-align: center;
-            font-size: 10px;
+            font-size: 10pt;
             font-weight: bold;
-            padding: 5px;
-            margin: 5px 0;
+            padding: 2pt 0 1pt 0;
+            margin: 0;
         }
 
         .rotulo-codigo-table {
-            width: 100%;
+            width: 571pt;
+            margin: 0 auto;
             border-collapse: collapse;
-            margin: 5px 0;
-            font-size: 9px;
+            font-size: 9pt;
         }
 
         .rotulo-codigo-table td {
-            padding: 3px;
+            padding: 2pt;
             vertical-align: middle;
+            border: none;
+        }
+
+        .rotulo-codigo-col1 {
+            width: 285pt;
+        }
+
+        .rotulo-codigo-col2 {
+            width: 286pt;
+            text-align: right;
         }
 
         .rotulo-tallas-table {
-            width: 100%;
+            width: 568pt;
+            margin: 5pt auto;
             border-collapse: collapse;
-            border: 1px solid #333;
-            font-size: 9px;
+            border: 1pt solid #333;
+            font-size: 9pt;
         }
 
         .rotulo-tallas-table th {
             background: #F0F0F0;
-            border: 1px solid #333;
-            padding: 3px;
+            border: 1pt solid #333;
+            padding: 1pt;
             text-align: center;
-            font-size: 9px;
+            font-size: 9pt;
             font-weight: bold;
+            height: 20pt;
+        }
+
+        .rotulo-tallas-table .th-t1 {
+            width: 45pt;
+        }
+
+        .rotulo-tallas-table .th-t2 {
+            width: 45pt;
+        }
+
+        .rotulo-tallas-table .th-cant {
+            width: 44pt;
+        }
+
+        .rotulo-tallas-table .th-sticker {
+            width: 150pt;
         }
 
         .rotulo-tallas-table td {
-            border: 1px solid #333;
-            padding: 3px;
+            border: 1pt solid #333;
+            padding: 1pt;
             text-align: center;
-            height: 70px;
+            height: 70pt;
             vertical-align: middle;
-            font-size: 12px;
+            font-size: 12pt;
         }
 
         .rotulo-sticker-col {
@@ -823,26 +880,18 @@
         </div>
 
         <div id="mainContent" class="main-content">
-            <div class="search-filter-section">
-                <h3>Búsqueda y Filtros</h3>
-                <div class="search-controls">
-                    <div class="form-group">
-                        <label class="form-label" for="searchInput">Buscar productos:</label>
-                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por descripción, marca, código..." aria-label="Campo de búsqueda">
+            <div class="mode-selector" style="margin-top: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                        <h3 style="margin: 0;">Tipo de Rótulo</h3>
+                        <div id="lastUpdate" style="font-size: 0.85em; color: #666; margin-top: 5px;">
+                            Última actualización: <strong id="updateTimestamp">No cargado</strong>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label" for="filterGenero">Filtrar por género:</label>
-                        <select id="filterGenero" class="form-select" aria-label="Filtrar por género">
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-secondary" onclick="App.clearFilters()" style="align-self: end;">LIMPIAR FILTROS</button>
+                    <button class="btn btn-secondary" onclick="App.Data.refreshData()" id="refreshBtn" style="display: none;">
+                        🔄 REFRESCAR DATOS
+                    </button>
                 </div>
-                <div id="activeFilters" style="margin-top: 10px;"></div>
-            </div>
-
-            <div class="mode-selector">
-                <h3>Tipo de Rótulo</h3>
                 <div class="mode-buttons">
                     <button class="mode-btn active" data-mode="original" aria-pressed="true">RÓTULO ORIGINAL</button>
                     <button class="mode-btn" data-mode="concodigo" aria-pressed="false">RÓTULO CON CÓDIGO + COLOR</button>
@@ -973,9 +1022,8 @@
                 activeOption: 1,
                 activeMode: 'original',
                 generatedLabels: [],
-                searchTerm: '',
-                filterGenero: '',
-                dataIndex: null
+                dataIndex: null,
+                lastUpdate: null
             };
 
             const Config = {
@@ -1133,16 +1181,33 @@
                         state.data = processedData;
                         state.dataIndex = Data.createIndex(processedData);
 
+                        // Guardar timestamp de actualización
+                        const now = new Date();
+                        state.lastUpdate = now.toISOString();
+                        document.getElementById('updateTimestamp').textContent = now.toLocaleString('es-ES');
+                        document.getElementById('refreshBtn').style.display = 'inline-block';
+
                         UI.populateProviders(processedData.providers);
-                        UI.populateGeneroFilter(processedData.generos);
                         UI.showStatus(`Datos cargados: ${processedData.providers.length} proveedores`, 'success');
-                        UI.showToast('Datos indexados correctamente');
+                        UI.showToast('Datos cargados correctamente');
 
                     } catch (error) {
                         console.error('Error cargando datos:', error);
                         UI.showStatus('Error: ' + error.message, 'error');
                     } finally {
                         UI.showSpinner(false);
+                    }
+                },
+
+                async refreshData() {
+                    if (confirm('¿Deseas recargar los datos desde Google Sheets? Se perderán las selecciones actuales.')) {
+                        // Limpiar selecciones
+                        document.getElementById('proveedorSelect').value = '';
+                        document.getElementById('selectionOptions').style.display = 'none';
+                        
+                        // Recargar datos
+                        await Data.loadProviders();
+                        UI.showToast('Datos actualizados desde Google Sheets');
                     }
                 },
 
@@ -1403,18 +1468,18 @@
                                     <td class="rotulo-ubicacion-header">UBICACIÓN DEL PRODUCTO</td>
                                 </tr>
                             </table>
-                            <table class="rotulo-info-table">
+                            <table class="rotulo-data-table">
                                 <tr>
-                                    <td>Proveedor: ${Utils.escapeHtml(selection.proveedor)}</td>
-                                    <td style="background: #FFFFFF;">Parihuela: ${Utils.escapeHtml(selection.parihuela)}</td>
+                                    <td class="rotulo-data-col1">Proveedor: ${Utils.escapeHtml(selection.proveedor)}</td>
+                                    <td class="rotulo-data-col2">Parihuela: ${Utils.escapeHtml(selection.parihuela)}</td>
                                 </tr>
                                 <tr>
-                                    <td>Validador: ${Utils.escapeHtml(validador)}</td>
-                                    <td style="background: #FFFFFF;">Caja: ${Utils.escapeHtml(selection.caja)}</td>
+                                    <td class="rotulo-data-col1">Validador: ${Utils.escapeHtml(validador)}</td>
+                                    <td class="rotulo-data-col2">Caja: ${Utils.escapeHtml(selection.caja)}</td>
                                 </tr>
                                 <tr>
-                                    <td>Fecha: ${fecha}</td>
-                                    <td>Total Stock: ${totalStock}</td>
+                                    <td class="rotulo-data-col1">Fecha: ${fecha}</td>
+                                    <td class="rotulo-data-col2">Total Stock: ${totalStock}</td>
                                 </tr>
                             </table>
                     `;
@@ -1433,8 +1498,8 @@
                                 html += `
                                     <table class="rotulo-codigo-table">
                                         <tr>
-                                            <td>CÓDIGO: ${Utils.escapeHtml(product.codigo || 'N/A')}</td>
-                                            <td style="text-align: right;">COLOR: ${Utils.escapeHtml(product.color || 'N/A')}</td>
+                                            <td class="rotulo-codigo-col1">CÓDIGO: ${Utils.escapeHtml(product.codigo || 'N/A')}</td>
+                                            <td class="rotulo-codigo-col2">COLOR: ${Utils.escapeHtml(product.color || 'N/A')}</td>
                                         </tr>
                                     </table>
                                 `;
@@ -1452,14 +1517,14 @@
                     let html = `
                         <table class="rotulo-tallas-table">
                             <tr>
-                                <th>T-1</th>
-                                <th>T-2</th>
-                                <th>CANT</th>
-                                <th>Sticker</th>
-                                <th>T-1</th>
-                                <th>T-2</th>
-                                <th>CANT</th>
-                                <th>Sticker</th>
+                                <th class="th-t1">T-1</th>
+                                <th class="th-t2">T-2</th>
+                                <th class="th-cant">CANT</th>
+                                <th class="th-sticker">Sticker</th>
+                                <th class="th-t1">T-1</th>
+                                <th class="th-t2">T-2</th>
+                                <th class="th-cant">CANT</th>
+                                <th class="th-sticker">Sticker</th>
                             </tr>
                     `;
 
@@ -1795,71 +1860,7 @@
             };
 
             const Search = {
-                debounceTimer: null,
-
-                init() {
-                    const searchInput = document.getElementById('searchInput');
-                    searchInput.addEventListener('input', (e) => {
-                        clearTimeout(Search.debounceTimer);
-                        Search.debounceTimer = setTimeout(() => {
-                            state.searchTerm = e.target.value.toLowerCase();
-                            Search.applyFilters();
-                        }, 300);
-                    });
-
-                    document.getElementById('filterGenero').addEventListener('change', (e) => {
-                        state.filterGenero = e.target.value;
-                        Search.applyFilters();
-                    });
-                },
-
-                applyFilters() {
-                    const provider = document.getElementById('proveedorSelect').value;
-                    if (!provider || !state.data) return;
-
-                    let combinations = state.data.combinationsByProvider[provider] || [];
-
-                    if (state.searchTerm || state.filterGenero) {
-                        combinations = combinations.filter(combo => {
-                            const rows = Data.filterData({
-                                proveedor: provider,
-                                parihuela: combo.parihuela,
-                                caja: combo.caja
-                            });
-
-                            return rows.some(row => {
-                                const matchesSearch = !state.searchTerm || 
-                                    ['DESCRIPCIÓN', 'MARCA', 'CODIGO', 'MUNDO'].some(col => 
-                                        String(row[state.data.cols[col]] || '').toLowerCase().includes(state.searchTerm)
-                                    );
-
-                                const matchesGenero = !state.filterGenero ||
-                                    String(row[state.data.cols['GENERO']] || '').trim() === state.filterGenero;
-
-                                return matchesSearch && matchesGenero;
-                            });
-                        });
-                    }
-
-                    UI.loadCombinations(provider, combinations);
-                    Search.updateFilterBadges();
-                },
-
-                updateFilterBadges() {
-                    const container = document.getElementById('activeFilters');
-                    const badges = [];
-
-                    if (state.searchTerm) {
-                        badges.push(`<span class="filter-badge">Búsqueda: "${Utils.escapeHtml(state.searchTerm)}"</span>`);
-                    }
-
-                    if (state.filterGenero) {
-                        badges.push(`<span class="filter-badge">Género: ${Utils.escapeHtml(state.filterGenero)}</span>`);
-                    }
-
-                    container.innerHTML = badges.length > 0 ? 
-                        `<strong>Filtros activos:</strong> ${badges.join('')}` : '';
-                }
+                // Módulo removido - Búsqueda y filtros eliminados
             };
 
             const UI = {
@@ -1951,22 +1952,8 @@
                     });
                 },
 
-                populateGeneroFilter(generos) {
-                    const select = document.getElementById('filterGenero');
-                    select.innerHTML = '<option value="">Todos</option>';
-                    
-                    generos.forEach(genero => {
-                        const option = document.createElement('option');
-                        option.value = genero;
-                        option.textContent = genero;
-                        select.appendChild(option);
-                    });
-                },
-
-                loadCombinations(provider, combinations = null) {
-                    if (!combinations) {
-                        combinations = state.data.combinationsByProvider[provider] || [];
-                    }
+                loadCombinations(provider) {
+                    const combinations = state.data.combinationsByProvider[provider] || [];
 
                     const parihuelas = [...new Set(combinations.map(c => c.parihuela))];
                     const cajas = [...new Set(combinations.map(c => c.caja))];
@@ -2154,20 +2141,32 @@
                     
                     const printWindow = window.open('', '_blank');
                     const printStyles = `
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2px solid #333; }
-                        .rotulo-titulo { text-align: center; font-size: 14px; font-weight: bold; padding: 5px; border-bottom: 1px solid #333; }
-                        .rotulo-info-table { width: 100%; border-collapse: collapse; font-size: 9px; }
-                        .rotulo-info-table td { border: 1px solid #666; padding: 5px; }
-                        .rotulo-info-header { background: #4472C4; color: white; font-weight: bold; text-align: center; font-size: 11px; }
-                        .rotulo-ubicacion-header { background: #E74C3C; color: white; font-weight: bold; text-align: center; font-size: 11px; }
-                        .rotulo-section-title { text-align: center; font-size: 11px; font-weight: bold; padding: 5px; margin: 5px 0; }
-                        .rotulo-producto-title { text-align: center; font-size: 10px; font-weight: bold; padding: 5px; margin: 5px 0; }
-                        .rotulo-codigo-table { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 9px; }
-                        .rotulo-codigo-table td { padding: 3px; }
-                        .rotulo-tallas-table { width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 9px; }
-                        .rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 3px; text-align: center; font-weight: bold; }
-                        .rotulo-tallas-table td { border: 1px solid #333; padding: 3px; text-align: center; height: 70px; font-size: 12px; }
+                        @page { margin: 3pt 12pt; }
+                        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+                        .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; }
+                        .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
+                        .rotulo-info-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
+                        .rotulo-info-header { background: #4472C4; color: white; font-weight: bold; text-align: center; font-size: 11pt; width: 285pt; }
+                        .rotulo-ubicacion-header { background: #E74C3C; color: white; font-weight: bold; text-align: center; font-size: 11pt; width: 286pt; }
+                        .rotulo-data-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
+                        .rotulo-data-col1 { width: 285pt; }
+                        .rotulo-data-col2 { width: 286pt; background: #FFFFFF; }
+                        .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
+                        .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
+                        .rotulo-codigo-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-codigo-table td { padding: 2pt; border: none; }
+                        .rotulo-codigo-col1 { width: 285pt; }
+                        .rotulo-codigo-col2 { width: 286pt; text-align: right; }
+                        .rotulo-tallas-table { width: 568pt; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
+                        .rotulo-tallas-table th { background: #F0F0F0; border: 1pt solid #333; padding: 1pt; text-align: center; font-weight: bold; height: 20pt; }
+                        .rotulo-tallas-table .th-t1 { width: 45pt; }
+                        .rotulo-tallas-table .th-t2 { width: 45pt; }
+                        .rotulo-tallas-table .th-cant { width: 44pt; }
+                        .rotulo-tallas-table .th-sticker { width: 150pt; }
+                        .rotulo-tallas-table td { border: 1pt solid #333; padding: 1pt; text-align: center; height: 70pt; vertical-align: middle; font-size: 12pt; }
+                        .rotulo-sticker-col { background: #FFFFFF; }
                     `;
                     
                     printWindow.document.write('<!DOCTYPE html>');
@@ -2187,21 +2186,6 @@
 
                 printAll() {
                     window.print();
-                },
-
-                clearFilters() {
-                    state.searchTerm = '';
-                    state.filterGenero = '';
-                    document.getElementById('searchInput').value = '';
-                    document.getElementById('filterGenero').value = '';
-                    
-                    const provider = document.getElementById('proveedorSelect').value;
-                    if (provider && state.data) {
-                        UI.loadCombinations(provider);
-                    }
-                    
-                    document.getElementById('activeFilters').innerHTML = '';
-                    UI.showToast('Filtros limpiados');
                 }
             };
         })();
@@ -2234,8 +2218,6 @@
                     App.UI.showToast('Modo: ' + this.textContent);
                 });
             });
-
-            App.Search.init();
         });
     </script>
     
