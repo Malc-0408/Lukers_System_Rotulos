@@ -2004,20 +2004,20 @@
                 },
 
                 drawSizesTable(pdf, tallas, x, y) {
+                    // Resetear colores
                     pdf.setDrawColor(51, 51, 51);
                     pdf.setLineWidth(1);
+                    pdf.setFillColor(255, 255, 255);
+                    pdf.setTextColor(0, 0, 0);
                     
                     // Anchos de columnas según especificaciones
                     const colWidths = [45, 45, 44, 150, 45, 45, 44, 150];
-                    const totalWidth = 568;
                     const rowHeight = 70;
                     const headerHeight = 20;
                     
-                    // ENCABEZADO
-                    pdf.setFillColor(240, 240, 240);
+                    // ENCABEZADO - TODO BLANCO
                     pdf.setFontSize(9);
                     pdf.setFont('helvetica', 'bold');
-                    pdf.setTextColor(0, 0, 0);
                     
                     const headers = ['T-1', 'T-2', 'CANT', 'Sticker', 'T-1', 'T-2', 'CANT', 'Sticker'];
                     let xPos = x;
@@ -2029,18 +2029,15 @@
                     }
                     y += headerHeight;
                     
-                    // FILAS DE DATOS
+                    // FILAS DE DATOS - TODO BLANCO
                     pdf.setFont('helvetica', 'normal');
-                    pdf.setFillColor(255, 255, 255);
+                    pdf.setFontSize(12);
                     
                     if (tallas.length === 0) {
                         xPos = x;
                         for (let i = 0; i < 8; i++) {
-                            if (i === 3 || i === 7) {
-                                pdf.rect(xPos, y, colWidths[i], rowHeight, 'FD');
-                            } else {
-                                pdf.rect(xPos, y, colWidths[i], rowHeight);
-                                pdf.setFontSize(12);
+                            pdf.rect(xPos, y, colWidths[i], rowHeight, 'FD');
+                            if (i !== 3 && i !== 7) {
                                 pdf.text('-', xPos + colWidths[i]/2, y + rowHeight/2 + 4, { align: 'center' });
                             }
                             xPos += colWidths[i];
@@ -2054,16 +2051,15 @@
                             xPos = x;
                             
                             // Primera mitad (columnas 0-3)
-                            pdf.rect(xPos, y, colWidths[0], rowHeight);
-                            pdf.setFontSize(12);
+                            pdf.rect(xPos, y, colWidths[0], rowHeight, 'FD');
                             pdf.text(t1.talla1 || '-', xPos + colWidths[0]/2, y + rowHeight/2 + 4, { align: 'center' });
                             xPos += colWidths[0];
                             
-                            pdf.rect(xPos, y, colWidths[1], rowHeight);
+                            pdf.rect(xPos, y, colWidths[1], rowHeight, 'FD');
                             pdf.text(t1.talla2 || '-', xPos + colWidths[1]/2, y + rowHeight/2 + 4, { align: 'center' });
                             xPos += colWidths[1];
                             
-                            pdf.rect(xPos, y, colWidths[2], rowHeight);
+                            pdf.rect(xPos, y, colWidths[2], rowHeight, 'FD');
                             pdf.text(String(t1.cantidad || '0'), xPos + colWidths[2]/2, y + rowHeight/2 + 4, { align: 'center' });
                             xPos += colWidths[2];
                             
@@ -2072,25 +2068,25 @@
                             
                             // Segunda mitad (columnas 4-7)
                             if (t2) {
-                                pdf.rect(xPos, y, colWidths[4], rowHeight);
+                                pdf.rect(xPos, y, colWidths[4], rowHeight, 'FD');
                                 pdf.text(t2.talla1 || '-', xPos + colWidths[4]/2, y + rowHeight/2 + 4, { align: 'center' });
                                 xPos += colWidths[4];
                                 
-                                pdf.rect(xPos, y, colWidths[5], rowHeight);
+                                pdf.rect(xPos, y, colWidths[5], rowHeight, 'FD');
                                 pdf.text(t2.talla2 || '-', xPos + colWidths[5]/2, y + rowHeight/2 + 4, { align: 'center' });
                                 xPos += colWidths[5];
                                 
-                                pdf.rect(xPos, y, colWidths[6], rowHeight);
+                                pdf.rect(xPos, y, colWidths[6], rowHeight, 'FD');
                                 pdf.text(String(t2.cantidad || '0'), xPos + colWidths[6]/2, y + rowHeight/2 + 4, { align: 'center' });
                                 xPos += colWidths[6];
                                 
                                 pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
                             } else {
-                                pdf.rect(xPos, y, colWidths[4], rowHeight);
+                                pdf.rect(xPos, y, colWidths[4], rowHeight, 'FD');
                                 xPos += colWidths[4];
-                                pdf.rect(xPos, y, colWidths[5], rowHeight);
+                                pdf.rect(xPos, y, colWidths[5], rowHeight, 'FD');
                                 xPos += colWidths[5];
-                                pdf.rect(xPos, y, colWidths[6], rowHeight);
+                                pdf.rect(xPos, y, colWidths[6], rowHeight, 'FD');
                                 xPos += colWidths[6];
                                 pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
                             }
