@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lukers - Sistema de Rótulos</title>
+    <title>Lukers - Sistema de Rótulos v2.0</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -31,22 +31,20 @@
             background: linear-gradient(135deg, #1e88e5 0%, #42a5f5 100%);
             color: white;
             padding: 20px;
-            text-align: center;
-            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
         }
 
-        .logo {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: bold;
-            font-size: 1.5em;
+        .version-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
         }
 
         .config-section {
@@ -55,7 +53,17 @@
             border-bottom: 1px solid #ddd;
         }
 
-        .config-form {
+        .security-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .config-grid {
             display: grid;
             grid-template-columns: 1fr 1fr auto;
             gap: 15px;
@@ -80,6 +88,16 @@
             border-radius: 5px;
             font-size: 1em;
             background: white;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #1e88e5;
+        }
+
+        .form-input.error {
+            border-color: #dc3545;
         }
 
         .btn {
@@ -91,6 +109,7 @@
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-size: 0.9em;
         }
 
         .btn-primary {
@@ -108,7 +127,7 @@
             color: white;
         }
 
-        .btn-success:hover {
+        .btn-success:hover:not(:disabled) {
             background: #218838;
         }
 
@@ -117,8 +136,17 @@
             color: white;
         }
 
-        .btn-danger:hover {
+        .btn-danger:hover:not(:disabled) {
             background: #c82333;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #5a6268;
         }
 
         .btn:disabled {
@@ -145,6 +173,7 @@
 
         .connected {
             background: #28a745;
+            box-shadow: 0 0 5px #28a745;
         }
 
         .disconnected {
@@ -154,6 +183,27 @@
         .main-content {
             padding: 30px;
             display: none;
+        }
+
+        .search-filter-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-controls {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .search-input {
+            padding: 12px;
+            border: 2px solid #1e88e5;
+            border-radius: 5px;
+            font-size: 1em;
         }
 
         .tabs {
@@ -209,7 +259,7 @@
         }
 
         .mode-btn {
-            padding: 8px 16px;
+            padding: 10px 20px;
             border: 2px solid #1e88e5;
             border-radius: 5px;
             background: white;
@@ -352,6 +402,7 @@
             margin-top: 30px;
             padding-top: 20px;
             border-top: 1px solid #ddd;
+            flex-wrap: wrap;
         }
 
         .status-message {
@@ -359,6 +410,18 @@
             padding: 15px;
             border-radius: 5px;
             display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .status-success {
@@ -379,16 +442,6 @@
             color: #856404;
         }
 
-        .security-warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-        }
-
         .loading {
             display: inline-block;
             width: 20px;
@@ -404,6 +457,30 @@
             100% { transform: rotate(360deg); }
         }
 
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner-overlay.active {
+            display: flex;
+        }
+
+        .spinner-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
         .rotulos-container {
             margin-top: 30px;
             display: none;
@@ -415,6 +492,12 @@
             border-radius: 8px;
             margin-bottom: 20px;
             overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .rotulo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .rotulo-header {
@@ -424,6 +507,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .rotulo-actions {
+            display: flex;
+            gap: 10px;
         }
 
         .rotulo-content {
@@ -526,12 +614,78 @@
             padding: 3px;
             text-align: center;
             height: 70px;
-            vertical-align: center;
+            vertical-align: middle;
             font-size: 12px;
         }
 
         .rotulo-sticker-col {
             background: #FFFFFF;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #1e88e5;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1e88e5;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .history-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .history-item {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #1e88e5;
+        }
+
+        .history-info {
+            flex: 1;
+        }
+
+        .history-timestamp {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .export-section {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
         }
 
         @media print {
@@ -555,7 +709,7 @@
         }
 
         @media (max-width: 768px) {
-            .config-form {
+            .config-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -574,1039 +728,1515 @@
             .mode-buttons {
                 flex-direction: column;
             }
+
+            .search-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: slideUp 0.3s ease-out;
+            display: none;
+        }
+
+        .toast.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .filter-badge {
+            display: inline-block;
+            background: #1e88e5;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin: 5px 5px 0 0;
         }
     </style>
 </head>
 <body>
+    <div class="spinner-overlay" id="spinnerOverlay">
+        <div class="spinner-content">
+            <div class="loading" style="width: 60px; height: 60px; border-width: 6px;"></div>
+            <p style="margin-top: 20px; font-weight: bold;">Procesando...</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
     <div class="container">
         <div class="header">
-            <h1>SISTEMA DE RÓTULOS LUKERS</h1>
-            <div class="logo">Lukers</div>
+            <div>
+                <h1>SISTEMA DE RÓTULOS LUKERS</h1>
+                <div class="version-badge">v2.0 - Optimizado</div>
+            </div>
         </div>
 
         <div class="config-section">
-            <div class="security-warning">
-                ⚠️ <strong>Aviso de Seguridad:</strong> Solo usa este sistema en entornos seguros. No compartas tus credenciales de Google.
+            <div class="security-warning" role="alert">
+                <strong>Aviso de Seguridad:</strong> Solo usa este sistema en entornos seguros. No compartas tus credenciales de Google.
             </div>
-            <div class="config-form">
+            <div class="config-grid">
                 <div class="form-group">
-                    <label class="form-label">Google OAuth Client ID:</label>
-                    <input type="text" id="clientId" class="form-input" placeholder="xxxxxx.apps.googleusercontent.com" maxlength="200">
+                    <label class="form-label" for="clientId">Google OAuth Client ID:</label>
+                    <input type="text" id="clientId" class="form-input" placeholder="xxxxxx.apps.googleusercontent.com" maxlength="200" aria-required="true">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">ID de la Hoja de Cálculo:</label>
-                    <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100">
+                    <label class="form-label" for="spreadsheetId">ID de la Hoja de Cálculo:</label>
+                    <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100" aria-required="true">
                 </div>
                 <div>
-                    <div class="auth-status">
-                        <div id="statusIndicator" class="status-indicator disconnected"></div>
+                    <div class="auth-status" role="status" aria-live="polite">
+                        <div id="statusIndicator" class="status-indicator disconnected" aria-hidden="true"></div>
                         <span id="authStatus">No autenticado</span>
                     </div>
                     <div style="margin-top: 10px;">
-                        <button id="signInBtn" class="btn btn-primary">INICIAR SESIÓN</button>
-                        <button id="signOutBtn" class="btn btn-danger" style="display: none;">CERRAR SESIÓN</button>
+                        <button id="signInBtn" class="btn btn-primary" disabled aria-label="Iniciar sesión con Google">INICIAR SESIÓN</button>
+                        <button id="signOutBtn" class="btn btn-danger" style="display: none;" aria-label="Cerrar sesión">CERRAR SESIÓN</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="mainContent" class="main-content">
+            <div class="search-filter-section">
+                <h3>Búsqueda y Filtros</h3>
+                <div class="search-controls">
+                    <div class="form-group">
+                        <label class="form-label" for="searchInput">Buscar productos:</label>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por descripción, marca, código..." aria-label="Campo de búsqueda">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="filterGenero">Filtrar por género:</label>
+                        <select id="filterGenero" class="form-select" aria-label="Filtrar por género">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" onclick="App.clearFilters()" style="align-self: end;">LIMPIAR FILTROS</button>
+                </div>
+                <div id="activeFilters" style="margin-top: 10px;"></div>
+            </div>
+
             <div class="mode-selector">
                 <h3>Tipo de Rótulo</h3>
                 <div class="mode-buttons">
-                    <button class="mode-btn active" data-mode="original">RÓTULO ORIGINAL</button>
-                    <button class="mode-btn" data-mode="concodigo">RÓTULO CON CÓDIGO + COLOR</button>
+                    <button class="mode-btn active" data-mode="original" aria-pressed="true">RÓTULO ORIGINAL</button>
+                    <button class="mode-btn" data-mode="concodigo" aria-pressed="false">RÓTULO CON CÓDIGO + COLOR</button>
                 </div>
             </div>
 
             <div class="tabs">
-                <button class="tab active" onclick="switchTab(event, 'generator')">GENERADOR DE RÓTULOS</button>
-                <button class="tab" onclick="switchTab(event, 'analysis')">ANÁLISIS</button>
+                <button class="tab active" onclick="App.UI.switchTab(event, 'generator')" role="tab" aria-selected="true">GENERADOR DE RÓTULOS</button>
+                <button class="tab" onclick="App.UI.switchTab(event, 'analysis')" role="tab" aria-selected="false">ANÁLISIS</button>
+                <button class="tab" onclick="App.UI.switchTab(event, 'history')" role="tab" aria-selected="false">HISTORIAL</button>
             </div>
 
-            <div id="generatorTab" class="tab-content active">
+            <div id="generatorTab" class="tab-content active" role="tabpanel">
                 <div class="proveedor-section">
                     <div class="proveedor-label">SELECCIONAR PROVEEDOR</div>
-                    <select class="proveedor-select" id="proveedorSelect">
+                    <select class="proveedor-select" id="proveedorSelect" aria-label="Seleccionar proveedor">
                         <option value="">-- Selecciona un proveedor --</option>
                     </select>
                 </div>
 
                 <div id="selectionOptions" class="selection-options">
-                    <div class="option-tabs">
-                        <button class="option-tab active" onclick="switchOption(1)">SELECCIÓN DIRECTA</button>
-                        <button class="option-tab" onclick="switchOption(2)">POR INTERVALO</button>
-                        <button class="option-tab" onclick="switchOption(3)">LISTA MÚLTIPLE</button>
+                    <div class="option-tabs" role="tablist">
+                        <button class="option-tab active" onclick="App.UI.switchOption(1)" role="tab" aria-selected="true">SELECCIÓN DIRECTA</button>
+                        <button class="option-tab" onclick="App.UI.switchOption(2)" role="tab" aria-selected="false">POR INTERVALO</button>
+                        <button class="option-tab" onclick="App.UI.switchOption(3)" role="tab" aria-selected="false">LISTA MÚLTIPLE</button>
                     </div>
 
-                    <div class="option-content active" id="option1">
+                    <div class="option-content active" id="option1" role="tabpanel">
                         <div class="two-column">
                             <div class="form-group">
-                                <label class="form-label">Parihuela:</label>
-                                <select class="form-select" id="parihuela1">
+                                <label class="form-label" for="parihuela1">Parihuela:</label>
+                                <select class="form-select" id="parihuela1" aria-label="Seleccionar parihuela">
                                     <option value="">-- Selecciona parihuela --</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Caja:</label>
-                                <select class="form-select" id="caja1">
+                                <label class="form-label" for="caja1">Caja:</label>
+                                <select class="form-select" id="caja1" aria-label="Seleccionar caja">
                                     <option value="">-- Selecciona caja --</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="option-content" id="option2">
+                    <div class="option-content" id="option2" role="tabpanel">
                         <div class="form-group">
-                            <label class="form-label">Parihuela:</label>
-                            <select class="form-select" id="parihuela2">
+                            <label class="form-label" for="parihuela2">Parihuela:</label>
+                            <select class="form-select" id="parihuela2" aria-label="Seleccionar parihuela">
                                 <option value="">-- Selecciona parihuela --</option>
                             </select>
                         </div>
                         <div class="two-column">
                             <div class="form-group">
-                                <label class="form-label">Caja Desde:</label>
-                                <select class="form-select" id="cajaDesde">
+                                <label class="form-label" for="cajaDesde">Caja Desde:</label>
+                                <select class="form-select" id="cajaDesde" aria-label="Caja inicial">
                                     <option value="">-- Caja inicial --</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Caja Hasta:</label>
-                                <select class="form-select" id="cajaHasta">
+                                <label class="form-label" for="cajaHasta">Caja Hasta:</label>
+                                <select class="form-select" id="cajaHasta" aria-label="Caja final">
                                     <option value="">-- Caja final --</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="option-content" id="option3">
+                    <div class="option-content" id="option3" role="tabpanel">
                         <div class="form-group">
                             <label class="form-label">Selecciona las combinaciones:</label>
                             <div class="selection-controls">
                                 <div>
-                                    <button type="button" class="btn btn-primary" onclick="selectAll()">SELECCIONAR TODOS</button>
-                                    <button type="button" class="btn" onclick="selectNone()">DESELECCIONAR</button>
+                                    <button type="button" class="btn btn-primary" onclick="App.UI.selectAll()">SELECCIONAR TODOS</button>
+                                    <button type="button" class="btn btn-secondary" onclick="App.UI.selectNone()">DESELECCIONAR</button>
                                 </div>
-                                <div id="selectionCounter">0 elementos seleccionados</div>
+                                <div id="selectionCounter" role="status" aria-live="polite">0 elementos seleccionados</div>
                             </div>
-                            <div class="checkbox-list" id="checkboxList"></div>
+                            <div class="checkbox-list" id="checkboxList" role="group" aria-label="Lista de combinaciones"></div>
                         </div>
                     </div>
 
                     <div class="action-buttons">
-                        <button id="generateBtn" class="btn btn-success" onclick="generarRotulos()">GENERAR VISTA PREVIA</button>
-                        <button id="clearBtn" class="btn" onclick="limpiarRotulos()">LIMPIAR VISTA</button>
+                        <button id="generateBtn" class="btn btn-success" onclick="App.generateLabels()">GENERAR VISTA PREVIA</button>
+                        <button id="clearBtn" class="btn btn-secondary" onclick="App.clearLabels()">LIMPIAR VISTA</button>
+                        <button id="exportAllPdfBtn" class="btn btn-primary" onclick="App.Export.exportAllToPDF()" style="display: none;">EXPORTAR TODO A PDF</button>
+                        <button id="printAllBtn" class="btn btn-primary" onclick="App.printAll()" style="display: none;">IMPRIMIR TODOS</button>
                     </div>
                 </div>
 
-                <div id="statusMessage" class="status-message"></div>
+                <div id="statusMessage" class="status-message" role="alert"></div>
 
                 <div id="rotulosContainer" class="rotulos-container">
-                    <h3>Rótulos Generados</h3>
+                    <h3>Rótulos Generados (<span id="labelCount">0</span>)</h3>
                     <div id="rotulosList"></div>
                 </div>
             </div>
 
-            <div id="analysisTab" class="tab-content">
+            <div id="analysisTab" class="tab-content" role="tabpanel">
                 <h3>Análisis de Datos</h3>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="analizarDatos()">ANALIZAR CLASIFICACIÓN</button>
+                    <button class="btn btn-primary" onclick="App.Analysis.analyze()">ANALIZAR CLASIFICACIÓN</button>
+                    <button class="btn btn-secondary" onclick="App.Analysis.exportAnalysis()">EXPORTAR ANÁLISIS</button>
                 </div>
                 <div id="analysisResults"></div>
+            </div>
+
+            <div id="historyTab" class="tab-content" role="tabpanel">
+                <h3>Historial de Rótulos Generados</h3>
+                <div class="action-buttons">
+                    <button class="btn btn-danger" onclick="App.History.clear()">LIMPIAR HISTORIAL</button>
+                </div>
+                <div class="history-section" id="historyList"></div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <script>
-        // Variables globales
-        let gapiInited = false;
-        let gisInited = false;
-        let tokenClient;
-        let currentSpreadsheetId = '';
-        let datosCompletos = null;
-        let opcionActiva = 1;
-        let modoActivo = 'original';
+        const App = (function() {
+            const state = {
+                gapiInited: false,
+                gisInited: false,
+                tokenClient: null,
+                spreadsheetId: '',
+                data: null,
+                activeOption: 1,
+                activeMode: 'original',
+                generatedLabels: [],
+                searchTerm: '',
+                filterGenero: '',
+                dataIndex: null
+            };
 
-        // Configuración
-        const API_CONFIG = {
-            DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
-            SCOPES: 'https://www.googleapis.com/auth/spreadsheets.readonly'
-        };
+            const Config = {
+                DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
+                SCOPES: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+                RANGE: 'Clasificación!A:Z'
+            };
 
-        // Funciones globales que Google APIs requiere
-        function gapiLoaded() {
-            console.log('GAPI loaded');
-            gapi.load('client', initializeGapiClient);
-        }
+            window.gapiLoaded = function() {
+                console.log('GAPI loaded');
+                gapi.load('client', Auth.initializeGapiClient);
+            };
 
-        function gisLoaded() {
-            console.log('GIS loaded');
-            gisInited = true;
-            maybeEnableButtons();
-        }
-
-        // Inicializar cliente GAPI
-        async function initializeGapiClient() {
-            try {
-                await gapi.client.init({
-                    discoveryDocs: [API_CONFIG.DISCOVERY_DOC],
-                });
-                gapiInited = true;
-                console.log('GAPI client initialized');
+            window.gisLoaded = function() {
+                console.log('GIS loaded');
+                state.gisInited = true;
                 maybeEnableButtons();
-            } catch (error) {
-                console.error('Error inicializando GAPI:', error);
-                showStatus('Error inicializando Google API', 'error');
-            }
-        }
+            };
 
-        // Habilitar botones cuando ambas APIs estén listas
-        function maybeEnableButtons() {
-            if (gapiInited && gisInited) {
-                console.log('Ambas APIs listas, habilitando botones');
-                document.getElementById('signInBtn').disabled = false;
-            }
-        }
-
-        // Función de autenticación
-        function handleSignIn() {
-            console.log('Iniciando proceso de autenticación...');
-            
-            const clientId = document.getElementById('clientId').value.trim();
-            const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
-
-            if (!clientId || !clientId.includes('.apps.googleusercontent.com')) {
-                showStatus('Por favor ingresa un Client ID válido', 'error');
-                return;
-            }
-
-            if (!spreadsheetId) {
-                showStatus('Por favor ingresa el ID de la hoja de cálculo', 'error');
-                return;
-            }
-
-            currentSpreadsheetId = spreadsheetId;
-
-            try {
-                tokenClient = google.accounts.oauth2.initTokenClient({
-                    client_id: clientId,
-                    scope: API_CONFIG.SCOPES,
-                    callback: handleAuthSuccess,
-                    error_callback: handleAuthError
-                });
-
-                console.log('Solicitando token de acceso...');
-                tokenClient.requestAccessToken({ prompt: 'consent' });
-                
-            } catch (error) {
-                console.error('Error creando token client:', error);
-                showStatus('Error configurando autenticación: ' + error.message, 'error');
-            }
-        }
-
-        // Manejar éxito de autenticación
-        function handleAuthSuccess(resp) {
-            if (resp.error !== undefined) {
-                console.error('Auth callback error:', resp.error);
-                showStatus('Error de autenticación: ' + resp.error, 'error');
-                return;
-            }
-
-            console.log('Autenticación exitosa');
-            updateAuthStatus(true);
-            showStatus('Autenticación exitosa con Google', 'success');
-            
-            document.getElementById('mainContent').style.display = 'block';
-            cargarProveedores();
-        }
-
-        // Manejar errores de autenticación
-        function handleAuthError(error) {
-            console.error('Auth error callback:', error);
-            let userMessage = 'Error de autenticación: ';
-            
-            switch(error.type) {
-                case 'popup_closed':
-                    userMessage += 'Ventana cerrada por el usuario. Intenta de nuevo.';
-                    break;
-                case 'popup_blocked':
-                    userMessage += 'Popup bloqueado. Habilita popups para este sitio.';
-                    break;
-                case 'access_denied':
-                    userMessage += 'Acceso denegado. Acepta los permisos requeridos.';
-                    break;
-                default:
-                    userMessage += error.message || 'Error desconocido';
-            }
-            
-            showStatus(userMessage, 'error');
-            updateAuthStatus(false);
-        }
-
-        // Cerrar sesión
-        function handleSignOut() {
-            const token = gapi.client.getToken();
-            if (token !== null) {
-                google.accounts.oauth2.revoke(token.access_token);
-                gapi.client.setToken('');
-            }
-            updateAuthStatus(false);
-            showStatus('Sesión cerrada', 'success');
-            document.getElementById('mainContent').style.display = 'none';
-        }
-
-        // Actualizar estado de autenticación
-        function updateAuthStatus(isSignedIn) {
-            const indicator = document.getElementById('statusIndicator');
-            const status = document.getElementById('authStatus');
-            const signInBtn = document.getElementById('signInBtn');
-            const signOutBtn = document.getElementById('signOutBtn');
-
-            if (isSignedIn) {
-                indicator.className = 'status-indicator connected';
-                status.textContent = 'Autenticado';
-                signInBtn.style.display = 'none';
-                signOutBtn.style.display = 'inline-block';
-            } else {
-                indicator.className = 'status-indicator disconnected';
-                status.textContent = 'No autenticado';
-                signInBtn.style.display = 'inline-block';
-                signOutBtn.style.display = 'none';
-            }
-        }
-
-        // Mostrar mensajes de estado
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('statusMessage');
-            statusDiv.className = `status-message status-${type}`;
-            statusDiv.textContent = message;
-            statusDiv.style.display = 'block';
-
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        // Cargar datos de proveedores
-        async function cargarProveedores() {
-            try {
-                showStatus('Cargando datos de proveedores...', 'success');
-
-                const response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: currentSpreadsheetId,
-                    range: 'Clasificación!A:Z'
-                });
-
-                const values = response.result.values;
-                if (!values || values.length <= 1) {
-                    showStatus('No hay datos en la hoja de Clasificación', 'warning');
-                    return;
+            function maybeEnableButtons() {
+                if (state.gapiInited && state.gisInited) {
+                    document.getElementById('signInBtn').disabled = false;
                 }
-
-                const encabezados = values[0];
-                const cols = {};
-                encabezados.forEach(function(header, index) {
-                    cols[header] = index;
-                });
-
-                if (cols['PARIHUELA'] === undefined || cols['CAJA'] === undefined || cols['ID Proveedor'] === undefined) {
-                    showStatus('Error: No se encontraron las columnas requeridas', 'error');
-                    return;
-                }
-
-                const proveedores = new Set();
-                const combinacionesPorProveedor = {};
-
-                for (let i = 1; i < values.length; i++) {
-                    const proveedor = String(values[i][cols['ID Proveedor']] || '').trim();
-                    const parihuela = String(values[i][cols['PARIHUELA']] || '').trim();
-                    const caja = String(values[i][cols['CAJA']] || '').trim();
-
-                    if (proveedor && parihuela && caja) {
-                        proveedores.add(proveedor);
-
-                        if (!combinacionesPorProveedor[proveedor]) {
-                            combinacionesPorProveedor[proveedor] = new Set();
-                        }
-                        combinacionesPorProveedor[proveedor].add(parihuela + '|' + caja);
-                    }
-                }
-
-                datosCompletos = {
-                    values: values,
-                    cols: cols,
-                    proveedores: Array.from(proveedores).sort(),
-                    combinacionesPorProveedor: {}
-                };
-
-                Object.keys(combinacionesPorProveedor).forEach(function(proveedor) {
-                    datosCompletos.combinacionesPorProveedor[proveedor] = Array.from(combinacionesPorProveedor[proveedor])
-                        .map(function(combo) {
-                            const parts = combo.split('|');
-                            return { parihuela: parts[0], caja: parts[1] };
-                        })
-                        .sort(function(a, b) {
-                            const numParihuelaA = parseInt(a.parihuela);
-                            const numParihuelaB = parseInt(b.parihuela);
-                            
-                            if (numParihuelaA === numParihuelaB) {
-                                return parseInt(a.caja) - parseInt(b.caja);
-                            }
-                            return numParihuelaA - numParihuelaB;
-                        });
-                });
-
-                const select = document.getElementById('proveedorSelect');
-                select.innerHTML = '<option value="">-- Selecciona un proveedor --</option>';
-                
-                datosCompletos.proveedores.forEach(function(proveedor) {
-                    const option = document.createElement('option');
-                    option.value = proveedor;
-                    option.textContent = proveedor;
-                    select.appendChild(option);
-                });
-
-                showStatus('Datos cargados: ' + proveedores.size + ' proveedores encontrados', 'success');
-
-            } catch (error) {
-                console.error('Error cargando proveedores:', error);
-                showStatus('Error cargando proveedores: ' + error.message, 'error');
-            }
-        }
-
-        // Funciones de UI
-        function switchTab(event, tabName) {
-            document.querySelectorAll('.tab').forEach(function(tab) {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-content').forEach(function(content) {
-                content.classList.remove('active');
-            });
-            
-            event.target.classList.add('active');
-            document.getElementById(tabName + 'Tab').classList.add('active');
-        }
-
-        function switchOption(optionNum) {
-            opcionActiva = optionNum;
-            
-            document.querySelectorAll('.option-tab').forEach(function(tab, index) {
-                tab.classList.toggle('active', index + 1 === optionNum);
-            });
-            
-            document.querySelectorAll('.option-content').forEach(function(content, index) {
-                content.classList.toggle('active', index + 1 === optionNum);
-            });
-        }
-
-        function cambiarProveedor() {
-            const proveedor = document.getElementById('proveedorSelect').value;
-            const optionsContainer = document.getElementById('selectionOptions');
-            
-            if (proveedor && datosCompletos) {
-                optionsContainer.style.display = 'block';
-                cargarCombinacionesProveedor(proveedor);
-            } else {
-                optionsContainer.style.display = 'none';
-            }
-        }
-
-        function cargarCombinacionesProveedor(proveedor) {
-            const combinaciones = datosCompletos.combinacionesPorProveedor[proveedor] || [];
-            
-            const parihuelas = [...new Set(combinaciones.map(function(c) { return c.parihuela; }))]
-                .sort(function(a, b) { return parseInt(a) - parseInt(b); });
-            const cajas = [...new Set(combinaciones.map(function(c) { return c.caja; }))]
-                .sort(function(a, b) { return parseInt(a) - parseInt(b); });
-            
-            cargarSelect('parihuela1', parihuelas);
-            cargarSelect('caja1', cajas);
-            cargarSelect('parihuela2', parihuelas);
-            cargarSelect('cajaDesde', cajas);
-            cargarSelect('cajaHasta', cajas);
-            
-            cargarListaMultiple(combinaciones);
-        }
-
-        function cargarSelect(id, opciones) {
-            const select = document.getElementById(id);
-            select.innerHTML = '<option value="">-- Selecciona --</option>';
-            
-            opciones.forEach(function(opcion) {
-                const option = document.createElement('option');
-                option.value = opcion;
-                option.textContent = opcion;
-                select.appendChild(option);
-            });
-        }
-
-        function cargarListaMultiple(combinaciones) {
-            const lista = document.getElementById('checkboxList');
-            lista.innerHTML = '';
-            
-            combinaciones.forEach(function(combo, index) {
-                const item = document.createElement('div');
-                item.className = 'checkbox-item';
-                
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.id = 'combo_' + index;
-                checkbox.value = combo.parihuela + '|' + combo.caja;
-                checkbox.onchange = actualizarContador;
-                
-                const label = document.createElement('label');
-                label.htmlFor = 'combo_' + index;
-                label.textContent = 'Parihuela: ' + combo.parihuela + ' - Caja: ' + combo.caja;
-                
-                item.appendChild(checkbox);
-                item.appendChild(label);
-                lista.appendChild(item);
-            });
-            
-            actualizarContador();
-        }
-
-        function selectAll() {
-            const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-            });
-            actualizarContador();
-        }
-
-        function selectNone() {
-            const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-            });
-            actualizarContador();
-        }
-
-        function actualizarContador() {
-            const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
-            const contador = checkboxes.length;
-            document.getElementById('selectionCounter').textContent = 
-                contador + ' elemento' + (contador !== 1 ? 's' : '') + ' seleccionado' + (contador !== 1 ? 's' : '');
-        }
-
-        function obtenerSelecciones() {
-            const proveedor = document.getElementById('proveedorSelect').value;
-            const selecciones = [];
-
-            if (opcionActiva === 1) {
-                const parihuela = document.getElementById('parihuela1').value;
-                const caja = document.getElementById('caja1').value;
-                if (parihuela && caja) {
-                    selecciones.push({ proveedor: proveedor, parihuela: parihuela, caja: caja });
-                }
-            } else if (opcionActiva === 2) {
-                const parihuela = document.getElementById('parihuela2').value;
-                const cajaDesde = document.getElementById('cajaDesde').value;
-                const cajaHasta = document.getElementById('cajaHasta').value;
-                
-                if (parihuela && cajaDesde && cajaHasta) {
-                    const combinaciones = datosCompletos.combinacionesPorProveedor[proveedor];
-                    const cajasEnRango = combinaciones
-                        .filter(function(c) { return c.parihuela === parihuela; })
-                        .map(function(c) { return c.caja; })
-                        .filter(function(c) { return parseInt(c) >= parseInt(cajaDesde) && parseInt(c) <= parseInt(cajaHasta); });
-                    
-                    cajasEnRango.forEach(function(caja) {
-                        selecciones.push({ proveedor: proveedor, parihuela: parihuela, caja: caja });
-                    });
-                }
-            } else if (opcionActiva === 3) {
-                const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
-                checkboxes.forEach(function(checkbox) {
-                    const parts = checkbox.value.split('|');
-                    selecciones.push({ proveedor: proveedor, parihuela: parts[0], caja: parts[1] });
-                });
             }
 
-            return selecciones;
-        }
-
-        // Funciones de generación de rótulos
-        async function generarRotulos() {
-            try {
-                const proveedor = document.getElementById('proveedorSelect').value;
-                if (!proveedor) {
-                    showStatus('Selecciona un proveedor', 'error');
-                    return;
-                }
-
-                const selecciones = obtenerSelecciones();
-                if (selecciones.length === 0) {
-                    showStatus('No hay selecciones válidas para procesar', 'warning');
-                    return;
-                }
-
-                const generateBtn = document.getElementById('generateBtn');
-                const originalText = generateBtn.textContent;
-                generateBtn.innerHTML = '<span class="loading"></span> GENERANDO...';
-                generateBtn.disabled = true;
-
-                document.getElementById('rotulosList').innerHTML = '';
-
-                let rotulosGenerados = 0;
-
-                for (const seleccion of selecciones) {
+            const Auth = {
+                async initializeGapiClient() {
                     try {
-                        await generarRotuloIndividual(seleccion);
-                        rotulosGenerados++;
+                        await gapi.client.init({
+                            discoveryDocs: [Config.DISCOVERY_DOC],
+                        });
+                        state.gapiInited = true;
+                        maybeEnableButtons();
                     } catch (error) {
-                        console.error('Error generando rótulo:', error);
+                        UI.showStatus('Error inicializando Google API', 'error');
+                        console.error(error);
                     }
-                }
+                },
 
-                if (rotulosGenerados > 0) {
-                    showStatus(rotulosGenerados + ' rótulos generados correctamente', 'success');
-                    document.getElementById('rotulosContainer').style.display = 'block';
-                } else {
-                    showStatus('No se pudieron generar rótulos', 'error');
-                }
+                signIn() {
+                    const clientId = document.getElementById('clientId').value.trim();
+                    const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
 
-            } catch (error) {
-                console.error('Error en generación:', error);
-                showStatus('Error en generación: ' + error.message, 'error');
-            } finally {
-                const generateBtn = document.getElementById('generateBtn');
-                generateBtn.textContent = 'GENERAR VISTA PREVIA';
-                generateBtn.disabled = false;
-            }
-        }
-
-        async function generarRotuloIndividual(seleccion) {
-            const datosFiltrados = filtrarDatosPorSeleccion(seleccion, datosCompletos.values, datosCompletos.cols);
-            
-            if (datosFiltrados.length === 0) {
-                throw new Error('No se encontraron datos para la selección');
-            }
-
-            const grupos = agruparDatosParaRotulo(datosFiltrados, datosCompletos.cols);
-            
-            if (Object.keys(grupos).length === 0) {
-                throw new Error('No se pudieron agrupar los datos');
-            }
-
-            const rotuloHtml = construirRotuloHTML(seleccion, grupos);
-            
-            const container = document.getElementById('rotulosList');
-            container.appendChild(rotuloHtml);
-        }
-
-        function construirRotuloHTML(seleccion, grupos) {
-            const card = document.createElement('div');
-            card.className = 'rotulo-card';
-
-            const tipoTexto = modoActivo === 'original' ? 'Original' : 'Con Código + Color';
-            
-            const headerDiv = document.createElement('div');
-            headerDiv.className = 'rotulo-header';
-            headerDiv.innerHTML = '<h4>Rótulo ' + tipoTexto + ' - P' + seleccion.parihuela + ' C' + seleccion.caja + ' (' + seleccion.proveedor + ')</h4><div><button class="btn btn-primary" onclick="imprimirRotulo(this)">IMPRIMIR</button></div>';
-
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'rotulo-content print-area';
-            contentDiv.innerHTML = construirRotuloContenido(seleccion, grupos);
-
-            card.appendChild(headerDiv);
-            card.appendChild(contentDiv);
-
-            return card;
-        }
-
-        function construirRotuloContenido(seleccion, grupos) {
-            const totalStock = calcularStockTotal(grupos);
-            const fechaActual = new Date().toLocaleDateString('es-ES', { month: '2-digit', year: 'numeric' });
-            const validador = obtenerValidador(grupos);
-
-            let html = '<div class="rotulo"><div class="rotulo-titulo">📦 RÓTULO DE CAJA - ALMACÉN RD50 📦</div>';
-            html += '<table class="rotulo-info-table"><tr><td class="rotulo-info-header">INFORMACIÓN DE LA CAJA</td><td class="rotulo-ubicacion-header">UBICACIÓN DEL PRODUCTO</td></tr></table>';
-            html += '<table class="rotulo-info-table">';
-            html += '<tr><td>Proveedor: ' + seleccion.proveedor + '</td><td style="background: #FFFFFF;">Parihuela: ' + seleccion.parihuela + '</td></tr>';
-            html += '<tr><td>Validador: ' + validador + '</td><td style="background: #FFFFFF;">Caja: ' + seleccion.caja + '</td></tr>';
-            html += '<tr><td>Fecha: ' + fechaActual + '</td><td>Total Stock: ' + totalStock + '</td></tr>';
-            html += '</table>';
-
-            const porGenero = agruparPorGenero(grupos, datosCompletos.cols);
-
-            Object.keys(porGenero).forEach(function(genero) {
-                html += '<div class="rotulo-section-title">=== ' + genero + ' ===</div>';
-
-                const productosUnicos = agruparProductosUnicos(porGenero[genero], datosCompletos.cols);
-
-                Object.keys(productosUnicos).forEach(function(claveProducto) {
-                    const producto = productosUnicos[claveProducto];
-                    
-                    html += '<div class="rotulo-producto-title">▸ ' + producto.descripcion + ' | ' + producto.mundo + ' | ' + producto.marca + '</div>';
-
-                    if (modoActivo === 'concodigo' && (producto.codigo || producto.color)) {
-                        html += '<table class="rotulo-codigo-table"><tr><td>CÓDIGO: ' + (producto.codigo || 'N/A') + '</td><td style="text-align: right;">COLOR: ' + (producto.color || 'N/A') + '</td></tr></table>';
+                    if (!Validation.validateClientId(clientId)) {
+                        UI.showStatus('Por favor ingresa un Client ID válido', 'error');
+                        document.getElementById('clientId').classList.add('error');
+                        return;
                     }
 
-                    html += construirTablaTallas(producto.tallas);
-                });
-            });
+                    if (!Validation.validateSpreadsheetId(spreadsheetId)) {
+                        UI.showStatus('Por favor ingresa un ID de hoja válido', 'error');
+                        document.getElementById('spreadsheetId').classList.add('error');
+                        return;
+                    }
 
-            html += '</div>';
-            return html;
-        }
+                    document.getElementById('clientId').classList.remove('error');
+                    document.getElementById('spreadsheetId').classList.remove('error');
 
-        function construirTablaTallas(tallas) {
-            let html = '<table class="rotulo-tallas-table"><tr><th>T-1</th><th>T-2</th><th>CANT</th><th>Sticker</th><th>T-1</th><th>T-2</th><th>CANT</th><th>Sticker</th></tr>';
+                    state.spreadsheetId = spreadsheetId;
 
-            if (tallas.length === 0) {
-                html += '<tr><td>-</td><td>-</td><td>-</td><td class="rotulo-sticker-col"> </td><td>-</td><td>-</td><td>-</td><td class="rotulo-sticker-col"> </td></tr>';
-            } else {
-                for (let i = 0; i < tallas.length; i += 2) {
-                    const talla1 = tallas[i];
-                    const talla2 = i + 1 < tallas.length ? tallas[i + 1] : null;
+                    try {
+                        state.tokenClient = google.accounts.oauth2.initTokenClient({
+                            client_id: clientId,
+                            scope: Config.SCOPES,
+                            callback: Auth.handleAuthSuccess,
+                            error_callback: Auth.handleAuthError
+                        });
 
-                    let filaHtml = '<tr><td>' + (talla1.talla1 || '-') + '</td><td>' + (talla1.talla2 || '-') + '</td><td>' + (talla1.cantidad || '0') + '</td><td class="rotulo-sticker-col"> </td>';
+                        state.tokenClient.requestAccessToken({ prompt: 'consent' });
+                    } catch (error) {
+                        UI.showStatus('Error configurando autenticación: ' + error.message, 'error');
+                    }
+                },
+
+                handleAuthSuccess(resp) {
+                    if (resp.error !== undefined) {
+                        UI.showStatus('Error de autenticación: ' + resp.error, 'error');
+                        return;
+                    }
+
+                    UI.updateAuthStatus(true);
+                    UI.showStatus('Autenticación exitosa', 'success');
+                    UI.showToast('Conectado a Google Sheets');
+                    document.getElementById('mainContent').style.display = 'block';
+                    Data.loadProviders();
+                },
+
+                handleAuthError(error) {
+                    let userMessage = 'Error de autenticación: ';
                     
-                    if (talla2) {
-                        filaHtml += '<td>' + (talla2.talla1 || '-') + '</td><td>' + (talla2.talla2 || '-') + '</td><td>' + (talla2.cantidad || '0') + '</td><td class="rotulo-sticker-col"> </td>';
-                    } else {
-                        filaHtml += '<td> </td><td> </td><td> </td><td class="rotulo-sticker-col"> </td>';
+                    switch(error.type) {
+                        case 'popup_closed':
+                            userMessage += 'Ventana cerrada por el usuario';
+                            break;
+                        case 'popup_blocked':
+                            userMessage += 'Popup bloqueado. Habilita popups para este sitio';
+                            break;
+                        case 'access_denied':
+                            userMessage += 'Acceso denegado. Acepta los permisos requeridos';
+                            break;
+                        default:
+                            userMessage += error.message || 'Error desconocido';
                     }
                     
-                    filaHtml += '</tr>';
-                    html += filaHtml;
-                }
-            }
+                    UI.showStatus(userMessage, 'error');
+                    UI.updateAuthStatus(false);
+                },
 
-            html += '</table>';
-            return html;
-        }
-
-        function filtrarDatosPorSeleccion(seleccion, datos, cols) {
-            const datosFiltrados = [];
-            
-            for (let i = 1; i < datos.length; i++) {
-                const fila = datos[i];
-                
-                const proveedorFila = String(fila[cols['ID Proveedor']] || '').trim();
-                const parihuelaFila = String(fila[cols['PARIHUELA']] || '').trim();
-                const cajaFila = String(fila[cols['CAJA']] || '').trim();
-                
-                const coincide = proveedorFila === seleccion.proveedor &&
-                                parihuelaFila === seleccion.parihuela &&
-                                cajaFila === seleccion.caja;
-                
-                if (coincide) {
-                    datosFiltrados.push(fila);
+                signOut() {
+                    const token = gapi.client.getToken();
+                    if (token !== null) {
+                        google.accounts.oauth2.revoke(token.access_token);
+                        gapi.client.setToken('');
+                    }
+                    UI.updateAuthStatus(false);
+                    UI.showStatus('Sesión cerrada', 'success');
+                    document.getElementById('mainContent').style.display = 'none';
+                    state.data = null;
+                    state.dataIndex = null;
                 }
-            }
-            
-            return datosFiltrados;
-        }
+            };
 
-        function agruparDatosParaRotulo(datosFiltrados, cols) {
-            const grupos = {};
-            
-            datosFiltrados.forEach(function(fila) {
-                const clave = modoActivo === 'concodigo' ? [
-                    String(fila[cols['DESCRIPCIÓN']] || '').trim(),
-                    String(fila[cols['MUNDO']] || '').trim(),
-                    String(fila[cols['MARCA']] || '').trim(),
-                    String(fila[cols['GENERO']] || '').trim(),
-                    String(fila[cols['PARIHUELA']] || '').trim(),
-                    String(fila[cols['CAJA']] || '').trim(),
-                    String(fila[cols['CODIGO']] || '').trim(),
-                    String(fila[cols['COLOR']] || '').trim()
-                ].join('|') : [
-                    String(fila[cols['DESCRIPCIÓN']] || '').trim(),
-                    String(fila[cols['MUNDO']] || '').trim(),
-                    String(fila[cols['MARCA']] || '').trim(),
-                    String(fila[cols['GENERO']] || '').trim(),
-                    String(fila[cols['PARIHUELA']] || '').trim(),
-                    String(fila[cols['CAJA']] || '').trim()
-                ].join('|');
-                
-                if (!grupos[clave]) {
-                    grupos[clave] = {
-                        info: {
-                            proveedor: fila[cols['ID Proveedor']] || '',
-                            marca: fila[cols['MARCA']] || '',
-                            genero: fila[cols['GENERO']] || '',
-                            descripcion: fila[cols['DESCRIPCIÓN']] || '',
-                            mundo: fila[cols['MUNDO']] || '',
-                            parihuela: fila[cols['PARIHUELA']] || '',
-                            caja: fila[cols['CAJA']] || '',
-                            codigo: fila[cols['CODIGO']] || '',
-                            color: fila[cols['COLOR']] || '',
-                            validador: fila[cols['VALIDADOR']] || ''
-                        },
-                        tallas: []
-                    };
+            const Validation = {
+                validateClientId(clientId) {
+                    return clientId && clientId.includes('.apps.googleusercontent.com');
+                },
+
+                validateSpreadsheetId(spreadsheetId) {
+                    return spreadsheetId && spreadsheetId.length > 10;
+                },
+
+                validateRange(desde, hasta) {
+                    return parseInt(desde) <= parseInt(hasta);
                 }
-                
-                const talla1 = String(fila[cols['TALLA 1']] || '').trim();
-                const talla2 = String(fila[cols['TALLA 2']] || '').trim();
-                const cantidad = String(fila[cols['CANTIDAD']] || '').trim();
-                
-                if (talla1 || talla2 || cantidad) {
-                    const tallaExistente = grupos[clave].tallas.find(function(t) {
-                        return String(t.talla1 || '').trim() === talla1 && 
-                               String(t.talla2 || '').trim() === talla2;
+            };
+
+            const Data = {
+                async loadProviders() {
+                    try {
+                        UI.showSpinner(true);
+                        UI.showStatus('Cargando datos...', 'success');
+
+                        const response = await gapi.client.sheets.spreadsheets.values.get({
+                            spreadsheetId: state.spreadsheetId,
+                            range: Config.RANGE
+                        });
+
+                        const values = response.result.values;
+                        if (!values || values.length <= 1) {
+                            UI.showStatus('No hay datos en la hoja', 'warning');
+                            return;
+                        }
+
+                        const processedData = Data.processData(values);
+                        state.data = processedData;
+                        state.dataIndex = Data.createIndex(processedData);
+
+                        UI.populateProviders(processedData.providers);
+                        UI.populateGeneroFilter(processedData.generos);
+                        UI.showStatus(`Datos cargados: ${processedData.providers.length} proveedores`, 'success');
+                        UI.showToast('Datos indexados correctamente');
+
+                    } catch (error) {
+                        console.error('Error cargando datos:', error);
+                        UI.showStatus('Error: ' + error.message, 'error');
+                    } finally {
+                        UI.showSpinner(false);
+                    }
+                },
+
+                processData(values) {
+                    const headers = values[0];
+                    const cols = {};
+                    headers.forEach((header, index) => {
+                        cols[header] = index;
                     });
+
+                    const requiredCols = ['PARIHUELA', 'CAJA', 'ID Proveedor', 'GENERO'];
+                    for (const col of requiredCols) {
+                        if (cols[col] === undefined) {
+                            throw new Error(`Columna requerida "${col}" no encontrada`);
+                        }
+                    }
+
+                    const providers = new Set();
+                    const generos = new Set();
+                    const combinationsByProvider = {};
+
+                    for (let i = 1; i < values.length; i++) {
+                        const row = values[i];
+                        const provider = String(row[cols['ID Proveedor']] || '').trim();
+                        const parihuela = String(row[cols['PARIHUELA']] || '').trim();
+                        const caja = String(row[cols['CAJA']] || '').trim();
+                        const genero = String(row[cols['GENERO']] || '').trim();
+
+                        if (provider && parihuela && caja) {
+                            providers.add(provider);
+                            if (genero) generos.add(genero);
+
+                            if (!combinationsByProvider[provider]) {
+                                combinationsByProvider[provider] = new Set();
+                            }
+                            combinationsByProvider[provider].add(`${parihuela}|${caja}`);
+                        }
+                    }
+
+                    const processedCombinations = {};
+                    for (const [provider, combos] of Object.entries(combinationsByProvider)) {
+                        processedCombinations[provider] = Array.from(combos)
+                            .map(combo => {
+                                const [parihuela, caja] = combo.split('|');
+                                return { parihuela, caja };
+                            })
+                            .sort((a, b) => {
+                                const diffP = parseInt(a.parihuela) - parseInt(b.parihuela);
+                                return diffP !== 0 ? diffP : parseInt(a.caja) - parseInt(b.caja);
+                            });
+                    }
+
+                    return {
+                        values,
+                        cols,
+                        providers: Array.from(providers).sort(),
+                        generos: Array.from(generos).sort(),
+                        combinationsByProvider: processedCombinations
+                    };
+                },
+
+                createIndex(data) {
+                    const index = {
+                        byProvider: {},
+                        byGenero: {},
+                        byDescripcion: {}
+                    };
+
+                    for (let i = 1; i < data.values.length; i++) {
+                        const row = data.values[i];
+                        const provider = String(row[data.cols['ID Proveedor']] || '').trim();
+                        const genero = String(row[data.cols['GENERO']] || '').trim();
+                        const descripcion = String(row[data.cols['DESCRIPCIÓN']] || '').trim();
+
+                        if (!index.byProvider[provider]) index.byProvider[provider] = [];
+                        index.byProvider[provider].push(i);
+
+                        if (genero) {
+                            if (!index.byGenero[genero]) index.byGenero[genero] = [];
+                            index.byGenero[genero].push(i);
+                        }
+
+                        if (descripcion) {
+                            const key = descripcion.toLowerCase();
+                            if (!index.byDescripcion[key]) index.byDescripcion[key] = [];
+                            index.byDescripcion[key].push(i);
+                        }
+                    }
+
+                    return index;
+                },
+
+                filterData(selection) {
+                    const filtered = [];
+                    const rows = state.dataIndex.byProvider[selection.proveedor] || [];
+
+                    for (const rowIndex of rows) {
+                        const row = state.data.values[rowIndex];
+                        const parihuela = String(row[state.data.cols['PARIHUELA']] || '').trim();
+                        const caja = String(row[state.data.cols['CAJA']] || '').trim();
+
+                        if (parihuela === selection.parihuela && caja === selection.caja) {
+                            filtered.push(row);
+                        }
+                    }
+
+                    return filtered;
+                }
+            };
+
+            const LabelGenerator = {
+                async generate(selections) {
+                    state.generatedLabels = [];
+                    const container = document.getElementById('rotulosList');
+                    container.innerHTML = '';
+
+                    let count = 0;
+
+                    for (const selection of selections) {
+                        try {
+                            const label = await LabelGenerator.generateSingle(selection);
+                            if (label) {
+                                state.generatedLabels.push({
+                                    selection,
+                                    html: label.html,
+                                    timestamp: new Date().toISOString()
+                                });
+                                container.appendChild(label.element);
+                                count++;
+                            }
+                        } catch (error) {
+                            console.error('Error generando rótulo:', error);
+                        }
+                    }
+
+                    History.addBatch(state.generatedLabels);
+                    return count;
+                },
+
+                async generateSingle(selection) {
+                    const filtered = Data.filterData(selection);
                     
-                    if (tallaExistente) {
-                        tallaExistente.cantidad = (parseFloat(tallaExistente.cantidad) || 0) + (parseFloat(cantidad) || 0);
+                    if (filtered.length === 0) {
+                        throw new Error('No hay datos para esta selección');
+                    }
+
+                    const groups = LabelGenerator.groupData(filtered);
+                    
+                    if (Object.keys(groups).length === 0) {
+                        throw new Error('No se pudieron agrupar los datos');
+                    }
+
+                    return LabelGenerator.buildLabelHTML(selection, groups);
+                },
+
+                groupData(rows) {
+                    const groups = {};
+                    const cols = state.data.cols;
+                    
+                    for (const row of rows) {
+                        const keyParts = [
+                            String(row[cols['DESCRIPCIÓN']] || '').trim(),
+                            String(row[cols['MUNDO']] || '').trim(),
+                            String(row[cols['MARCA']] || '').trim(),
+                            String(row[cols['GENERO']] || '').trim(),
+                            String(row[cols['PARIHUELA']] || '').trim(),
+                            String(row[cols['CAJA']] || '').trim()
+                        ];
+
+                        if (state.activeMode === 'concodigo') {
+                            keyParts.push(
+                                String(row[cols['CODIGO']] || '').trim(),
+                                String(row[cols['COLOR']] || '').trim()
+                            );
+                        }
+
+                        const key = keyParts.join('|');
+                        
+                        if (!groups[key]) {
+                            groups[key] = {
+                                info: {
+                                    proveedor: row[cols['ID Proveedor']] || '',
+                                    marca: row[cols['MARCA']] || '',
+                                    genero: row[cols['GENERO']] || '',
+                                    descripcion: row[cols['DESCRIPCIÓN']] || '',
+                                    mundo: row[cols['MUNDO']] || '',
+                                    parihuela: row[cols['PARIHUELA']] || '',
+                                    caja: row[cols['CAJA']] || '',
+                                    codigo: row[cols['CODIGO']] || '',
+                                    color: row[cols['COLOR']] || '',
+                                    validador: row[cols['VALIDADOR']] || ''
+                                },
+                                tallas: []
+                            };
+                        }
+                        
+                        const talla1 = String(row[cols['TALLA 1']] || '').trim();
+                        const talla2 = String(row[cols['TALLA 2']] || '').trim();
+                        const cantidad = String(row[cols['CANTIDAD']] || '').trim();
+                        
+                        if (talla1 || talla2 || cantidad) {
+                            const existing = groups[key].tallas.find(t =>
+                                String(t.talla1).trim() === talla1 && 
+                                String(t.talla2).trim() === talla2
+                            );
+                            
+                            if (existing) {
+                                existing.cantidad = (parseFloat(existing.cantidad) || 0) + (parseFloat(cantidad) || 0);
+                            } else {
+                                groups[key].tallas.push({ talla1, talla2, cantidad });
+                            }
+                        }
+                    }
+                    
+                    return groups;
+                },
+
+                buildLabelHTML(selection, groups) {
+                    const card = document.createElement('div');
+                    card.className = 'rotulo-card';
+
+                    const tipoTexto = state.activeMode === 'original' ? 'Original' : 'Con Código + Color';
+                    
+                    const headerDiv = document.createElement('div');
+                    headerDiv.className = 'rotulo-header';
+                    headerDiv.innerHTML = `
+                        <h4>Rótulo ${tipoTexto} - P${selection.parihuela} C${selection.caja} (${selection.proveedor})</h4>
+                        <div class="rotulo-actions">
+                            <button class="btn btn-primary" onclick="App.printSingle(this)" aria-label="Imprimir rótulo">IMPRIMIR</button>
+                            <button class="btn btn-success" onclick="App.Export.exportSingleToPDF(this)" aria-label="Exportar a PDF">PDF</button>
+                        </div>
+                    `;
+
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'rotulo-content print-area';
+                    contentDiv.innerHTML = LabelGenerator.buildContent(selection, groups);
+
+                    card.appendChild(headerDiv);
+                    card.appendChild(contentDiv);
+
+                    return {
+                        element: card,
+                        html: card.outerHTML
+                    };
+                },
+
+                buildContent(selection, groups) {
+                    const totalStock = LabelGenerator.calculateTotalStock(groups);
+                    const fecha = new Date().toLocaleDateString('es-ES', { month: '2-digit', year: 'numeric' });
+                    const validador = LabelGenerator.getValidator(groups);
+
+                    let html = `
+                        <div class="rotulo">
+                            <div class="rotulo-titulo">📦 RÓTULO DE CAJA - ALMACÉN RD50 📦</div>
+                            <table class="rotulo-info-table">
+                                <tr>
+                                    <td class="rotulo-info-header">INFORMACIÓN DE LA CAJA</td>
+                                    <td class="rotulo-ubicacion-header">UBICACIÓN DEL PRODUCTO</td>
+                                </tr>
+                            </table>
+                            <table class="rotulo-info-table">
+                                <tr>
+                                    <td>Proveedor: ${Utils.escapeHtml(selection.proveedor)}</td>
+                                    <td style="background: #FFFFFF;">Parihuela: ${Utils.escapeHtml(selection.parihuela)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Validador: ${Utils.escapeHtml(validador)}</td>
+                                    <td style="background: #FFFFFF;">Caja: ${Utils.escapeHtml(selection.caja)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha: ${fecha}</td>
+                                    <td>Total Stock: ${totalStock}</td>
+                                </tr>
+                            </table>
+                    `;
+
+                    const byGenero = LabelGenerator.groupByGenero(groups);
+
+                    for (const [genero, items] of Object.entries(byGenero)) {
+                        html += `<div class="rotulo-section-title">=== ${Utils.escapeHtml(genero)} ===</div>`;
+
+                        const uniqueProducts = LabelGenerator.groupUniqueProducts(items);
+
+                        for (const product of Object.values(uniqueProducts)) {
+                            html += `<div class="rotulo-producto-title">▸ ${Utils.escapeHtml(product.descripcion)} | ${Utils.escapeHtml(product.mundo)} | ${Utils.escapeHtml(product.marca)}</div>`;
+
+                            if (state.activeMode === 'concodigo' && (product.codigo || product.color)) {
+                                html += `
+                                    <table class="rotulo-codigo-table">
+                                        <tr>
+                                            <td>CÓDIGO: ${Utils.escapeHtml(product.codigo || 'N/A')}</td>
+                                            <td style="text-align: right;">COLOR: ${Utils.escapeHtml(product.color || 'N/A')}</td>
+                                        </tr>
+                                    </table>
+                                `;
+                            }
+
+                            html += LabelGenerator.buildSizesTable(product.tallas);
+                        }
+                    }
+
+                    html += '</div>';
+                    return html;
+                },
+
+                buildSizesTable(tallas) {
+                    let html = `
+                        <table class="rotulo-tallas-table">
+                            <tr>
+                                <th>T-1</th>
+                                <th>T-2</th>
+                                <th>CANT</th>
+                                <th>Sticker</th>
+                                <th>T-1</th>
+                                <th>T-2</th>
+                                <th>CANT</th>
+                                <th>Sticker</th>
+                            </tr>
+                    `;
+
+                    if (tallas.length === 0) {
+                        html += '<tr><td>-</td><td>-</td><td>-</td><td class="rotulo-sticker-col"> </td><td>-</td><td>-</td><td>-</td><td class="rotulo-sticker-col"> </td></tr>';
                     } else {
-                        grupos[clave].tallas.push({
-                            talla1: talla1 || '',
-                            talla2: talla2 || '',
-                            cantidad: cantidad || ''
+                        for (let i = 0; i < tallas.length; i += 2) {
+                            const t1 = tallas[i];
+                            const t2 = i + 1 < tallas.length ? tallas[i + 1] : null;
+
+                            html += '<tr>';
+                            html += `<td>${Utils.escapeHtml(t1.talla1 || '-')}</td>`;
+                            html += `<td>${Utils.escapeHtml(t1.talla2 || '-')}</td>`;
+                            html += `<td>${Utils.escapeHtml(t1.cantidad || '0')}</td>`;
+                            html += '<td class="rotulo-sticker-col"> </td>';
+                            
+                            if (t2) {
+                                html += `<td>${Utils.escapeHtml(t2.talla1 || '-')}</td>`;
+                                html += `<td>${Utils.escapeHtml(t2.talla2 || '-')}</td>`;
+                                html += `<td>${Utils.escapeHtml(t2.cantidad || '0')}</td>`;
+                                html += '<td class="rotulo-sticker-col"> </td>';
+                            } else {
+                                html += '<td> </td><td> </td><td> </td><td class="rotulo-sticker-col"> </td>';
+                            }
+                            
+                            html += '</tr>';
+                        }
+                    }
+
+                    html += '</table>';
+                    return html;
+                },
+
+                groupByGenero(groups) {
+                    const byGenero = {};
+                    
+                    for (const group of Object.values(groups)) {
+                        const genero = group.info.genero || 'SIN GÉNERO';
+                        if (!byGenero[genero]) byGenero[genero] = [];
+                        byGenero[genero].push(group);
+                    }
+                    
+                    return byGenero;
+                },
+
+                groupUniqueProducts(items) {
+                    const unique = {};
+                    
+                    for (const item of items) {
+                        const keyParts = [
+                            item.info.descripcion,
+                            item.info.mundo,
+                            item.info.marca
+                        ];
+
+                        if (state.activeMode === 'concodigo') {
+                            keyParts.push(item.info.codigo, item.info.color);
+                        }
+
+                        const key = keyParts.join('|');
+                        
+                        if (!unique[key]) {
+                            unique[key] = {
+                                descripcion: item.info.descripcion,
+                                mundo: item.info.mundo,
+                                marca: item.info.marca,
+                                codigo: item.info.codigo,
+                                color: item.info.color,
+                                tallas: []
+                            };
+                        }
+                        
+                        unique[key].tallas.push(...item.tallas);
+                    }
+                    
+                    return unique;
+                },
+
+                calculateTotalStock(groups) {
+                    let total = 0;
+                    for (const group of Object.values(groups)) {
+                        for (const talla of group.tallas) {
+                            total += parseFloat(talla.cantidad) || 0;
+                        }
+                    }
+                    return total;
+                },
+
+                getValidator(groups) {
+                    const validators = Object.values(groups)
+                        .map(g => g.info.validador)
+                        .filter(v => v);
+                    return validators[0] || 'N/A';
+                }
+            };
+
+            const Export = {
+                async exportSingleToPDF(button) {
+                    try {
+                        UI.showSpinner(true);
+                        const card = button.closest('.rotulo-card');
+                        const content = card.querySelector('.rotulo-content');
+                        
+                        const canvas = await html2canvas(content, {
+                            scale: 2,
+                            useCORS: true,
+                            logging: false
+                        });
+
+                        const { jsPDF } = window.jspdf;
+                        const pdf = new jsPDF('p', 'mm', 'a4');
+                        
+                        const imgData = canvas.toDataURL('image/png');
+                        const imgWidth = 210;
+                        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                        
+                        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                        pdf.save(`rotulo-${Date.now()}.pdf`);
+                        
+                        UI.showToast('PDF exportado correctamente');
+                    } catch (error) {
+                        console.error('Error exportando PDF:', error);
+                        UI.showStatus('Error al exportar PDF', 'error');
+                    } finally {
+                        UI.showSpinner(false);
+                    }
+                },
+
+                async exportAllToPDF() {
+                    if (state.generatedLabels.length === 0) {
+                        UI.showStatus('No hay rótulos para exportar', 'warning');
+                        return;
+                    }
+
+                    try {
+                        UI.showSpinner(true);
+                        const { jsPDF } = window.jspdf;
+                        const pdf = new jsPDF('p', 'mm', 'a4');
+                        
+                        const cards = document.querySelectorAll('.rotulo-card .rotulo-content');
+                        
+                        for (let i = 0; i < cards.length; i++) {
+                            if (i > 0) pdf.addPage();
+                            
+                            const canvas = await html2canvas(cards[i], {
+                                scale: 2,
+                                useCORS: true,
+                                logging: false
+                            });
+                            
+                            const imgData = canvas.toDataURL('image/png');
+                            const imgWidth = 210;
+                            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                            
+                            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                        }
+                        
+                        pdf.save(`rotulos-lukers-${Date.now()}.pdf`);
+                        UI.showToast(`${cards.length} rótulos exportados a PDF`);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        UI.showStatus('Error exportando PDFs', 'error');
+                    } finally {
+                        UI.showSpinner(false);
+                    }
+                }
+            };
+
+            const Analysis = {
+                analyze() {
+                    if (!state.data) {
+                        UI.showStatus('Primero carga los datos', 'warning');
+                        return;
+                    }
+
+                    const values = state.data.values;
+                    const cols = state.data.cols;
+                    
+                    const totalRecords = values.length - 1;
+                    const groups = {};
+
+                    for (let i = 1; i < values.length; i++) {
+                        const row = values[i];
+                        const key = [
+                            row[cols['DESCRIPCIÓN']],
+                            row[cols['MUNDO']],
+                            row[cols['MARCA']],
+                            row[cols['GENERO']],
+                            row[cols['PARIHUELA']],
+                            row[cols['CAJA']]
+                        ].join('|');
+                        
+                        groups[key] = (groups[key] || 0) + 1;
+                    }
+
+                    const totalGroups = Object.keys(groups).length;
+                    const maxSizes = Math.max(...Object.values(groups));
+                    const largeGroups = Object.values(groups).filter(c => c > 20).length;
+                    const avgSizes = (totalRecords / totalGroups).toFixed(1);
+
+                    const resultsDiv = document.getElementById('analysisResults');
+                    resultsDiv.innerHTML = `
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                            <h4 style="color: #1e88e5; margin-bottom: 15px;">Análisis de Clasificación</h4>
+                            <div class="stats-grid">
+                                <div class="stat-card" style="border-left-color: #28a745;">
+                                    <div class="stat-value">${totalRecords.toLocaleString()}</div>
+                                    <div class="stat-label">Total Registros</div>
+                                </div>
+                                <div class="stat-card" style="border-left-color: #1e88e5;">
+                                    <div class="stat-value">${totalGroups.toLocaleString()}</div>
+                                    <div class="stat-label">Grupos Únicos</div>
+                                </div>
+                                <div class="stat-card" style="border-left-color: #ffc107;">
+                                    <div class="stat-value">${state.data.providers.length}</div>
+                                    <div class="stat-label">Proveedores</div>
+                                </div>
+                                <div class="stat-card" style="border-left-color: #dc3545;">
+                                    <div class="stat-value">${maxSizes}</div>
+                                    <div class="stat-label">Máx Tallas/Grupo</div>
+                                </div>
+                                <div class="stat-card" style="border-left-color: #17a2b8;">
+                                    <div class="stat-value">${avgSizes}</div>
+                                    <div class="stat-label">Promedio Tallas</div>
+                                </div>
+                                <div class="stat-card" style="border-left-color: #6f42c1;">
+                                    <div class="stat-value">${state.data.generos.length}</div>
+                                    <div class="stat-label">Géneros</div>
+                                </div>
+                            </div>
+                            ${largeGroups > 0 ? `
+                                <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 15px; margin-top: 15px;">
+                                    <strong style="color: #856404;">⚠️ Atención:</strong> 
+                                    ${largeGroups} grupos tienen más de 20 tallas
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    
+                    UI.showStatus('Análisis completado', 'success');
+                },
+
+                exportAnalysis() {
+                    const results = document.getElementById('analysisResults');
+                    if (!results.innerHTML) {
+                        UI.showStatus('Primero ejecuta el análisis', 'warning');
+                        return;
+                    }
+
+                    const text = results.innerText;
+                    const blob = new Blob([text], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `analisis-lukers-${Date.now()}.txt`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    
+                    UI.showToast('Análisis exportado');
+                }
+            };
+
+            const History = {
+                addBatch(labels) {
+                    const history = History.load();
+                    const batch = {
+                        id: Date.now(),
+                        timestamp: new Date().toISOString(),
+                        count: labels.length,
+                        labels: labels.map(l => ({
+                            proveedor: l.selection.proveedor,
+                            parihuela: l.selection.parihuela,
+                            caja: l.selection.caja
+                        }))
+                    };
+                    history.unshift(batch);
+                    
+                    if (history.length > 50) history.length = 50;
+                    
+                    History.save(history);
+                    History.render();
+                },
+
+                load() {
+                    try {
+                        const data = sessionStorage.getItem('lukers_history');
+                        return data ? JSON.parse(data) : [];
+                    } catch {
+                        return [];
+                    }
+                },
+
+                save(history) {
+                    try {
+                        sessionStorage.setItem('lukers_history', JSON.stringify(history));
+                    } catch (e) {
+                        console.warn('No se pudo guardar el historial:', e);
+                    }
+                },
+
+                render() {
+                    const history = History.load();
+                    const container = document.getElementById('historyList');
+                    
+                    if (history.length === 0) {
+                        container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">No hay historial de rótulos generados</p>';
+                        return;
+                    }
+
+                    container.innerHTML = history.map(batch => {
+                        const date = new Date(batch.timestamp);
+                        const timeStr = date.toLocaleString('es-ES');
+                        
+                        return `
+                            <div class="history-item">
+                                <div class="history-info">
+                                    <strong>${batch.count} rótulo${batch.count !== 1 ? 's' : ''}</strong>
+                                    <div class="history-timestamp">${timeStr}</div>
+                                    <small>${batch.labels.map(l => `P${l.parihuela}-C${l.caja}`).join(', ')}</small>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                },
+
+                clear() {
+                    if (confirm('¿Estás seguro de que deseas limpiar todo el historial?')) {
+                        History.save([]);
+                        History.render();
+                        UI.showToast('Historial limpiado');
+                    }
+                }
+            };
+
+            const Search = {
+                debounceTimer: null,
+
+                init() {
+                    const searchInput = document.getElementById('searchInput');
+                    searchInput.addEventListener('input', (e) => {
+                        clearTimeout(Search.debounceTimer);
+                        Search.debounceTimer = setTimeout(() => {
+                            state.searchTerm = e.target.value.toLowerCase();
+                            Search.applyFilters();
+                        }, 300);
+                    });
+
+                    document.getElementById('filterGenero').addEventListener('change', (e) => {
+                        state.filterGenero = e.target.value;
+                        Search.applyFilters();
+                    });
+                },
+
+                applyFilters() {
+                    const provider = document.getElementById('proveedorSelect').value;
+                    if (!provider || !state.data) return;
+
+                    let combinations = state.data.combinationsByProvider[provider] || [];
+
+                    if (state.searchTerm || state.filterGenero) {
+                        combinations = combinations.filter(combo => {
+                            const rows = Data.filterData({
+                                proveedor: provider,
+                                parihuela: combo.parihuela,
+                                caja: combo.caja
+                            });
+
+                            return rows.some(row => {
+                                const matchesSearch = !state.searchTerm || 
+                                    ['DESCRIPCIÓN', 'MARCA', 'CODIGO', 'MUNDO'].some(col => 
+                                        String(row[state.data.cols[col]] || '').toLowerCase().includes(state.searchTerm)
+                                    );
+
+                                const matchesGenero = !state.filterGenero ||
+                                    String(row[state.data.cols['GENERO']] || '').trim() === state.filterGenero;
+
+                                return matchesSearch && matchesGenero;
+                            });
                         });
                     }
-                }
-            });
-            
-            return grupos;
-        }
 
-        function agruparPorGenero(grupos, cols) {
-            const porGenero = {};
-            
-            Object.keys(grupos).forEach(function(clave) {
-                const grupo = grupos[clave];
-                const genero = grupo.info.genero || 'SIN GÉNERO';
-                
-                if (!porGenero[genero]) {
-                    porGenero[genero] = [];
-                }
-                porGenero[genero].push(grupo);
-            });
-            
-            return porGenero;
-        }
+                    UI.loadCombinations(provider, combinations);
+                    Search.updateFilterBadges();
+                },
 
-        function agruparProductosUnicos(gruposGenero, cols) {
-            const productosUnicos = {};
-            
-            gruposGenero.forEach(function(grupo) {
-                const claveProducto = modoActivo === 'concodigo' ? 
-                    grupo.info.descripcion + '|' + grupo.info.mundo + '|' + grupo.info.marca + '|' + grupo.info.codigo + '|' + grupo.info.color :
-                    grupo.info.descripcion + '|' + grupo.info.mundo + '|' + grupo.info.marca;
-                
-                if (!productosUnicos[claveProducto]) {
-                    productosUnicos[claveProducto] = {
-                        descripcion: grupo.info.descripcion,
-                        mundo: grupo.info.mundo,
-                        marca: grupo.info.marca,
-                        codigo: grupo.info.codigo,
-                        color: grupo.info.color,
-                        tallas: []
-                    };
-                }
-                
-                productosUnicos[claveProducto].tallas.push(...grupo.tallas);
-            });
-            
-            return productosUnicos;
-        }
+                updateFilterBadges() {
+                    const container = document.getElementById('activeFilters');
+                    const badges = [];
 
-        function calcularStockTotal(grupos) {
-            let total = 0;
-            Object.values(grupos).forEach(function(grupo) {
-                grupo.tallas.forEach(function(talla) {
-                    total += parseFloat(talla.cantidad) || 0;
-                });
-            });
-            return total;
-        }
-
-        function obtenerValidador(grupos) {
-            const validadores = Object.values(grupos)
-                .map(function(g) { return g.info.validador; })
-                .filter(function(v) { return v; });
-            return validadores[0] || 'N/A';
-        }
-
-        function imprimirRotulo(button) {
-            const card = button.closest('.rotulo-card');
-            const printArea = card.querySelector('.print-area');
-            
-            const printWindow = window.open('', '_blank');
-            const printStyles = 'body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }' +
-                '.rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2px solid #333; font-family: Arial, sans-serif; color: black; }' +
-                '.rotulo-titulo { text-align: center; font-size: 14px; font-weight: bold; padding: 5px; background: white; color: black; border-bottom: 1px solid #333; }' +
-                '.rotulo-info-table { width: 100%; border-collapse: collapse; font-size: 9px; }' +
-                '.rotulo-info-table td { border: 1px solid #666; padding: 5px; vertical-align: middle; }' +
-                '.rotulo-info-header { background: #4472C4; color: white; font-weight: bold; text-align: center; font-size: 11px; }' +
-                '.rotulo-ubicacion-header { background: #E74C3C; color: white; font-weight: bold; text-align: center; font-size: 11px; }' +
-                '.rotulo-section-title { text-align: center; font-size: 11px; font-weight: bold; padding: 5px; margin: 5px 0; }' +
-                '.rotulo-producto-title { text-align: center; font-size: 10px; font-weight: bold; padding: 5px; margin: 5px 0; }' +
-                '.rotulo-codigo-table { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 9px; }' +
-                '.rotulo-codigo-table td { padding: 3px; vertical-align: middle; }' +
-                '.rotulo-tallas-table { width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 9px; }' +
-                '.rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 3px; text-align: center; font-size: 9px; font-weight: bold; }' +
-                '.rotulo-tallas-table td { border: 1px solid #333; padding: 3px; text-align: center; height: 70px; vertical-align: center; font-size: 12px; }' +
-                '.rotulo-sticker-col { background: #FFFFFF; }';
-            
-            printWindow.document.write('<!DOCTYPE html>');
-            printWindow.document.write('<html><head>');
-            printWindow.document.write('<meta charset="UTF-8">');
-            printWindow.document.write('<title>Rotulo Lukers</title>');
-            printWindow.document.write('<style>' + printStyles + '</style>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write('<div id="print-content"></div>');
-            printWindow.document.write('<scr' + 'ipt>');
-            printWindow.document.write('window.onload = function() {');
-            printWindow.document.write('  setTimeout(function() { window.print(); }, 100);');
-            printWindow.document.write('};');
-            printWindow.document.write('window.onafterprint = function() { window.close(); };');
-            printWindow.document.write('</scr' + 'ipt>');
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            
-            setTimeout(() => {
-                const printContent = printWindow.document.getElementById('print-content');
-                if (printContent && printArea) {
-                    const clonedContent = printArea.cloneNode(true);
-                    printContent.appendChild(clonedContent);
-                }
-            }, 50);
-        }
-
-        function limpiarRotulos() {
-            document.getElementById('rotulosList').innerHTML = '';
-            document.getElementById('rotulosContainer').style.display = 'none';
-            showStatus('Vista previa limpiada', 'success');
-        }
-
-        async function analizarDatos() {
-            try {
-                showStatus('Analizando datos...', 'success');
-                
-                if (!datosCompletos || !datosCompletos.values) {
-                    showStatus('Primero carga los datos', 'warning');
-                    return;
-                }
-
-                const values = datosCompletos.values;
-                const cols = datosCompletos.cols;
-                
-                const totalRegistros = values.length - 1;
-                const proveedores = new Set();
-                const grupos = {};
-
-                for (let i = 1; i < values.length; i++) {
-                    const fila = values[i];
-                    const proveedor = String(fila[cols['ID Proveedor']] || '').trim();
-                    if (proveedor) proveedores.add(proveedor);
-                    
-                    const clave = [
-                        fila[cols['DESCRIPCIÓN']],
-                        fila[cols['MUNDO']],
-                        fila[cols['MARCA']],
-                        fila[cols['GENERO']],
-                        fila[cols['PARIHUELA']],
-                        fila[cols['CAJA']]
-                    ].join('|');
-                    
-                    if (!grupos[clave]) {
-                        grupos[clave] = 0;
+                    if (state.searchTerm) {
+                        badges.push(`<span class="filter-badge">Búsqueda: "${Utils.escapeHtml(state.searchTerm)}"</span>`);
                     }
-                    grupos[clave]++;
+
+                    if (state.filterGenero) {
+                        badges.push(`<span class="filter-badge">Género: ${Utils.escapeHtml(state.filterGenero)}</span>`);
+                    }
+
+                    container.innerHTML = badges.length > 0 ? 
+                        `<strong>Filtros activos:</strong> ${badges.join('')}` : '';
+                }
+            };
+
+            const UI = {
+                updateAuthStatus(isSignedIn) {
+                    const indicator = document.getElementById('statusIndicator');
+                    const status = document.getElementById('authStatus');
+                    const signInBtn = document.getElementById('signInBtn');
+                    const signOutBtn = document.getElementById('signOutBtn');
+
+                    if (isSignedIn) {
+                        indicator.className = 'status-indicator connected';
+                        status.textContent = 'Autenticado';
+                        signInBtn.style.display = 'none';
+                        signOutBtn.style.display = 'inline-block';
+                    } else {
+                        indicator.className = 'status-indicator disconnected';
+                        status.textContent = 'No autenticado';
+                        signInBtn.style.display = 'inline-block';
+                        signOutBtn.style.display = 'none';
+                    }
+                },
+
+                showStatus(message, type) {
+                    const statusDiv = document.getElementById('statusMessage');
+                    statusDiv.className = `status-message status-${type}`;
+                    statusDiv.textContent = message;
+                    statusDiv.style.display = 'block';
+
+                    setTimeout(() => {
+                        statusDiv.style.display = 'none';
+                    }, 5000);
+                },
+
+                showToast(message) {
+                    const toast = document.getElementById('toast');
+                    toast.textContent = message;
+                    toast.classList.add('active');
+
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 3000);
+                },
+
+                showSpinner(show) {
+                    document.getElementById('spinnerOverlay').classList.toggle('active', show);
+                },
+
+                switchTab(event, tabName) {
+                    document.querySelectorAll('.tab').forEach(tab => {
+                        tab.classList.remove('active');
+                        tab.setAttribute('aria-selected', 'false');
+                    });
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    event.target.classList.add('active');
+                    event.target.setAttribute('aria-selected', 'true');
+                    document.getElementById(tabName + 'Tab').classList.add('active');
+
+                    if (tabName === 'history') {
+                        History.render();
+                    }
+                },
+
+                switchOption(optionNum) {
+                    state.activeOption = optionNum;
+                    
+                    document.querySelectorAll('.option-tab').forEach((tab, index) => {
+                        const isActive = index + 1 === optionNum;
+                        tab.classList.toggle('active', isActive);
+                        tab.setAttribute('aria-selected', isActive.toString());
+                    });
+                    
+                    document.querySelectorAll('.option-content').forEach((content, index) => {
+                        content.classList.toggle('active', index + 1 === optionNum);
+                    });
+                },
+
+                populateProviders(providers) {
+                    const select = document.getElementById('proveedorSelect');
+                    select.innerHTML = '<option value="">-- Selecciona un proveedor --</option>';
+                    
+                    providers.forEach(provider => {
+                        const option = document.createElement('option');
+                        option.value = provider;
+                        option.textContent = provider;
+                        select.appendChild(option);
+                    });
+                },
+
+                populateGeneroFilter(generos) {
+                    const select = document.getElementById('filterGenero');
+                    select.innerHTML = '<option value="">Todos</option>';
+                    
+                    generos.forEach(genero => {
+                        const option = document.createElement('option');
+                        option.value = genero;
+                        option.textContent = genero;
+                        select.appendChild(option);
+                    });
+                },
+
+                loadCombinations(provider, combinations = null) {
+                    if (!combinations) {
+                        combinations = state.data.combinationsByProvider[provider] || [];
+                    }
+
+                    const parihuelas = [...new Set(combinations.map(c => c.parihuela))];
+                    const cajas = [...new Set(combinations.map(c => c.caja))];
+                    
+                    UI.populateSelect('parihuela1', parihuelas);
+                    UI.populateSelect('caja1', cajas);
+                    UI.populateSelect('parihuela2', parihuelas);
+                    UI.populateSelect('cajaDesde', cajas);
+                    UI.populateSelect('cajaHasta', cajas);
+                    
+                    UI.loadMultipleList(combinations);
+                },
+
+                populateSelect(id, options) {
+                    const select = document.getElementById(id);
+                    const firstOption = select.options[0].text;
+                    select.innerHTML = `<option value="">${firstOption}</option>`;
+                    
+                    options.forEach(option => {
+                        const opt = document.createElement('option');
+                        opt.value = option;
+                        opt.textContent = option;
+                        select.appendChild(opt);
+                    });
+                },
+
+                loadMultipleList(combinations) {
+                    const lista = document.getElementById('checkboxList');
+                    lista.innerHTML = '';
+                    
+                    combinations.forEach((combo, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.id = `combo_${index}`;
+                        checkbox.value = `${combo.parihuela}|${combo.caja}`;
+                        checkbox.addEventListener('change', UI.updateCounter);
+                        
+                        const label = document.createElement('label');
+                        label.htmlFor = `combo_${index}`;
+                        label.textContent = `Parihuela: ${combo.parihuela} - Caja: ${combo.caja}`;
+                        
+                        item.appendChild(checkbox);
+                        item.appendChild(label);
+                        lista.appendChild(item);
+                    });
+                    
+                    UI.updateCounter();
+                },
+
+                selectAll() {
+                    document.querySelectorAll('#checkboxList input[type="checkbox"]').forEach(cb => {
+                        cb.checked = true;
+                    });
+                    UI.updateCounter();
+                },
+
+                selectNone() {
+                    document.querySelectorAll('#checkboxList input[type="checkbox"]').forEach(cb => {
+                        cb.checked = false;
+                    });
+                    UI.updateCounter();
+                },
+
+                updateCounter() {
+                    const count = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked').length;
+                    document.getElementById('selectionCounter').textContent = 
+                        `${count} elemento${count !== 1 ? 's' : ''} seleccionado${count !== 1 ? 's' : ''}`;
+                }
+            };
+
+            const Utils = {
+                escapeHtml(text) {
+                    const map = {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#039;'
+                    };
+                    return String(text).replace(/[&<>"']/g, m => map[m]);
+                }
+            };
+
+            function getSelections() {
+                const provider = document.getElementById('proveedorSelect').value;
+                const selections = [];
+
+                if (state.activeOption === 1) {
+                    const parihuela = document.getElementById('parihuela1').value;
+                    const caja = document.getElementById('caja1').value;
+                    if (parihuela && caja) {
+                        selections.push({ proveedor: provider, parihuela, caja });
+                    }
+                } else if (state.activeOption === 2) {
+                    const parihuela = document.getElementById('parihuela2').value;
+                    const desde = document.getElementById('cajaDesde').value;
+                    const hasta = document.getElementById('cajaHasta').value;
+                    
+                    if (parihuela && desde && hasta) {
+                        if (!Validation.validateRange(desde, hasta)) {
+                            UI.showStatus('Rango inválido: "Desde" debe ser menor o igual a "Hasta"', 'error');
+                            return [];
+                        }
+
+                        const combinations = state.data.combinationsByProvider[provider];
+                        const inRange = combinations
+                            .filter(c => c.parihuela === parihuela)
+                            .filter(c => parseInt(c.caja) >= parseInt(desde) && parseInt(c.caja) <= parseInt(hasta));
+                        
+                        inRange.forEach(c => {
+                            selections.push({ proveedor: provider, parihuela, caja: c.caja });
+                        });
+                    }
+                } else if (state.activeOption === 3) {
+                    const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
+                    checkboxes.forEach(cb => {
+                        const [parihuela, caja] = cb.value.split('|');
+                        selections.push({ proveedor: provider, parihuela, caja });
+                    });
                 }
 
-                const totalGrupos = Object.keys(grupos).length;
-                const maxTallas = Math.max(...Object.values(grupos));
-                const gruposGrandes = Object.values(grupos).filter(function(count) { return count > 20; }).length;
+                return selections;
+            }
 
-                const resultsDiv = document.getElementById('analysisResults');
-                resultsDiv.innerHTML = 
-                    '<div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px;">' +
-                        '<h4 style="color: #1e88e5; margin-bottom: 15px;">Análisis de Clasificación</h4>' +
-                        '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">' +
-                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745; text-align: center;">' +
-                                '<div style="font-size: 2em; font-weight: bold; color: #28a745;">' + totalRegistros.toLocaleString() + '</div>' +
-                                '<div style="color: #666;">Total Registros</div>' +
-                            '</div>' +
-                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #1e88e5; text-align: center;">' +
-                                '<div style="font-size: 2em; font-weight: bold; color: #1e88e5;">' + totalGrupos.toLocaleString() + '</div>' +
-                                '<div style="color: #666;">Grupos Únicos</div>' +
-                            '</div>' +
-                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; text-align: center;">' +
-                                '<div style="font-size: 2em; font-weight: bold; color: #ffc107;">' + proveedores.size + '</div>' +
-                                '<div style="color: #666;">Proveedores</div>' +
-                            '</div>' +
-                            '<div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #dc3545; text-align: center;">' +
-                                '<div style="font-size: 2em; font-weight: bold; color: #dc3545;">' + maxTallas + '</div>' +
-                                '<div style="color: #666;">Max Tallas/Grupo</div>' +
-                            '</div>' +
-                        '</div>' +
-                        (gruposGrandes > 0 ? 
-                            '<div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 15px; margin-top: 15px;">' +
-                                '<strong style="color: #856404;">⚠️ Atención:</strong> ' +
-                                gruposGrandes + ' grupos tienen más de 20 tallas (podrían requerir múltiples rótulos)' +
-                            '</div>' : '') +
-                    '</div>';
+            return {
+                Auth,
+                Data,
+                LabelGenerator,
+                Export,
+                Analysis,
+                History,
+                Search,
+                UI,
+                Utils,
+
+                async generateLabels() {
+                    const provider = document.getElementById('proveedorSelect').value;
+                    if (!provider) {
+                        UI.showStatus('Selecciona un proveedor', 'error');
+                        return;
+                    }
+
+                    const selections = getSelections();
+                    if (selections.length === 0) {
+                        UI.showStatus('No hay selecciones válidas', 'warning');
+                        return;
+                    }
+
+                    try {
+                        UI.showSpinner(true);
+                        const count = await LabelGenerator.generate(selections);
+                        
+                        if (count > 0) {
+                            UI.showStatus(`${count} rótulos generados`, 'success');
+                            document.getElementById('rotulosContainer').style.display = 'block';
+                            document.getElementById('labelCount').textContent = count;
+                            document.getElementById('exportAllPdfBtn').style.display = 'inline-block';
+                            document.getElementById('printAllBtn').style.display = 'inline-block';
+                        } else {
+                            UI.showStatus('No se pudieron generar rótulos', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        UI.showStatus('Error: ' + error.message, 'error');
+                    } finally {
+                        UI.showSpinner(false);
+                    }
+                },
+
+                clearLabels() {
+                    document.getElementById('rotulosList').innerHTML = '';
+                    document.getElementById('rotulosContainer').style.display = 'none';
+                    document.getElementById('exportAllPdfBtn').style.display = 'none';
+                    document.getElementById('printAllBtn').style.display = 'none';
+                    state.generatedLabels = [];
+                    UI.showToast('Vista limpiada');
+                },
+
+                printSingle(button) {
+                    const card = button.closest('.rotulo-card');
+                    const printArea = card.querySelector('.print-area');
+                    
+                    const printWindow = window.open('', '_blank');
+                    const printStyles = `
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2px solid #333; }
+                        .rotulo-titulo { text-align: center; font-size: 14px; font-weight: bold; padding: 5px; border-bottom: 1px solid #333; }
+                        .rotulo-info-table { width: 100%; border-collapse: collapse; font-size: 9px; }
+                        .rotulo-info-table td { border: 1px solid #666; padding: 5px; }
+                        .rotulo-info-header { background: #4472C4; color: white; font-weight: bold; text-align: center; font-size: 11px; }
+                        .rotulo-ubicacion-header { background: #E74C3C; color: white; font-weight: bold; text-align: center; font-size: 11px; }
+                        .rotulo-section-title { text-align: center; font-size: 11px; font-weight: bold; padding: 5px; margin: 5px 0; }
+                        .rotulo-producto-title { text-align: center; font-size: 10px; font-weight: bold; padding: 5px; margin: 5px 0; }
+                        .rotulo-codigo-table { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 9px; }
+                        .rotulo-codigo-table td { padding: 3px; }
+                        .rotulo-tallas-table { width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 9px; }
+                        .rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 3px; text-align: center; font-weight: bold; }
+                        .rotulo-tallas-table td { border: 1px solid #333; padding: 3px; text-align: center; height: 70px; font-size: 12px; }
+                    `;
+                    
+                    printWindow.document.write('<!DOCTYPE html>');
+                    printWindow.document.write('<html><head>');
+                    printWindow.document.write('<meta charset="UTF-8">');
+                    printWindow.document.write('<title>Rotulo Lukers</title>');
+                    printWindow.document.write('<style>' + printStyles + '</style>');
+                    printWindow.document.write('</head><body>');
+                    printWindow.document.write(printArea.innerHTML);
+                    printWindow.document.write('<scr' + 'ipt>');
+                    printWindow.document.write('window.onload = function() { setTimeout(function() { window.print(); }, 100); };');
+                    printWindow.document.write('window.onafterprint = function() { window.close(); };');
+                    printWindow.document.write('</scr' + 'ipt>');
+                    printWindow.document.write('</body></html>');
+                    printWindow.document.close();
+                },
+
+                printAll() {
+                    window.print();
+                },
+
+                clearFilters() {
+                    state.searchTerm = '';
+                    state.filterGenero = '';
+                    document.getElementById('searchInput').value = '';
+                    document.getElementById('filterGenero').value = '';
+                    
+                    const provider = document.getElementById('proveedorSelect').value;
+                    if (provider && state.data) {
+                        UI.loadCombinations(provider);
+                    }
+                    
+                    document.getElementById('activeFilters').innerHTML = '';
+                    UI.showToast('Filtros limpiados');
+                }
+            };
+        })();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('signInBtn').addEventListener('click', App.Auth.signIn);
+            document.getElementById('signOutBtn').addEventListener('click', App.Auth.signOut);
+            
+            document.getElementById('proveedorSelect').addEventListener('change', (e) => {
+                const provider = e.target.value;
+                const options = document.getElementById('selectionOptions');
                 
-                showStatus('Análisis completado', 'success');
+                if (provider && App.Data) {
+                    options.style.display = 'block';
+                    App.UI.loadCombinations(provider);
+                } else {
+                    options.style.display = 'none';
+                }
+            });
 
-            } catch (error) {
-                console.error('Error en análisis:', error);
-                showStatus('Error en análisis: ' + error.message, 'error');
-            }
-        }
-
-        // Configurar event listeners cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, configurando event listeners...');
-            
-            const signInBtn = document.getElementById('signInBtn');
-            const signOutBtn = document.getElementById('signOutBtn');
-            const proveedorSelect = document.getElementById('proveedorSelect');
-            
-            if (signInBtn) {
-                signInBtn.addEventListener('click', handleSignIn);
-                signInBtn.disabled = true;
-                console.log('Event listener para signIn configurado');
-            }
-            
-            if (signOutBtn) {
-                signOutBtn.addEventListener('click', handleSignOut);
-                console.log('Event listener para signOut configurado');
-            }
-
-            if (proveedorSelect) {
-                proveedorSelect.addEventListener('change', cambiarProveedor);
-            }
-            
             document.querySelectorAll('.mode-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.mode-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
                     this.classList.add('active');
-                    modoActivo = this.dataset.mode;
-                    showStatus('Modo cambiado a: ' + this.textContent, 'success');
+                    this.setAttribute('aria-pressed', 'true');
+                    App.state.activeMode = this.dataset.mode;
+                    App.UI.showToast('Modo: ' + this.textContent);
                 });
             });
 
-            loadSavedCredentials();
+            App.Search.init();
         });
-
-        function loadSavedCredentials() {
-            try {
-                if (typeof(Storage) !== "undefined") {
-                    const savedClientId = sessionStorage.getItem('lukers_client_id');
-                    const savedSpreadsheetId = sessionStorage.getItem('lukers_spreadsheet_id');
-                    
-                    if (savedClientId) {
-                        document.getElementById('clientId').value = atob(savedClientId);
-                    }
-                    if (savedSpreadsheetId) {
-                        document.getElementById('spreadsheetId').value = atob(savedSpreadsheetId);
-                    }
-                }
-            } catch (e) {
-                console.warn('Error cargando credenciales guardadas:', e);
-            }
-        }
-
-        console.log('Script cargado, esperando APIs de Google...');
     </script>
     
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
