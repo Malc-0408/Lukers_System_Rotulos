@@ -1964,19 +1964,23 @@
                     const byGenero = LabelGenerator.groupByGenero(groups);
                     
                     for (const [genero, items] of Object.entries(byGenero)) {
-                        // SEPARADOR DE GÉNERO
+                        // SEPARADOR DE GÉNERO (más espacio arriba)
+                        yPos += 5;
                         pdf.setFontSize(11);
                         pdf.setFont('helvetica', 'bold');
+                        pdf.setTextColor(0, 0, 0);
                         pdf.text(`=== ${genero} ===`, 297.5, yPos, { align: 'center' });
-                        yPos += 8;
+                        yPos += 10;
                         
                         const uniqueProducts = LabelGenerator.groupUniqueProducts(items);
                         
                         for (const product of Object.values(uniqueProducts)) {
-                            // TÍTULO DE PRODUCTO
+                            // TÍTULO DE PRODUCTO (sin símbolo >)
                             pdf.setFontSize(10);
-                            pdf.text(`> ${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
-                            yPos += 5;
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setTextColor(0, 0, 0);
+                            pdf.text(`${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
+                            yPos += 8;
                             
                             // TABLA CÓDIGO/COLOR (si aplica)
                             if (state.activeMode === 'concodigo' && (product.codigo || product.color)) {
@@ -1987,14 +1991,14 @@
                                 
                                 pdf.text(codigoText, marginLeft, yPos);
                                 pdf.text(colorText, marginLeft + 571, yPos, { align: 'right' });
-                                yPos += 12;
+                                yPos += 10;
                                 
                                 pdf.setFont('helvetica', 'bold');
                             }
                             
                             // TABLA DE TALLAS
                             yPos = Export.drawSizesTable(pdf, product.tallas, marginLeft, yPos);
-                            yPos += 10;
+                            yPos += 8;
                         }
                     }
                 },
@@ -2013,6 +2017,7 @@
                     pdf.setFillColor(240, 240, 240);
                     pdf.setFontSize(9);
                     pdf.setFont('helvetica', 'bold');
+                    pdf.setTextColor(0, 0, 0);
                     
                     const headers = ['T-1', 'T-2', 'CANT', 'Sticker', 'T-1', 'T-2', 'CANT', 'Sticker'];
                     let xPos = x;
@@ -2026,12 +2031,15 @@
                     
                     // FILAS DE DATOS
                     pdf.setFont('helvetica', 'normal');
+                    pdf.setFillColor(255, 255, 255);
                     
                     if (tallas.length === 0) {
                         xPos = x;
                         for (let i = 0; i < 8; i++) {
-                            pdf.rect(xPos, y, colWidths[i], rowHeight);
-                            if (i !== 3 && i !== 7) {
+                            if (i === 3 || i === 7) {
+                                pdf.rect(xPos, y, colWidths[i], rowHeight, 'FD');
+                            } else {
+                                pdf.rect(xPos, y, colWidths[i], rowHeight);
                                 pdf.setFontSize(12);
                                 pdf.text('-', xPos + colWidths[i]/2, y + rowHeight/2 + 4, { align: 'center' });
                             }
@@ -2059,7 +2067,6 @@
                             pdf.text(String(t1.cantidad || '0'), xPos + colWidths[2]/2, y + rowHeight/2 + 4, { align: 'center' });
                             xPos += colWidths[2];
                             
-                            pdf.setFillColor(255, 255, 255);
                             pdf.rect(xPos, y, colWidths[3], rowHeight, 'FD');
                             xPos += colWidths[3];
                             
@@ -2077,7 +2084,6 @@
                                 pdf.text(String(t2.cantidad || '0'), xPos + colWidths[6]/2, y + rowHeight/2 + 4, { align: 'center' });
                                 xPos += colWidths[6];
                                 
-                                pdf.setFillColor(255, 255, 255);
                                 pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
                             } else {
                                 pdf.rect(xPos, y, colWidths[4], rowHeight);
@@ -2086,7 +2092,6 @@
                                 xPos += colWidths[5];
                                 pdf.rect(xPos, y, colWidths[6], rowHeight);
                                 xPos += colWidths[6];
-                                pdf.setFillColor(255, 255, 255);
                                 pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
                             }
                             
