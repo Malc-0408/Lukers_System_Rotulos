@@ -2410,7 +2410,7 @@
                         groups[key] = (groups[key] || 0) + 1;
                     }
 
-                    const totalGroupsconst totalGroups = Object.keys(groups).length;
+                    const totalGroups = Object.keys(groups).length;
                     const maxSizes = Math.max(...Object.values(groups));
                     const largeGroups = Object.values(groups).filter(c => c > 20).length;
                     const avgSizes = (totalRecords / totalGroups).toFixed(1);
