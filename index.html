@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             background: white;
             min-height: 100vh;
@@ -27,7 +27,7 @@
         }
 
         /* ============================================
-           NUEVO HEADER COMPACTO
+           HEADER COMPACTO
         ============================================ */
         .header-compact {
             background: linear-gradient(135deg, #1e88e5 0%, #42a5f5 100%);
@@ -423,94 +423,63 @@
         }
 
         /* ============================================
-           CONTENIDO PRINCIPAL
+           LAYOUT DOS COLUMNAS
         ============================================ */
         .main-content {
-            padding: 30px;
             display: none;
         }
 
-        .search-filter-section {
-            background: #e3f2fd;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .search-controls {
+        .two-column-layout {
             display: grid;
-            grid-template-columns: 2fr 1fr auto;
-            gap: 15px;
-            align-items: end;
+            grid-template-columns: 450px 1fr;
+            height: calc(100vh - 60px);
         }
 
-        .search-input {
-            padding: 12px;
-            border: 2px solid #1e88e5;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 15px 20px;
+        /* COLUMNA IZQUIERDA - CONFIGURACIÓN */
+        .config-column {
             background: #f8f9fa;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1em;
-            transition: all 0.3s;
-            color: #666;
+            border-right: 2px solid #dee2e6;
+            overflow-y: auto;
+            padding: 25px;
         }
 
-        .tab.active {
-            background: #1e88e5;
-            color: white;
-        }
-
-        .tab:hover:not(.active) {
-            background: #e3f2fd;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .mode-selector {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
+        .config-column h3 {
+            color: #1e88e5;
             margin-bottom: 20px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-selector-compact {
+            background: white;
+            border: 2px solid #1e88e5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .mode-selector-compact h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 0.9em;
         }
 
         .mode-buttons {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
+            gap: 8px;
         }
 
         .mode-btn {
-            padding: 10px 20px;
+            flex: 1;
+            padding: 8px 12px;
             border: 2px solid #1e88e5;
             border-radius: 5px;
             background: white;
             color: #1e88e5;
             cursor: pointer;
             font-weight: bold;
+            font-size: 0.85em;
             transition: all 0.3s;
         }
 
@@ -519,252 +488,279 @@
             color: white;
         }
 
-        .proveedor-section {
-            background: #f8f9fa;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
+        .selection-section {
+            background: white;
+            border-radius: 8px;
             padding: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .proveedor-label {
-            font-weight: bold;
+        .selection-section h4 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .proveedor-select {
+        .large-select {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 2px solid #ddd;
             border-radius: 5px;
-            font-size: 1.1em;
-            color: #333;
+            font-size: 1.05em;
             background: white;
-        }
-
-        .selection-options {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .option-tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .option-tab {
-            flex: 1;
-            padding: 12px 10px;
-            background: #f8f9fa;
-            border: none;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9em;
-            text-align: center;
             transition: all 0.3s;
-            color: #666;
         }
 
-        .option-tab.active {
+        .large-select:hover {
+            border-color: #1e88e5;
+        }
+
+        .large-select:focus {
+            outline: none;
+            border-color: #1e88e5;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+
+        .parihuela-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .parihuela-chip {
+            padding: 12px 8px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .parihuela-chip:hover {
+            border-color: #1e88e5;
+            background: #e3f2fd;
+        }
+
+        .parihuela-chip.selected {
+            border-color: #1e88e5;
             background: #1e88e5;
             color: white;
         }
 
-        .option-content {
-            display: none;
-            background: #f9f9f9;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            min-height: 200px;
+        .parihuela-chip.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .option-content.active {
+        .caja-count {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .parihuela-chip.selected .caja-count {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .method-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            background: #f0f0f0;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        .method-tab {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .method-tab.active {
+            background: #1e88e5;
+            color: white;
+        }
+
+        .method-content {
+            display: none;
+        }
+
+        .method-content.active {
             display: block;
         }
 
-        .two-column {
+        .caja-range {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .checkbox-list {
-            max-height: 300px;
+        .checkbox-list-compact {
+            max-height: 200px;
             overflow-y: auto;
             border: 1px solid #ddd;
             border-radius: 5px;
             background: white;
         }
 
-        .checkbox-item {
-            padding: 10px 15px;
+        .checkbox-item-compact {
+            padding: 10px;
             border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
         }
 
-        .checkbox-item:hover {
-            background-color: #f0f0f0;
+        .checkbox-item-compact:hover {
+            background: #f0f0f0;
         }
 
-        .checkbox-item:last-child {
+        .checkbox-item-compact:last-child {
             border-bottom: none;
         }
 
-        .checkbox-item input {
+        .checkbox-item-compact input {
             margin-right: 10px;
             transform: scale(1.2);
             accent-color: #1e88e5;
         }
 
-        .checkbox-item label {
+        .checkbox-item-compact label {
             cursor: pointer;
             flex: 1;
+            font-size: 0.9em;
         }
 
-        .selection-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #e3f2fd;
-            border-radius: 5px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            flex-wrap: wrap;
-        }
-
-        .status-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            display: none;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .status-success {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-
-        .status-error {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-
-        .status-warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #1e88e5;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .spinner-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .spinner-overlay.active {
-            display: flex;
-        }
-
-        .spinner-content {
+        .action-section {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .rotulos-container {
-            margin-top: 30px;
-            display: none;
-        }
-
-        .rotulo-card {
-            background: white;
-            border: 1px solid #ddd;
             border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            transition: transform 0.2s;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .rotulo-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .action-buttons-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .rotulo-header {
-            background: #1e88e5;
-            color: white;
-            padding: 10px 15px;
+        /* COLUMNA DERECHA - PREVIEW */
+        .preview-column {
+            background: white;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .preview-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
         }
 
-        .rotulo-actions {
+        .preview-header h3 {
+            color: #333;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .preview-actions {
             display: flex;
             gap: 10px;
         }
 
-        .rotulo-content {
-            padding: 20px;
+        .preview-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
         }
 
+        .preview-empty-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .preview-empty h4 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .preview-empty p {
+            color: #999;
+            font-size: 0.95em;
+        }
+
+        .preview-info {
+            background: #e3f2fd;
+            border-left: 4px solid #1e88e5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        .preview-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .preview-stat {
+            text-align: center;
+        }
+
+        .preview-stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #1e88e5;
+        }
+
+        .preview-stat-label {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .rotulo-preview {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .rotulo-preview:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Estilos del rótulo (mantener los originales) */
         .rotulo {
-            max-width: 210mm;
+            max-width: 100%;
             margin: 0 auto;
             background: white;
             border: 2px solid #333;
@@ -781,11 +777,10 @@
             margin: 0;
             background: white;
             color: black;
-            border-bottom: none;
         }
 
         .rotulo-info-table {
-            width: 571pt;
+            width: 100%;
             margin: 0 auto;
             border-collapse: collapse;
             font-size: 9pt;
@@ -804,7 +799,6 @@
             font-weight: bold;
             text-align: center;
             font-size: 11pt;
-            width: 285pt;
         }
 
         .rotulo-ubicacion-header {
@@ -813,11 +807,10 @@
             font-weight: bold;
             text-align: center;
             font-size: 11pt;
-            width: 286pt;
         }
 
         .rotulo-data-table {
-            width: 571pt;
+            width: 100%;
             margin: 0 auto;
             border-collapse: collapse;
             font-size: 9pt;
@@ -828,15 +821,6 @@
             padding: 2pt 5pt;
             vertical-align: middle;
             height: 18pt;
-        }
-
-        .rotulo-data-col1 {
-            width: 285pt;
-        }
-
-        .rotulo-data-col2 {
-            width: 286pt;
-            background: #FFFFFF;
         }
 
         .rotulo-section-title {
@@ -856,7 +840,7 @@
         }
 
         .rotulo-codigo-table {
-            width: 571pt;
+            width: 100%;
             margin: 0 auto;
             border-collapse: collapse;
             font-size: 9pt;
@@ -868,17 +852,12 @@
             border: none;
         }
 
-        .rotulo-codigo-col1 {
-            width: 285pt;
-        }
-
         .rotulo-codigo-col2 {
-            width: 286pt;
             text-align: right;
         }
 
         .rotulo-tallas-table {
-            width: 568pt;
+            width: 100%;
             margin: 5pt auto;
             border-collapse: collapse;
             border: 1pt solid #333;
@@ -895,22 +874,6 @@
             height: 20pt;
         }
 
-        .rotulo-tallas-table .th-t1 {
-            width: 45pt;
-        }
-
-        .rotulo-tallas-table .th-t2 {
-            width: 45pt;
-        }
-
-        .rotulo-tallas-table .th-cant {
-            width: 44pt;
-        }
-
-        .rotulo-tallas-table .th-sticker {
-            width: 150pt;
-        }
-
         .rotulo-tallas-table td {
             border: 1pt solid #333;
             padding: 1pt;
@@ -924,6 +887,41 @@
             background: #FFFFFF;
         }
 
+        .tabs {
+            display: flex;
+            background: #f0f0f0;
+            border-radius: 8px;
+            padding: 5px;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            color: #666;
+            border-radius: 5px;
+        }
+
+        .tab.active {
+            background: #1e88e5;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Análisis e Historial */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -960,7 +958,6 @@
             background: #f8f9fa;
             padding: 20px;
             border-radius: 10px;
-            margin-top: 20px;
         }
 
         .history-item {
@@ -968,14 +965,7 @@
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             border-left: 4px solid #1e88e5;
-        }
-
-        .history-info {
-            flex: 1;
         }
 
         .history-timestamp {
@@ -983,30 +973,123 @@
             color: #666;
         }
 
-        .export-section {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
 
-        @media print {
-            body * {
-                visibility: hidden;
+        .spinner-overlay.active {
+            display: flex;
+        }
+
+        .spinner-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #1e88e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10000;
+            display: none;
+            animation: slideUpToast 0.3s ease-out;
+        }
+
+        .toast.active {
+            display: block;
+        }
+
+        @keyframes slideUpToast {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            
-            .print-area, .print-area * {
-                visibility: visible;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            
-            .print-area {
-                position: absolute;
-                left: 0;
-                top: 0;
+        }
+
+        .update-info {
+            font-size: 0.85em;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .status-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        @media (max-width: 1200px) {
+            .two-column-layout {
+                grid-template-columns: 400px 1fr;
             }
-            
-            .rotulo-header, .action-buttons {
-                display: none !important;
+        }
+
+        @media (max-width: 968px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .config-column {
+                border-right: none;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            .preview-column {
+                padding: 20px;
             }
         }
 
@@ -1022,91 +1105,27 @@
                 justify-content: space-between;
             }
 
-            .config-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-            
-            .tabs, .option-tabs {
-                flex-direction: column;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .mode-buttons {
-                flex-direction: column;
-            }
-
-            .search-controls {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
             .dropdown-menu {
                 right: auto;
                 left: 0;
                 width: 100%;
                 min-width: auto;
             }
-        }
 
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #333;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 10000;
-            animation: slideUp 0.3s ease-out;
-            display: none;
-        }
-
-        .toast.active {
-            display: block;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+            .parihuela-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .preview-info-grid {
+                grid-template-columns: 1fr;
             }
-        }
-
-        .filter-badge {
-            display: inline-block;
-            background: #1e88e5;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin: 5px 5px 0 0;
-        }
-
-        .update-info {
-            font-size: 0.85em;
-            color: rgba(255,255,255,0.9);
         }
     </style>
 </head>
 <body>
     <div class="spinner-overlay" id="spinnerOverlay">
         <div class="spinner-content">
-            <div class="loading" style="width: 60px; height: 60px; border-width: 6px;"></div>
+            <div class="loading"></div>
             <p style="margin-top: 20px; font-weight: bold;">Procesando...</p>
         </div>
     </div>
@@ -1114,9 +1133,7 @@
     <div class="toast" id="toast"></div>
 
     <div class="container">
-        <!-- ============================================
-             NUEVO HEADER COMPACTO
-        ============================================ -->
+        <!-- HEADER COMPACTO -->
         <div class="header-compact">
             <div class="header-left">
                 <div>
@@ -1173,9 +1190,7 @@
             </div>
         </div>
 
-        <!-- ============================================
-             MODAL DE LOGIN ADMINISTRADOR
-        ============================================ -->
+        <!-- MODAL LOGIN ADMIN -->
         <div class="modal-overlay" id="adminLoginModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1197,9 +1212,7 @@
             </div>
         </div>
 
-        <!-- ============================================
-             MODAL DE CONFIGURACIÓN
-        ============================================ -->
+        <!-- MODAL CONFIGURACIÓN -->
         <div class="modal-overlay" id="configModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1216,147 +1229,188 @@
                         <div class="config-grid">
                             <div class="form-group">
                                 <label class="form-label" for="clientId">Google OAuth Client ID:</label>
-                                <input type="text" id="clientId" class="form-input" placeholder="xxxxxx.apps.googleusercontent.com" maxlength="200" aria-required="true">
+                                <input type="text" id="clientId" class="form-input" placeholder="xxxxxx.apps.googleusercontent.com" maxlength="200">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="spreadsheetId">ID de la Hoja de Cálculo:</label>
-                                <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100" aria-required="true">
+                                <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100">
                             </div>
                         </div>
                         <button class="btn btn-success btn-block" onclick="App.Auth.saveConfig()">💾 GUARDAR CONFIGURACIÓN</button>
 
                         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
                             <h4 style="margin-bottom: 15px; color: #333;">Estado de Autenticación</h4>
-                            <div class="auth-status" role="status" aria-live="polite">
-                                <div id="statusIndicatorAdmin" class="status-indicator disconnected" aria-hidden="true"></div>
+                            <div class="auth-status">
+                                <div id="statusIndicatorAdmin" class="status-indicator"></div>
                                 <span id="authStatusAdmin">No autenticado</span>
                             </div>
-                            <button id="signInBtnAdmin" class="btn btn-primary btn-block" onclick="App.Auth.signInAdmin()" disabled aria-label="Iniciar sesión con Google">INICIAR SESIÓN CON GOOGLE</button>
-                            <button id="signOutBtnAdmin" class="btn btn-danger btn-block" onclick="App.Auth.signOutAdmin()" style="display: none;" aria-label="Cerrar sesión">CERRAR SESIÓN</button>
+                            <button id="signInBtnAdmin" class="btn btn-primary btn-block" onclick="App.Auth.signInAdmin()" disabled>INICIAR SESIÓN CON GOOGLE</button>
+                            <button id="signOutBtnAdmin" class="btn btn-danger btn-block" onclick="App.Auth.signOutAdmin()" style="display: none;">CERRAR SESIÓN</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ============================================
-             CONTENIDO PRINCIPAL
-        ============================================ -->
+        <!-- CONTENIDO PRINCIPAL -->
         <div id="mainContent" class="main-content">
-            <div class="mode-selector" style="margin-top: 0;">
-                <h3 style="margin: 0 0 10px 0;">Tipo de Rótulo</h3>
-                <div class="mode-buttons">
-                    <button class="mode-btn active" data-mode="original" aria-pressed="true">RÓTULO ORIGINAL</button>
-                    <button class="mode-btn" data-mode="concodigo" aria-pressed="false">RÓTULO CON CÓDIGO + COLOR</button>
-                </div>
-            </div>
-
             <div class="tabs">
-                <button class="tab active" onclick="App.UI.switchTab(event, 'generator')" role="tab" aria-selected="true">GENERADOR DE RÓTULOS</button>
-                <button class="tab" onclick="App.UI.switchTab(event, 'analysis')" role="tab" aria-selected="false">ANÁLISIS</button>
-                <button class="tab" onclick="App.UI.switchTab(event, 'history')" role="tab" aria-selected="false">HISTORIAL</button>
+                <button class="tab active" onclick="App.UI.switchTab(event, 'generator')">GENERADOR DE RÓTULOS</button>
+                <button class="tab" onclick="App.UI.switchTab(event, 'analysis')">ANÁLISIS</button>
+                <button class="tab" onclick="App.UI.switchTab(event, 'history')">HISTORIAL</button>
             </div>
 
-            <div id="generatorTab" class="tab-content active" role="tabpanel">
-                <div class="proveedor-section">
-                    <div class="proveedor-label">SELECCIONAR PROVEEDOR</div>
-                    <select class="proveedor-select" id="proveedorSelect" aria-label="Seleccionar proveedor">
-                        <option value="">-- Selecciona un proveedor --</option>
-                    </select>
-                </div>
+            <!-- TAB GENERADOR -->
+            <div id="generatorTab" class="tab-content active">
+                <div class="two-column-layout">
+                    <!-- COLUMNA IZQUIERDA - CONFIGURACIÓN -->
+                    <div class="config-column">
+                        <h3>📋 CONFIGURACIÓN</h3>
 
-                <div id="selectionOptions" class="selection-options">
-                    <div class="option-tabs" role="tablist">
-                        <button class="option-tab active" onclick="App.UI.switchOption(1)" role="tab" aria-selected="true">SELECCIÓN DIRECTA</button>
-                        <button class="option-tab" onclick="App.UI.switchOption(2)" role="tab" aria-selected="false">POR INTERVALO</button>
-                        <button class="option-tab" onclick="App.UI.switchOption(3)" role="tab" aria-selected="false">LISTA MÚLTIPLE</button>
-                    </div>
-
-                    <div class="option-content active" id="option1" role="tabpanel">
-                        <div class="two-column">
-                            <div class="form-group">
-                                <label class="form-label" for="parihuela1">Parihuela:</label>
-                                <select class="form-select" id="parihuela1" aria-label="Seleccionar parihuela">
-                                    <option value="">-- Selecciona parihuela --</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="caja1">Caja:</label>
-                                <select class="form-select" id="caja1" aria-label="Seleccionar caja">
-                                    <option value="">-- Selecciona caja --</option>
-                                </select>
+                        <!-- MODO -->
+                        <div class="mode-selector-compact">
+                            <h4>🏷️ TIPO DE RÓTULO</h4>
+                            <div class="mode-buttons">
+                                <button class="mode-btn active" data-mode="original">ORIGINAL</button>
+                                <button class="mode-btn" data-mode="concodigo">CON CÓDIGO</button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="option-content" id="option2" role="tabpanel">
-                        <div class="form-group">
-                            <label class="form-label" for="parihuela2">Parihuela:</label>
-                            <select class="form-select" id="parihuela2" aria-label="Seleccionar parihuela">
-                                <option value="">-- Selecciona parihuela --</option>
+                        <!-- PROVEEDOR -->
+                        <div class="selection-section">
+                            <h4>🏢 PROVEEDOR</h4>
+                            <select class="large-select" id="proveedorSelect">
+                                <option value="">-- Selecciona un proveedor --</option>
                             </select>
                         </div>
-                        <div class="two-column">
-                            <div class="form-group">
-                                <label class="form-label" for="cajaDesde">Caja Desde:</label>
-                                <select class="form-select" id="cajaDesde" aria-label="Caja inicial">
-                                    <option value="">-- Caja inicial --</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cajaHasta">Caja Hasta:</label>
-                                <select class="form-select" id="cajaHasta" aria-label="Caja final">
-                                    <option value="">-- Caja final --</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="option-content" id="option3" role="tabpanel">
-                        <div class="form-group">
-                            <label class="form-label">Selecciona las combinaciones:</label>
-                            <div class="selection-controls">
-                                <div>
-                                    <button type="button" class="btn btn-primary" onclick="App.UI.selectAll()">SELECCIONAR TODOS</button>
-                                    <button type="button" class="btn btn-secondary" onclick="App.UI.selectNone()">DESELECCIONAR</button>
+                        <!-- PARIHUELA -->
+                        <div class="selection-section" id="parihuselaSection" style="display: none;">
+                            <h4>📦 PARIHUELA</h4>
+                            <div class="parihuela-grid" id="parihulaGrid"></div>
+                        </div>
+
+                        <!-- MÉTODO Y CAJAS -->
+                        <div class="selection-section" id="methodSection" style="display: none;">
+                            <h4>🎯 MÉTODO DE SELECCIÓN</h4>
+                            <div class="method-tabs">
+                                <button class="method-tab active" onclick="App.UI.switchMethod(1)">DIRECTA</button>
+                                <button class="method-tab" onclick="App.UI.switchMethod(2)">RANGO</button>
+                                <button class="method-tab" onclick="App.UI.switchMethod(3)">MÚLTIPLE</button>
+                            </div>
+
+                            <!-- Método 1: Directa -->
+                            <div class="method-content active" id="methodContent1">
+                                <select class="large-select" id="cajaDirecta">
+                                    <option value="">-- Selecciona una caja --</option>
+                                </select>
+                            </div>
+
+                            <!-- Método 2: Rango -->
+                            <div class="method-content" id="methodContent2">
+                                <div class="caja-range">
+                                    <div>
+                                        <label class="form-label">Desde:</label>
+                                        <select class="large-select" id="cajaDesde">
+                                            <option value="">Inicio</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Hasta:</label>
+                                        <select class="large-select" id="cajaHasta">
+                                            <option value="">Fin</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div id="selectionCounter" role="status" aria-live="polite">0 elementos seleccionados</div>
                             </div>
-                            <div class="checkbox-list" id="checkboxList" role="group" aria-label="Lista de combinaciones"></div>
+
+                            <!-- Método 3: Múltiple -->
+                            <div class="method-content" id="methodContent3">
+                                <div style="margin-bottom: 10px;">
+                                    <button class="btn btn-secondary" onclick="App.UI.selectAll()" style="margin-right: 5px; font-size: 0.8em;">Todos</button>
+                                    <button class="btn btn-secondary" onclick="App.UI.selectNone()" style="font-size: 0.8em;">Ninguno</button>
+                                    <span id="selectionCounter" style="float: right; font-size: 0.85em; padding: 8px;">0 seleccionadas</span>
+                                </div>
+                                <div class="checkbox-list-compact" id="checkboxList"></div>
+                            </div>
+                        </div>
+
+                        <!-- ACCIONES -->
+                        <div class="action-section" id="actionSection" style="display: none;">
+                            <div class="action-buttons-vertical">
+                                <button class="btn btn-success btn-block" onclick="App.generateLabels()">
+                                    ✨ GENERAR RÓTULOS
+                                </button>
+                                <button class="btn btn-secondary btn-block" onclick="App.clearPreview()">
+                                    🗑️ LIMPIAR VISTA
+                                </button>
+                            </div>
+                            <div id="statusMessage" class="status-message"></div>
                         </div>
                     </div>
 
-                    <div class="action-buttons">
-                        <button id="generateBtn" class="btn btn-success" onclick="App.generateLabels()">GENERAR VISTA PREVIA</button>
-                        <button id="clearBtn" class="btn btn-secondary" onclick="App.clearLabels()">LIMPIAR VISTA</button>
-                        <button id="exportAllPdfBtn" class="btn btn-primary" onclick="App.Export.exportAllToPDF()" style="display: none;">EXPORTAR TODO A PDF</button>
-                        <button id="printAllBtn" class="btn btn-primary" onclick="App.printAll()" style="display: none;">IMPRIMIR TODOS</button>
+                    <!-- COLUMNA DERECHA - PREVIEW -->
+                    <div class="preview-column">
+                        <div class="preview-header">
+                            <h3>👁️ VISTA PREVIA</h3>
+                            <div class="preview-actions" id="previewActions" style="display: none;">
+                                <button class="btn btn-primary" onclick="App.Export.exportAllToPDF()">📄 EXPORTAR PDF</button>
+                                <button class="btn btn-primary" onclick="App.printAll()">🖨️ IMPRIMIR</button>
+                            </div>
+                        </div>
+
+                        <div id="previewEmpty" class="preview-empty">
+                            <div class="preview-empty-icon">📋</div>
+                            <h4>Sin Rótulos Generados</h4>
+                            <p>Selecciona un proveedor, parihuela y caja para comenzar</p>
+                        </div>
+
+                        <div id="previewContent" style="display: none;">
+                            <div class="preview-info">
+                                <strong>📊 Resumen de Generación</strong>
+                                <div class="preview-info-grid">
+                                    <div class="preview-stat">
+                                        <div class="preview-stat-value" id="previewCount">0</div>
+                                        <div class="preview-stat-label">Rótulos</div>
+                                    </div>
+                                    <div class="preview-stat">
+                                        <div class="preview-stat-value" id="previewProvider">-</div>
+                                        <div class="preview-stat-label">Proveedor</div>
+                                    </div>
+                                    <div class="preview-stat">
+                                        <div class="preview-stat-value" id="previewMode">-</div>
+                                        <div class="preview-stat-label">Modo</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="rotulosList"></div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div id="statusMessage" class="status-message" role="alert"></div>
-
-                <div id="rotulosContainer" class="rotulos-container">
-                    <h3>Rótulos Generados (<span id="labelCount">0</span>)</h3>
-                    <div id="rotulosList"></div>
+            <!-- TAB ANÁLISIS -->
+            <div id="analysisTab" class="tab-content">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 30px;">
+                    <h3>📊 Análisis de Datos</h3>
+                    <div style="margin: 20px 0;">
+                        <button class="btn btn-primary" onclick="App.Analysis.analyze()">ANALIZAR CLASIFICACIÓN</button>
+                        <button class="btn btn-secondary" onclick="App.Analysis.exportAnalysis()">EXPORTAR ANÁLISIS</button>
+                    </div>
+                    <div id="analysisResults"></div>
                 </div>
             </div>
 
-            <div id="analysisTab" class="tab-content" role="tabpanel">
-                <h3>Análisis de Datos</h3>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="App.Analysis.analyze()">ANALIZAR CLASIFICACIÓN</button>
-                    <button class="btn btn-secondary" onclick="App.Analysis.exportAnalysis()">EXPORTAR ANÁLISIS</button>
+            <!-- TAB HISTORIAL -->
+            <div id="historyTab" class="tab-content">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 30px;">
+                    <h3>📜 Historial de Rótulos Generados</h3>
+                    <div style="margin: 20px 0;">
+                        <button class="btn btn-danger" onclick="App.History.clear()">LIMPIAR HISTORIAL</button>
+                    </div>
+                    <div class="history-section" id="historyList"></div>
                 </div>
-                <div id="analysisResults"></div>
-            </div>
-
-            <div id="historyTab" class="tab-content" role="tabpanel">
-                <h3>Historial de Rótulos Generados</h3>
-                <div class="action-buttons">
-                    <button class="btn btn-danger" onclick="App.History.clear()">LIMPIAR HISTORIAL</button>
-                </div>
-                <div class="history-section" id="historyList"></div>
             </div>
         </div>
     </div>
@@ -1372,12 +1426,14 @@
                 spreadsheetId: '',
                 clientId: '',
                 data: null,
-                activeOption: 1,
+                activeMethod: 1,
                 activeMode: 'original',
                 generatedLabels: [],
                 dataIndex: null,
                 lastUpdate: null,
-                isAdminLogged: false
+                isAdminLogged: false,
+                selectedProvider: '',
+                selectedParihuela: ''
             };
 
             const Config = {
@@ -1625,6 +1681,7 @@
                     document.getElementById('mainContent').style.display = 'none';
                     state.data = null;
                     state.dataIndex = null;
+                    UI.resetSelections();
                 },
 
                 signOutAdmin() {
@@ -1699,9 +1756,7 @@
 
                 async refreshData() {
                     if (confirm('¿Deseas recargar los datos desde Google Sheets? Se perderán las selecciones actuales.')) {
-                        document.getElementById('proveedorSelect').value = '';
-                        document.getElementById('selectionOptions').style.display = 'none';
-                        
+                        UI.resetSelections();
                         await Data.loadProviders();
                         UI.showToast('✓ Datos actualizados');
                         UI.closeUserMenu();
@@ -1727,12 +1782,11 @@
                     const combinationsByProvider = {};
 
                     for (let i = 1; i < values.length; i++) {
-    const row = values[i];
-    const provider = String(row[cols['ID Proveedor']] || '').trim();
-    // Normalizar parihuela y caja para evitar problemas de case-sensitivity
-    const parihuela = String(row[cols['PARIHUELA']] || '').trim().toUpperCase();
-    const caja = String(row[cols['CAJA']] || '').trim().toUpperCase();
-    const genero = String(row[cols['GENERO']] || '').trim();
+                        const row = values[i];
+                        const provider = String(row[cols['ID Proveedor']] || '').trim();
+                        const parihuela = String(row[cols['PARIHUELA']] || '').trim();
+                        const caja = String(row[cols['CAJA']] || '').trim();
+                        const genero = String(row[cols['GENERO']] || '').trim();
 
                         if (provider && parihuela && caja) {
                             providers.add(provider);
@@ -1753,39 +1807,39 @@
                                 return { parihuela, caja };
                             })
                             .sort((a, b) => {
-    // Función auxiliar para ordenamiento natural
-    const isNumeric = (str) => !isNaN(str) && !isNaN(parseFloat(str));
-    
-    const aParNum = isNumeric(a.parihuela);
-    const bParNum = isNumeric(b.parihuela);
-    
-    // Si uno es número y el otro no, el número va primero
-    if (aParNum && !bParNum) return -1;
-    if (!aParNum && bParNum) return 1;
-    
-    // Si ambos son números, comparar numéricamente
-    if (aParNum && bParNum) {
-        const diffP = parseFloat(a.parihuela) - parseFloat(b.parihuela);
-        if (diffP !== 0) return diffP;
-    } else {
-        // Si ambos son texto, comparar alfabéticamente
-        const diffP = a.parihuela.localeCompare(b.parihuela);
-        if (diffP !== 0) return diffP;
-    }
-    
-    // Ordenar cajas de la misma forma
-    const aCajNum = isNumeric(a.caja);
-    const bCajNum = isNumeric(b.caja);
-    
-    if (aCajNum && !bCajNum) return -1;
-    if (!aCajNum && bCajNum) return 1;
-    
-    if (aCajNum && bCajNum) {
-        return parseFloat(a.caja) - parseFloat(b.caja);
-    } else {
-        return a.caja.localeCompare(b.caja);
-    }
-});
+                                // Función auxiliar para ordenamiento natural
+                                const isNumeric = (str) => !isNaN(str) && !isNaN(parseFloat(str));
+                                
+                                const aParNum = isNumeric(a.parihuela);
+                                const bParNum = isNumeric(b.parihuela);
+                                
+                                // Si uno es número y el otro no, el número va primero
+                                if (aParNum && !bParNum) return -1;
+                                if (!aParNum && bParNum) return 1;
+                                
+                                // Si ambos son números, comparar numéricamente
+                                if (aParNum && bParNum) {
+                                    const diffP = parseFloat(a.parihuela) - parseFloat(b.parihuela);
+                                    if (diffP !== 0) return diffP;
+                                } else {
+                                    // Si ambos son texto, comparar alfabéticamente
+                                    const diffP = a.parihuela.localeCompare(b.parihuela);
+                                    if (diffP !== 0) return diffP;
+                                }
+                                
+                                // Ordenar cajas de la misma forma
+                                const aCajNum = isNumeric(a.caja);
+                                const bCajNum = isNumeric(b.caja);
+                                
+                                if (aCajNum && !bCajNum) return -1;
+                                if (!aCajNum && bCajNum) return 1;
+                                
+                                if (aCajNum && bCajNum) {
+                                    return parseFloat(a.caja) - parseFloat(b.caja);
+                                } else {
+                                    return a.caja.localeCompare(b.caja);
+                                }
+                            });
                     }
 
                     return {
@@ -1828,40 +1882,56 @@
                     return index;
                 },
 
-filterData(selection) {
-    const filtered = [];
-    const rows = state.dataIndex.byProvider[selection.proveedor] || [];
+                filterData(selection) {
+                    const filtered = [];
+                    const rows = state.dataIndex.byProvider[selection.proveedor] || [];
 
-    // Normalizar la selección
-    const selParihuela = String(selection.parihuela || '').trim().toUpperCase();
-    const selCaja = String(selection.caja || '').trim().toUpperCase();
+                    // Normalizar la selección
+                    const selParihuela = String(selection.parihuela || '').trim();
+                    const selCaja = String(selection.caja || '').trim();
 
-    for (const rowIndex of rows) {
-        const row = state.data.values[rowIndex];
-        
-        // Normalizar los valores del Sheet
-        const parihuela = String(row[state.data.cols['PARIHUELA']] || '').trim().toUpperCase();
-        const caja = String(row[state.data.cols['CAJA']] || '').trim().toUpperCase();
+                    for (const rowIndex of rows) {
+                        const row = state.data.values[rowIndex];
+                        
+                        // Normalizar los valores del Sheet
+                        const parihuela = String(row[state.data.cols['PARIHUELA']] || '').trim();
+                        const caja = String(row[state.data.cols['CAJA']] || '').trim();
 
-        // Comparación case-insensitive y sin espacios extra
-        if (parihuela === selParihuela && caja === selCaja) {
-            filtered.push(row);
-        }
-    }
+                        // Comparación exacta
+                        if (parihuela === selParihuela && caja === selCaja) {
+                            filtered.push(row);
+                        }
+                    }
 
-    // Debug: Si no encuentra datos, mostrar información útil
-    if (filtered.length === 0) {
-        console.warn('No se encontraron datos para:', {
-            proveedor: selection.proveedor,
-            parihuela: selParihuela,
-            caja: selCaja,
-            rowsChecked: rows.length
-        });
-    }
+                    // Debug: Si no encuentra datos, mostrar información útil
+                    if (filtered.length === 0) {
+                        console.warn('No se encontraron datos para:', {
+                            proveedor: selection.proveedor,
+                            parihuela: selParihuela,
+                            caja: selCaja,
+                            rowsChecked: rows.length
+                        });
+                    }
 
-    return filtered;
-}                
+                    return filtered;
+                },
+
+                // NUEVA FUNCIÓN: Obtener cajas de una parihuela específica
+                getCajasForParihuela(provider, parihuela) {
+                    if (!state.data || !state.data.combinationsByProvider[provider]) {
+                        return [];
+                    }
+
+                    const combinations = state.data.combinationsByProvider[provider];
+                    const cajas = combinations
+                        .filter(c => c.parihuela === parihuela)
+                        .map(c => c.caja);
+
+                    return cajas;
+                }
             };
+
+// Continuación del código JavaScript...
 
             const LabelGenerator = {
                 async generate(selections) {
@@ -1972,25 +2042,14 @@ filterData(selection) {
 
                 buildLabelHTML(selection, groups) {
                     const card = document.createElement('div');
-                    card.className = 'rotulo-card';
+                    card.className = 'rotulo-preview';
 
                     const tipoTexto = state.activeMode === 'original' ? 'Original' : 'Con Código + Color';
                     
-                    const headerDiv = document.createElement('div');
-                    headerDiv.className = 'rotulo-header';
-                    headerDiv.innerHTML = `
-                        <h4>Rótulo ${tipoTexto} - P${selection.parihuela} C${selection.caja} (${selection.proveedor})</h4>
-                        <div class="rotulo-actions">
-                            <button class="btn btn-primary" onclick="App.printSingle(this)" aria-label="Imprimir rótulo">IMPRIMIR</button>
-                            <button class="btn btn-success" onclick="App.Export.exportSingleToPDF(this)" aria-label="Exportar a PDF">PDF</button>
-                        </div>
-                    `;
-
                     const contentDiv = document.createElement('div');
                     contentDiv.className = 'rotulo-content print-area';
                     contentDiv.innerHTML = LabelGenerator.buildContent(selection, groups);
 
-                    card.appendChild(headerDiv);
                     card.appendChild(contentDiv);
 
                     return {
@@ -2015,16 +2074,16 @@ filterData(selection) {
                             </table>
                             <table class="rotulo-data-table">
                                 <tr>
-                                    <td class="rotulo-data-col1">Proveedor: ${Utils.escapeHtml(selection.proveedor)}</td>
-                                    <td class="rotulo-data-col2">Parihuela: ${Utils.escapeHtml(selection.parihuela)}</td>
+                                    <td>Proveedor: ${Utils.escapeHtml(selection.proveedor)}</td>
+                                    <td>Parihuela: ${Utils.escapeHtml(selection.parihuela)}</td>
                                 </tr>
                                 <tr>
-                                    <td class="rotulo-data-col1">Validador: ${Utils.escapeHtml(validador)}</td>
-                                    <td class="rotulo-data-col2">Caja: ${Utils.escapeHtml(selection.caja)}</td>
+                                    <td>Validador: ${Utils.escapeHtml(validador)}</td>
+                                    <td>Caja: ${Utils.escapeHtml(selection.caja)}</td>
                                 </tr>
                                 <tr>
-                                    <td class="rotulo-data-col1">Fecha: ${fecha}</td>
-                                    <td class="rotulo-data-col2">Total Stock: ${totalStock}</td>
+                                    <td>Fecha: ${fecha}</td>
+                                    <td>Total Stock: ${totalStock}</td>
                                 </tr>
                             </table>
                     `;
@@ -2043,7 +2102,7 @@ filterData(selection) {
                                 html += `
                                     <table class="rotulo-codigo-table">
                                         <tr>
-                                            <td class="rotulo-codigo-col1">CÓDIGO: ${Utils.escapeHtml(product.codigo || 'N/A')}</td>
+                                            <td>CÓDIGO: ${Utils.escapeHtml(product.codigo || 'N/A')}</td>
                                             <td class="rotulo-codigo-col2">COLOR: ${Utils.escapeHtml(product.color || 'N/A')}</td>
                                         </tr>
                                     </table>
@@ -2062,14 +2121,14 @@ filterData(selection) {
                     let html = `
                         <table class="rotulo-tallas-table">
                             <tr>
-                                <th class="th-t1">T-1</th>
-                                <th class="th-t2">T-2</th>
-                                <th class="th-cant">CANT</th>
-                                <th class="th-sticker">Sticker</th>
-                                <th class="th-t1">T-1</th>
-                                <th class="th-t2">T-2</th>
-                                <th class="th-cant">CANT</th>
-                                <th class="th-sticker">Sticker</th>
+                                <th>T-1</th>
+                                <th>T-2</th>
+                                <th>CANT</th>
+                                <th>Sticker</th>
+                                <th>T-1</th>
+                                <th>T-2</th>
+                                <th>CANT</th>
+                                <th>Sticker</th>
                             </tr>
                     `;
 
@@ -2167,27 +2226,11 @@ filterData(selection) {
             };
 
             const Export = {
-                async exportSingleToPDF(button) {
+                async exportSingleToPDF(selection) {
                     try {
                         UI.showSpinner(true);
-                        const card = button.closest('.rotulo-card');
-                        
-                        const rotuloDiv = card.querySelector('.rotulo');
-                        const proveedor = rotuloDiv.querySelector('.rotulo-data-col1').textContent.replace('Proveedor: ', '').trim();
-                        const parihuela = rotuloDiv.querySelector('.rotulo-data-col2').textContent.replace('Parihuela: ', '').trim();
-                        
-                        const selection = state.generatedLabels.find(l => 
-                            l.selection.proveedor === proveedor && 
-                            l.selection.parihuela === parihuela
-                        );
-                        
-                        if (!selection) {
-                            throw new Error('No se encontraron los datos del rótulo');
-                        }
-                        
-                        const pdf = await Export.generateDirectPDF(selection.selection);
-                        pdf.save(`rotulo-P${parihuela}-${Date.now()}.pdf`);
-                        
+                        const pdf = await Export.generateDirectPDF(selection);
+                        pdf.save(`rotulo-${selection.parihuela}-${selection.caja}-${Date.now()}.pdf`);
                         UI.showToast('✓ PDF exportado correctamente');
                     } catch (error) {
                         console.error('Error exportando PDF:', error);
@@ -2236,7 +2279,6 @@ filterData(selection) {
                     
                     const marginTop = 3;
                     const marginLeft = 12;
-                    const marginRight = 12;
                     
                     let yPos = marginTop;
                     
@@ -2293,7 +2335,6 @@ filterData(selection) {
                         yPos += 5;
                         pdf.setFontSize(11);
                         pdf.setFont('helvetica', 'bold');
-                        pdf.setTextColor(0, 0, 0);
                         pdf.text(`=== ${genero} ===`, 297.5, yPos, { align: 'center' });
                         yPos += 10;
                         
@@ -2301,21 +2342,15 @@ filterData(selection) {
                         
                         for (const product of Object.values(uniqueProducts)) {
                             pdf.setFontSize(10);
-                            pdf.setFont('helvetica', 'bold');
-                            pdf.setTextColor(0, 0, 0);
                             pdf.text(`${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
                             yPos += 8;
                             
                             if (state.activeMode === 'concodigo' && (product.codigo || product.color)) {
                                 pdf.setFontSize(9);
                                 pdf.setFont('helvetica', 'normal');
-                                const codigoText = `CODIGO: ${product.codigo || 'N/A'}`;
-                                const colorText = `COLOR: ${product.color || 'N/A'}`;
-                                
-                                pdf.text(codigoText, marginLeft, yPos);
-                                pdf.text(colorText, marginLeft + 571, yPos, { align: 'right' });
+                                pdf.text(`CODIGO: ${product.codigo || 'N/A'}`, marginLeft, yPos);
+                                pdf.text(`COLOR: ${product.color || 'N/A'}`, marginLeft + 571, yPos, { align: 'right' });
                                 yPos += 10;
-                                
                                 pdf.setFont('helvetica', 'bold');
                             }
                             
@@ -2328,7 +2363,6 @@ filterData(selection) {
                 drawSizesTable(pdf, tallas, x, y) {
                     pdf.setDrawColor(51, 51, 51);
                     pdf.setLineWidth(1);
-                    pdf.setTextColor(0, 0, 0);
                     
                     const colWidths = [45, 45, 44, 150, 45, 45, 44, 150];
                     const rowHeight = 70;
@@ -2407,20 +2441,11 @@ filterData(selection) {
                                 pdf.setFillColor(255, 255, 255);
                                 pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
                             } else {
-                                pdf.setFillColor(255, 255, 255);
-                                pdf.rect(xPos, y, colWidths[4], rowHeight, 'FD');
-                                xPos += colWidths[4];
-                                
-                                pdf.setFillColor(255, 255, 255);
-                                pdf.rect(xPos, y, colWidths[5], rowHeight, 'FD');
-                                xPos += colWidths[5];
-                                
-                                pdf.setFillColor(255, 255, 255);
-                                pdf.rect(xPos, y, colWidths[6], rowHeight, 'FD');
-                                xPos += colWidths[6];
-                                
-                                pdf.setFillColor(255, 255, 255);
-                                pdf.rect(xPos, y, colWidths[7], rowHeight, 'FD');
+                                for (let j = 4; j < 8; j++) {
+                                    pdf.setFillColor(255, 255, 255);
+                                    pdf.rect(xPos, y, colWidths[j], rowHeight, 'FD');
+                                    xPos += colWidths[j];
+                                }
                             }
                             
                             y += rowHeight;
@@ -2597,6 +2622,8 @@ filterData(selection) {
                 }
             };
 
+// Continuación - Sección UI...
+
             const UI = {
                 toggleUserMenu() {
                     const dropdown = document.getElementById('userDropdown');
@@ -2634,7 +2661,6 @@ filterData(selection) {
                         text.textContent = statusText || 'Sin autenticar';
                     }
 
-                    // Actualizar dropdown también
                     const dropdownStatus = document.getElementById('dropdownAuthStatus');
                     if (isConnected) {
                         dropdownStatus.textContent = '🟢 ' + (statusText || 'Autenticado');
@@ -2696,14 +2722,12 @@ filterData(selection) {
                 switchTab(event, tabName) {
                     document.querySelectorAll('.tab').forEach(tab => {
                         tab.classList.remove('active');
-                        tab.setAttribute('aria-selected', 'false');
                     });
                     document.querySelectorAll('.tab-content').forEach(content => {
                         content.classList.remove('active');
                     });
                     
                     event.target.classList.add('active');
-                    event.target.setAttribute('aria-selected', 'true');
                     document.getElementById(tabName + 'Tab').classList.add('active');
 
                     if (tabName === 'history') {
@@ -2711,17 +2735,15 @@ filterData(selection) {
                     }
                 },
 
-                switchOption(optionNum) {
-                    state.activeOption = optionNum;
+                switchMethod(methodNum) {
+                    state.activeMethod = methodNum;
                     
-                    document.querySelectorAll('.option-tab').forEach((tab, index) => {
-                        const isActive = index + 1 === optionNum;
-                        tab.classList.toggle('active', isActive);
-                        tab.setAttribute('aria-selected', isActive.toString());
+                    document.querySelectorAll('.method-tab').forEach((tab, index) => {
+                        tab.classList.toggle('active', index + 1 === methodNum);
                     });
                     
-                    document.querySelectorAll('.option-content').forEach((content, index) => {
-                        content.classList.toggle('active', index + 1 === optionNum);
+                    document.querySelectorAll('.method-content').forEach((content, index) => {
+                        content.classList.toggle('active', index + 1 === methodNum);
                     });
                 },
 
@@ -2737,25 +2759,73 @@ filterData(selection) {
                     });
                 },
 
-                loadCombinations(provider) {
+                // NUEVA FUNCIÓN: Cargar parihuelas como chips visuales
+                loadParihuelas(provider) {
                     const combinations = state.data.combinationsByProvider[provider] || [];
-
                     const parihuelas = [...new Set(combinations.map(c => c.parihuela))];
-                    const cajas = [...new Set(combinations.map(c => c.caja))];
                     
-                    UI.populateSelect('parihuela1', parihuelas);
-                    UI.populateSelect('caja1', cajas);
-                    UI.populateSelect('parihuela2', parihuelas);
-                    UI.populateSelect('cajaDesde', cajas);
-                    UI.populateSelect('cajaHasta', cajas);
+                    const grid = document.getElementById('parihulaGrid');
+                    grid.innerHTML = '';
                     
-                    UI.loadMultipleList(combinations);
+                    parihuelas.forEach(parihuela => {
+                        const cajasCount = combinations.filter(c => c.parihuela === parihuela).length;
+                        
+                        const chip = document.createElement('div');
+                        chip.className = 'parihuela-chip';
+                        chip.dataset.parihuela = parihuela;
+                        chip.innerHTML = `
+                            <div>${parihuela}</div>
+                            <div class="caja-count">${cajasCount} cajas</div>
+                        `;
+                        
+                        chip.addEventListener('click', () => UI.selectParihuela(parihuela));
+                        grid.appendChild(chip);
+                    });
+
+                    document.getElementById('parihuselaSection').style.display = 'block';
                 },
 
-                populateSelect(id, options) {
-                    const select = document.getElementById(id);
-                    const firstOption = select.options[0].text;
-                    select.innerHTML = `<option value="">${firstOption}</option>`;
+                // NUEVA FUNCIÓN: Seleccionar una parihuela
+                selectParihuela(parihuela) {
+                    // Deseleccionar todas
+                    document.querySelectorAll('.parihuela-chip').forEach(chip => {
+                        chip.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar la clickeada
+                    const selectedChip = document.querySelector(`[data-parihuela="${parihuela}"]`);
+                    if (selectedChip) {
+                        selectedChip.classList.add('selected');
+                    }
+                    
+                    state.selectedParihuela = parihuela;
+                    
+                    // Cargar cajas para esta parihuela
+                    UI.loadCajasForParihuela(state.selectedProvider, parihuela);
+                    
+                    // Mostrar sección de métodos
+                    document.getElementById('methodSection').style.display = 'block';
+                    document.getElementById('actionSection').style.display = 'block';
+                },
+
+                // NUEVA FUNCIÓN: Cargar cajas filtradas por parihuela
+                loadCajasForParihuela(provider, parihuela) {
+                    const cajas = Data.getCajasForParihuela(provider, parihuela);
+                    
+                    // Llenar select de método directo
+                    UI.populateSelectSimple('cajaDirecta', cajas, '-- Selecciona una caja --');
+                    
+                    // Llenar selects de método rango
+                    UI.populateSelectSimple('cajaDesde', cajas, 'Inicio');
+                    UI.populateSelectSimple('cajaHasta', cajas, 'Fin');
+                    
+                    // Llenar checkboxes de método múltiple
+                    UI.loadCheckboxList(provider, parihuela, cajas);
+                },
+
+                populateSelectSimple(selectId, options, placeholder) {
+                    const select = document.getElementById(selectId);
+                    select.innerHTML = `<option value="">${placeholder}</option>`;
                     
                     options.forEach(option => {
                         const opt = document.createElement('option');
@@ -2765,23 +2835,23 @@ filterData(selection) {
                     });
                 },
 
-                loadMultipleList(combinations) {
+                loadCheckboxList(provider, parihuela, cajas) {
                     const lista = document.getElementById('checkboxList');
                     lista.innerHTML = '';
                     
-                    combinations.forEach((combo, index) => {
+                    cajas.forEach((caja, index) => {
                         const item = document.createElement('div');
-                        item.className = 'checkbox-item';
+                        item.className = 'checkbox-item-compact';
                         
                         const checkbox = document.createElement('input');
                         checkbox.type = 'checkbox';
-                        checkbox.id = `combo_${index}`;
-                        checkbox.value = `${combo.parihuela}|${combo.caja}`;
+                        checkbox.id = `caja_${index}`;
+                        checkbox.value = caja;
                         checkbox.addEventListener('change', UI.updateCounter);
                         
                         const label = document.createElement('label');
-                        label.htmlFor = `combo_${index}`;
-                        label.textContent = `Parihuela: ${combo.parihuela} - Caja: ${combo.caja}`;
+                        label.htmlFor = `caja_${index}`;
+                        label.textContent = `Caja ${caja}`;
                         
                         item.appendChild(checkbox);
                         item.appendChild(label);
@@ -2808,7 +2878,36 @@ filterData(selection) {
                 updateCounter() {
                     const count = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked').length;
                     document.getElementById('selectionCounter').textContent = 
-                        `${count} elemento${count !== 1 ? 's' : ''} seleccionado${count !== 1 ? 's' : ''}`;
+                        `${count} seleccionada${count !== 1 ? 's' : ''}`;
+                },
+
+                showPreview(count, provider, mode) {
+                    document.getElementById('previewEmpty').style.display = 'none';
+                    document.getElementById('previewContent').style.display = 'block';
+                    document.getElementById('previewActions').style.display = 'flex';
+                    
+                    document.getElementById('previewCount').textContent = count;
+                    document.getElementById('previewProvider').textContent = provider;
+                    document.getElementById('previewMode').textContent = mode === 'original' ? 'Original' : 'Código';
+                },
+
+                hidePreview() {
+                    document.getElementById('previewEmpty').style.display = 'block';
+                    document.getElementById('previewContent').style.display = 'none';
+                    document.getElementById('previewActions').style.display = 'none';
+                    document.getElementById('rotulosList').innerHTML = '';
+                },
+
+                resetSelections() {
+                    state.selectedProvider = '';
+                    state.selectedParihuela = '';
+                    
+                    document.getElementById('proveedorSelect').value = '';
+                    document.getElementById('parihuselaSection').style.display = 'none';
+                    document.getElementById('methodSection').style.display = 'none';
+                    document.getElementById('actionSection').style.display = 'none';
+                    
+                    UI.hidePreview();
                 }
             };
 
@@ -2826,40 +2925,48 @@ filterData(selection) {
             };
 
             function getSelections() {
-                const provider = document.getElementById('proveedorSelect').value;
+                const provider = state.selectedProvider;
+                const parihuela = state.selectedParihuela;
                 const selections = [];
 
-                if (state.activeOption === 1) {
-                    const parihuela = document.getElementById('parihuela1').value;
-                    const caja = document.getElementById('caja1').value;
-                    if (parihuela && caja) {
+                if (!provider || !parihuela) {
+                    return selections;
+                }
+
+                if (state.activeMethod === 1) {
+                    // Método directo
+                    const caja = document.getElementById('cajaDirecta').value;
+                    if (caja) {
                         selections.push({ proveedor: provider, parihuela, caja });
                     }
-                } else if (state.activeOption === 2) {
-                    const parihuela = document.getElementById('parihuela2').value;
+                } else if (state.activeMethod === 2) {
+                    // Método rango
                     const desde = document.getElementById('cajaDesde').value;
                     const hasta = document.getElementById('cajaHasta').value;
                     
-                    if (parihuela && desde && hasta) {
+                    if (desde && hasta) {
                         if (!Validation.validateRange(desde, hasta)) {
                             UI.showStatus('Rango inválido: "Desde" debe ser menor o igual a "Hasta"', 'error');
                             return [];
                         }
 
-                        const combinations = state.data.combinationsByProvider[provider];
-                        const inRange = combinations
-                            .filter(c => c.parihuela === parihuela)
-                            .filter(c => parseInt(c.caja) >= parseInt(desde) && parseInt(c.caja) <= parseInt(hasta));
+                        const cajas = Data.getCajasForParihuela(provider, parihuela);
+                        const inRange = cajas.filter(c => {
+                            const cajaNum = parseFloat(c);
+                            const desdeNum = parseFloat(desde);
+                            const hastaNum = parseFloat(hasta);
+                            return cajaNum >= desdeNum && cajaNum <= hastaNum;
+                        });
                         
-                        inRange.forEach(c => {
-                            selections.push({ proveedor: provider, parihuela, caja: c.caja });
+                        inRange.forEach(caja => {
+                            selections.push({ proveedor: provider, parihuela, caja });
                         });
                     }
-                } else if (state.activeOption === 3) {
+                } else if (state.activeMethod === 3) {
+                    // Método múltiple
                     const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
                     checkboxes.forEach(cb => {
-                        const [parihuela, caja] = cb.value.split('|');
-                        selections.push({ proveedor: provider, parihuela, caja });
+                        selections.push({ proveedor: provider, parihuela, caja: cb.value });
                     });
                 }
 
@@ -2878,9 +2985,16 @@ filterData(selection) {
                 state,
 
                 async generateLabels() {
-                    const provider = document.getElementById('proveedorSelect').value;
+                    const provider = state.selectedProvider;
+                    const parihuela = state.selectedParihuela;
+
                     if (!provider) {
                         UI.showStatus('Selecciona un proveedor', 'error');
+                        return;
+                    }
+
+                    if (!parihuela) {
+                        UI.showStatus('Selecciona una parihuela', 'error');
                         return;
                     }
 
@@ -2890,20 +3004,15 @@ filterData(selection) {
                         return;
                     }
 
-                    console.log('Modo activo:', state.activeMode);
-                    console.log('Columnas disponibles:', Object.keys(state.data.cols));
-
                     try {
                         UI.showSpinner(true);
                         const count = await LabelGenerator.generate(selections);
                         
                         if (count > 0) {
-                            const modoTexto = state.activeMode === 'concodigo' ? ' (CON CÓDIGO Y COLOR)' : ' (ORIGINAL)';
-                            UI.showStatus(`${count} rótulos generados${modoTexto}`, 'success');
-                            document.getElementById('rotulosContainer').style.display = 'block';
-                            document.getElementById('labelCount').textContent = count;
-                            document.getElementById('exportAllPdfBtn').style.display = 'inline-block';
-                            document.getElementById('printAllBtn').style.display = 'inline-block';
+                            const modoTexto = state.activeMode === 'concodigo' ? 'Código' : 'Original';
+                            UI.showPreview(count, provider, state.activeMode);
+                            UI.showStatus(`${count} rótulos generados correctamente`, 'success');
+                            UI.showToast(`✓ ${count} rótulos generados`);
                         } else {
                             UI.showStatus('No se pudieron generar rótulos', 'error');
                         }
@@ -2915,18 +3024,15 @@ filterData(selection) {
                     }
                 },
 
-                clearLabels() {
-                    document.getElementById('rotulosList').innerHTML = '';
-                    document.getElementById('rotulosContainer').style.display = 'none';
-                    document.getElementById('exportAllPdfBtn').style.display = 'none';
-                    document.getElementById('printAllBtn').style.display = 'none';
+                clearPreview() {
                     state.generatedLabels = [];
-                    UI.showToast('✓ Vista limpiada');
+                    UI.hidePreview();
+                    UI.showToast('Vista limpiada');
                 },
 
                 printSingle(button) {
-                    const card = button.closest('.rotulo-card');
-                    const printArea = card.querySelector('.print-area');
+                    const card = button.closest('.rotulo-preview');
+                    const printArea = card.querySelector('.rotulo');
                     
                     const printWindow = window.open('', '_blank');
                     const printStyles = `
@@ -2934,26 +3040,19 @@ filterData(selection) {
                         body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
                         .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; }
                         .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
-                        .rotulo-info-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
                         .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
-                        .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; width: 285pt; }
-                        .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; width: 286pt; }
-                        .rotulo-data-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+                        .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+                        .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
                         .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
-                        .rotulo-data-col1 { width: 285pt; }
-                        .rotulo-data-col2 { width: 286pt; background: #FFFFFF; }
                         .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
                         .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
-                        .rotulo-codigo-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
                         .rotulo-codigo-table td { padding: 2pt; border: none; }
-                        .rotulo-codigo-col1 { width: 285pt; }
-                        .rotulo-codigo-col2 { width: 286pt; text-align: right; }
-                        .rotulo-tallas-table { width: 568pt; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
+                        .rotulo-codigo-col2 { text-align: right; }
+                        .rotulo-tallas-table { width: 100%; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
                         .rotulo-tallas-table th { background: #F0F0F0; border: 1pt solid #333; padding: 1pt; text-align: center; font-weight: bold; height: 20pt; }
-                        .rotulo-tallas-table .th-t1 { width: 45pt; }
-                        .rotulo-tallas-table .th-t2 { width: 45pt; }
-                        .rotulo-tallas-table .th-cant { width: 44pt; }
-                        .rotulo-tallas-table .th-sticker { width: 150pt; }
                         .rotulo-tallas-table td { border: 1pt solid #333; padding: 1pt; text-align: center; height: 70pt; vertical-align: middle; font-size: 12pt; }
                         .rotulo-sticker-col { background: #FFFFFF; }
                     `;
@@ -2986,26 +3085,19 @@ filterData(selection) {
                         .rotulo { max-width: 210mm; margin: 0 auto 20pt auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; page-break-after: always; }
                         .rotulo:last-child { page-break-after: auto; }
                         .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
-                        .rotulo-info-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
                         .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
-                        .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; width: 285pt; }
-                        .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; width: 286pt; }
-                        .rotulo-data-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+                        .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+                        .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
                         .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
-                        .rotulo-data-col1 { width: 285pt; }
-                        .rotulo-data-col2 { width: 286pt; background: #FFFFFF; }
                         .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
                         .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
-                        .rotulo-codigo-table { width: 571pt; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+                        .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
                         .rotulo-codigo-table td { padding: 2pt; border: none; }
-                        .rotulo-codigo-col1 { width: 285pt; }
-                        .rotulo-codigo-col2 { width: 286pt; text-align: right; }
-                        .rotulo-tallas-table { width: 568pt; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
+                        .rotulo-codigo-col2 { text-align: right; }
+                        .rotulo-tallas-table { width: 100%; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
                         .rotulo-tallas-table th { background: #F0F0F0; border: 1pt solid #333; padding: 1pt; text-align: center; font-weight: bold; height: 20pt; }
-                        .rotulo-tallas-table .th-t1 { width: 45pt; }
-                        .rotulo-tallas-table .th-t2 { width: 45pt; }
-                        .rotulo-tallas-table .th-cant { width: 44pt; }
-                        .rotulo-tallas-table .th-sticker { width: 150pt; }
                         .rotulo-tallas-table td { border: 1pt solid #333; padding: 1pt; text-align: center; height: 70pt; vertical-align: middle; font-size: 12pt; }
                         .rotulo-sticker-col { background: #FFFFFF; }
                     `;
@@ -3017,9 +3109,9 @@ filterData(selection) {
                     printWindow.document.write('<style>' + printStyles + '</style>');
                     printWindow.document.write('</head><body>');
                     
-                    const cards = document.querySelectorAll('.rotulo-card .rotulo-content');
-                    cards.forEach(card => {
-                        printWindow.document.write(card.innerHTML);
+                    const rotulos = document.querySelectorAll('.rotulo-preview .rotulo');
+                    rotulos.forEach(rotulo => {
+                        printWindow.document.write(rotulo.outerHTML);
                     });
                     
                     printWindow.document.write('<scr' + 'ipt>');
@@ -3032,7 +3124,10 @@ filterData(selection) {
             };
         })();
 
-        // Event Listeners
+        // EXPONER APP GLOBALMENTE
+        window.App = App;
+
+        // EVENT LISTENERS
         document.addEventListener('DOMContentLoaded', () => {
             // Cerrar menú al hacer click fuera
             document.addEventListener('click', (e) => {
@@ -3042,7 +3137,7 @@ filterData(selection) {
                 if (userMenu && dropdown && 
                     !userMenu.contains(e.target) && 
                     !dropdown.contains(e.target)) {
-                    App.UI.closeUserMenu();
+                    window.App.UI.closeUserMenu();
                 }
             });
 
@@ -3060,21 +3155,20 @@ filterData(selection) {
             if (adminPass) {
                 adminPass.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
-                        App.Auth.adminLogin();
+                        window.App.Auth.adminLogin();
                     }
                 });
             }
             
-            // Selector de proveedor
+            // NUEVO: Selector de proveedor
             document.getElementById('proveedorSelect').addEventListener('change', (e) => {
                 const provider = e.target.value;
-                const options = document.getElementById('selectionOptions');
                 
-                if (provider && App.Data) {
-                    options.style.display = 'block';
-                    App.UI.loadCombinations(provider);
+                if (provider && window.App.state.data) {
+                    window.App.state.selectedProvider = provider;
+                    window.App.UI.loadParihuelas(provider);
                 } else {
-                    options.style.display = 'none';
+                    window.App.UI.resetSelections();
                 }
             });
 
@@ -3083,12 +3177,10 @@ filterData(selection) {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.mode-btn').forEach(b => {
                         b.classList.remove('active');
-                        b.setAttribute('aria-pressed', 'false');
                     });
                     this.classList.add('active');
-                    this.setAttribute('aria-pressed', 'true');
-                    App.state.activeMode = this.dataset.mode;
-                    App.UI.showToast('Modo: ' + this.textContent);
+                    window.App.state.activeMode = this.dataset.mode;
+                    window.App.UI.showToast('Modo: ' + this.textContent);
                 });
             });
         });
@@ -3098,3 +3190,4 @@ filterData(selection) {
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 </body>
 </html>
+                     
