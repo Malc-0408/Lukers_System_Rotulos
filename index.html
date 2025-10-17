@@ -1727,11 +1727,12 @@
                     const combinationsByProvider = {};
 
                     for (let i = 1; i < values.length; i++) {
-                        const row = values[i];
-                        const provider = String(row[cols['ID Proveedor']] || '').trim();
-                        const parihuela = String(row[cols['PARIHUELA']] || '').trim();
-                        const caja = String(row[cols['CAJA']] || '').trim();
-                        const genero = String(row[cols['GENERO']] || '').trim();
+    const row = values[i];
+    const provider = String(row[cols['ID Proveedor']] || '').trim();
+    // Normalizar parihuela y caja para evitar problemas de case-sensitivity
+    const parihuela = String(row[cols['PARIHUELA']] || '').trim().toUpperCase();
+    const caja = String(row[cols['CAJA']] || '').trim().toUpperCase();
+    const genero = String(row[cols['GENERO']] || '').trim();
 
                         if (provider && parihuela && caja) {
                             providers.add(provider);
@@ -1752,9 +1753,39 @@
                                 return { parihuela, caja };
                             })
                             .sort((a, b) => {
-                                const diffP = parseInt(a.parihuela) - parseInt(b.parihuela);
-                                return diffP !== 0 ? diffP : parseInt(a.caja) - parseInt(b.caja);
-                            });
+    // Función auxiliar para ordenamiento natural
+    const isNumeric = (str) => !isNaN(str) && !isNaN(parseFloat(str));
+    
+    const aParNum = isNumeric(a.parihuela);
+    const bParNum = isNumeric(b.parihuela);
+    
+    // Si uno es número y el otro no, el número va primero
+    if (aParNum && !bParNum) return -1;
+    if (!aParNum && bParNum) return 1;
+    
+    // Si ambos son números, comparar numéricamente
+    if (aParNum && bParNum) {
+        const diffP = parseFloat(a.parihuela) - parseFloat(b.parihuela);
+        if (diffP !== 0) return diffP;
+    } else {
+        // Si ambos son texto, comparar alfabéticamente
+        const diffP = a.parihuela.localeCompare(b.parihuela);
+        if (diffP !== 0) return diffP;
+    }
+    
+    // Ordenar cajas de la misma forma
+    const aCajNum = isNumeric(a.caja);
+    const bCajNum = isNumeric(b.caja);
+    
+    if (aCajNum && !bCajNum) return -1;
+    if (!aCajNum && bCajNum) return 1;
+    
+    if (aCajNum && bCajNum) {
+        return parseFloat(a.caja) - parseFloat(b.caja);
+    } else {
+        return a.caja.localeCompare(b.caja);
+    }
+});
                     }
 
                     return {
@@ -1797,22 +1828,39 @@
                     return index;
                 },
 
-                filterData(selection) {
-                    const filtered = [];
-                    const rows = state.dataIndex.byProvider[selection.proveedor] || [];
+filterData(selection) {
+    const filtered = [];
+    const rows = state.dataIndex.byProvider[selection.proveedor] || [];
 
-                    for (const rowIndex of rows) {
-                        const row = state.data.values[rowIndex];
-                        const parihuela = String(row[state.data.cols['PARIHUELA']] || '').trim();
-                        const caja = String(row[state.data.cols['CAJA']] || '').trim();
+    // Normalizar la selección
+    const selParihuela = String(selection.parihuela || '').trim().toUpperCase();
+    const selCaja = String(selection.caja || '').trim().toUpperCase();
 
-                        if (parihuela === selection.parihuela && caja === selection.caja) {
-                            filtered.push(row);
-                        }
-                    }
+    for (const rowIndex of rows) {
+        const row = state.data.values[rowIndex];
+        
+        // Normalizar los valores del Sheet
+        const parihuela = String(row[state.data.cols['PARIHUELA']] || '').trim().toUpperCase();
+        const caja = String(row[state.data.cols['CAJA']] || '').trim().toUpperCase();
 
-                    return filtered;
-                }
+        // Comparación case-insensitive y sin espacios extra
+        if (parihuela === selParihuela && caja === selCaja) {
+            filtered.push(row);
+        }
+    }
+
+    // Debug: Si no encuentra datos, mostrar información útil
+    if (filtered.length === 0) {
+        console.warn('No se encontraron datos para:', {
+            proveedor: selection.proveedor,
+            parihuela: selParihuela,
+            caja: selCaja,
+            rowsChecked: rows.length
+        });
+    }
+
+    return filtered;
+}                
             };
 
             const LabelGenerator = {
