@@ -1725,7 +1725,7 @@
                 lastUpdate: null,
                 isAdminLogged: false,
                 selectedProvider: '',
-                selectedParihuela: ''
+                selectedParihuela: '',
                 inventarioFinalData: null,
                 comparisonResults: [],
                 currentPage: 1,
@@ -1741,16 +1741,6 @@
                 ADMIN_PASS: 'Malc-0408'
             };
 
-            window.gapiLoaded = function() {
-                console.log('GAPI loaded');
-                gapi.load('client', Auth.initializeGapiClient);
-            };
-
-            window.gisLoaded = function() {
-                console.log('GIS loaded');
-                state.gisInited = true;
-                maybeEnableButtons();
-            };
 
             function maybeEnableButtons() {
                 if (state.gapiInited && state.gisInited) {
@@ -3756,6 +3746,22 @@
 
         // EXPONER APP GLOBALMENTE
         window.App = App;
+
+        // FUNCIONES GLOBALES PARA GOOGLE API
+        window.gapiLoaded = function() {
+            console.log('GAPI loaded');
+            gapi.load('client', App.Auth.initializeGapiClient);
+        };
+
+        window.gisLoaded = function() {
+            console.log('GIS loaded');
+            App.state.gisInited = true;
+            // Llamar función interna si existe
+            if (App.Auth && App.Auth.maybeEnableButtons) {
+                App.Auth.maybeEnableButtons();
+            }
+        };
+
 
         // EVENT LISTENERS
         document.addEventListener('DOMContentLoaded', () => {
