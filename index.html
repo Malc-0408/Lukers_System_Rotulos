@@ -1120,190 +1120,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* ============================================
-           SECCIÓN DE VERIFICACIÓN
-        ============================================ */
-        .verification-section {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .verification-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0 30px 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 4px solid #6c757d;
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .stat-card.success {
-            border-left-color: #28a745;
-        }
-
-        .stat-card.warning {
-            border-left-color: #ffc107;
-        }
-
-        .stat-card.danger {
-            border-left-color: #dc3545;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #6c757d;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-grid-verification {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #dee2e6;
-            border-radius: 6px;
-            font-size: 1em;
-            transition: all 0.3s;
-            background: white;
-        }
-
-        .form-select:focus {
-            outline: none;
-            border-color: #1e88e5;
-            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
-        }
-
-        .action-buttons-verification {
-            display: flex;
-            gap: 15px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
-
-        .verification-table-container {
-            overflow-x: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin: 20px 0;
-        }
-
-        .verification-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        .verification-table thead {
-            background: linear-gradient(135deg, #1e88e5 0%, #42a5f5 100%);
-            color: white;
-        }
-
-        .verification-table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .verification-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 0.95em;
-        }
-
-        .verification-table tbody tr:hover {
-            background: #f8f9fa;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-
-        .status-badge.success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-badge.warning {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-badge.danger {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .fields-different {
-            font-size: 0.85em;
-            color: #856404;
-            font-style: italic;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        .pagination button {
-            padding: 8px 15px;
-            border: 2px solid #dee2e6;
-            background: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .pagination button:hover:not(:disabled) {
-            border-color: #1e88e5;
-            color: #1e88e5;
-        }
-
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .pagination span {
-            color: #6c757d;
-            font-weight: 500;
-        }
     </style>
 </head>
 <body>
@@ -1442,7 +1258,6 @@
                 <button class="tab active" onclick="App.UI.switchTab(event, 'generator')">GENERADOR DE RÓTULOS</button>
                 <button class="tab" onclick="App.UI.switchTab(event, 'analysis')">ANÁLISIS</button>
                 <button class="tab" onclick="App.UI.switchTab(event, 'history')">HISTORIAL</button>
-                <button class="tab" onclick="App.UI.switchTab(event, 'verification')">🔍 VERIFICACIÓN</button>
             </div>
 
             <!-- TAB GENERADOR -->
@@ -1597,113 +1412,6 @@
                     <div class="history-section" id="historyList"></div>
                 </div>
             </div>
-
-            <!-- TAB VERIFICACIÓN -->
-            <div id="verificationTab" class="tab-content">
-                <div style="max-width: 1400px; margin: 0 auto; padding: 30px;">
-                    <!-- Estadísticas -->
-                    <div id="statsSection" style="display: none;">
-                        <h3>📊 Resumen de Comparación</h3>
-                        <div class="verification-stats">
-                            <div class="stat-card success">
-                                <div class="stat-label">✅ Sincronizados</div>
-                                <div class="stat-value" id="statSynced">0</div>
-                            </div>
-                            <div class="stat-card warning">
-                                <div class="stat-label">⚠️ Con Diferencias</div>
-                                <div class="stat-value" id="statDiff">0</div>
-                            </div>
-                            <div class="stat-card danger">
-                                <div class="stat-label">❌ No Existen</div>
-                                <div class="stat-value" id="statMissing">0</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-label">📊 Total Registros</div>
-                                <div class="stat-value" id="statTotal">0</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Filtros -->
-                    <div class="verification-section">
-                        <h3>🔍 Filtros de Búsqueda</h3>
-                        <div class="form-grid-verification">
-                            <div class="form-group">
-                                <label for="verProveedorSelect">🏢 Proveedor</label>
-                                <select id="verProveedorSelect" class="form-select" onchange="App.Verification.filterResults()">
-                                    <option value="">Todos los proveedores</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="verStatusSelect">📊 Estado</label>
-                                <select id="verStatusSelect" class="form-select" onchange="App.Verification.filterResults()">
-                                    <option value="all">Todos los estados</option>
-                                    <option value="synced">✅ Sincronizados</option>
-                                    <option value="diff">⚠️ Con Diferencias</option>
-                                    <option value="missing">❌ No Existen en Clasificación</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="verMarcaSelect">🏷️ Marca</label>
-                                <select id="verMarcaSelect" class="form-select" onchange="App.Verification.filterResults()">
-                                    <option value="">Todas las marcas</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="verSearchInput">🔍 Buscar por ID Detalle</label>
-                                <select id="verSearchInput" class="form-select" onchange="App.Verification.filterResults()">
-                                    <option value="">Todos los ID Detalle</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="action-buttons-verification">
-                            <button class="btn btn-primary" onclick="App.Verification.loadAndCompare()">
-                                🔄 Cargar y Comparar Datos
-                            </button>
-                            <button class="btn btn-secondary" onclick="App.Verification.exportToCSV()">
-                                📥 Exportar a CSV
-                            </button>
-                            <button class="btn btn-secondary" onclick="App.Verification.clearFilters()">
-                                🗑️ Limpiar Filtros
-                            </button>
-                        </div>
-                        
-                        <div id="verificationStatus"></div>
-                    </div>
-
-                    <!-- Tabla de Resultados -->
-                    <div id="resultsSection" style="display: none;">
-                        <h3>📋 Resultados de Verificación</h3>
-                        <div class="verification-table-container">
-                            <table class="verification-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID Detalle</th>
-                                        <th>ID Proveedor</th>
-                                        <th>Marca</th>
-                                        <th>Descripción</th>
-                                        <th>Estado</th>
-                                        <th>Campos Diferentes</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="verificationTableBody">
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <!-- Paginación -->
-                        <div class="pagination">
-                            <button onclick="App.Verification.previousPage()">◀ Anterior</button>
-                            <span id="pageInfo">Página 1 de 1</span>
-                            <button onclick="App.Verification.nextPage()">Siguiente ▶</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1725,22 +1433,27 @@
                 lastUpdate: null,
                 isAdminLogged: false,
                 selectedProvider: '',
-                selectedParihuela: '',
-                inventarioFinalData: null,
-                comparisonResults: [],
-                currentPage: 1,
-                itemsPerPage: 50
+                selectedParihuela: ''
             };
 
             const Config = {
                 DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
-                INVENTARIO_FINAL_SHEET_ID: '1d1OUPxfbyYVVmOtRvRl3b-x034Yh0fbwYIg5Rb4IzeM',
                 SCOPES: 'https://www.googleapis.com/auth/spreadsheets.readonly',
                 RANGE: 'Clasificación!A:Z',
                 ADMIN_USER: 'mluzquinos',
                 ADMIN_PASS: 'Malc-0408'
             };
 
+            window.gapiLoaded = function() {
+                console.log('GAPI loaded');
+                gapi.load('client', Auth.initializeGapiClient);
+            };
+
+            window.gisLoaded = function() {
+                console.log('GIS loaded');
+                state.gisInited = true;
+                maybeEnableButtons();
+            };
 
             function maybeEnableButtons() {
                 if (state.gapiInited && state.gisInited) {
@@ -3211,338 +2924,6 @@
                 }
             };
 
-            const Verification = {
-                async loadAndCompare() {
-                    if (!state.gapiInited || !state.gisInited) {
-                        UI.showStatus('Debes iniciar sesión primero', 'error');
-                        return;
-                    }
-
-                    try {
-                        UI.showSpinner('Cargando datos para comparación...');
-                        
-                        // Asegurar que ambos datos estén cargados
-                        if (!state.data) {
-                            await Data.loadProviders();
-                        }
-                        
-                        // Cargar datos de Inventario Final
-                        const inventarioData = await this.loadInventarioFinalData();
-                        
-                        // Realizar comparación
-                        this.compareData(inventarioData);
-                        
-                    } catch (error) {
-                        console.error('Error:', error);
-                        const statusDiv = document.getElementById('verificationStatus');
-                        statusDiv.innerHTML = `<div class="status-message status-error">Error: ${error.message}</div>`;
-                    } finally {
-                        UI.hideSpinner();
-                    }
-                },
-
-                async loadInventarioFinalData() {
-                    try {
-                        const response = await gapi.client.sheets.spreadsheets.values.get({
-                            spreadsheetId: Config.INVENTARIO_FINAL_SHEET_ID,
-                            range: 'Inventario Final!A2:Z',
-                        });
-
-                        const rows = response.result.values;
-                        if (!rows || rows.length === 0) {
-                            throw new Error('No se encontraron datos en Inventario Final');
-                        }
-
-                        state.inventarioFinalData = rows;
-                        return rows;
-                        
-                    } catch (error) {
-                        console.error('Error cargando Inventario Final:', error);
-                        throw error;
-                    }
-                },
-
-                compareData(inventarioData) {
-                    const results = [];
-                    
-                    // Crear un mapa de Clasificación para búsqueda rápida
-                    const clasificacionMap = new Map();
-                    if (state.data && state.data.values) {
-                        state.data.values.forEach(row => {
-                            const idDetalle = row[state.data.cols['ID Detalle']];
-                            if (idDetalle) {
-                                clasificacionMap.set(idDetalle, {
-                                    idProveedor: row[state.data.cols['ID Proveedor']],
-                                    paquete: row[state.data.cols['Paquete']],
-                                    marca: row[state.data.cols['MARCA']],
-                                    genero: row[state.data.cols['GENERO']],
-                                    descripcion: row[state.data.cols['DESCRIPCIÓN']],
-                                    mundo: row[state.data.cols['MUNDO']],
-                                    talla1: row[state.data.cols['TALLA 1']],
-                                    talla2: row[state.data.cols['TALLA 2']],
-                                    cantidad: row[state.data.cols['CANTIDAD']],
-                                    parihuela: row[state.data.cols['PARIHUELA']],
-                                    caja: row[state.data.cols['CAJA']],
-                                    color: row[state.data.cols['COLOR']],
-                                    codigo: row[state.data.cols['CODIGO']],
-                                });
-                            }
-                        });
-                    }
-
-                    // Comparar cada registro de Inventario Final
-                    inventarioData.forEach(invRow => {
-                        const idDetalle = invRow[1]; // Columna B: ID Detalle
-                        const clasificacionRow = clasificacionMap.get(idDetalle);
-
-                        const result = {
-                            idDetalle: idDetalle || '-',
-                            idProveedor: invRow[0] || '-',
-                            marca: invRow[3] || '-',
-                            descripcion: invRow[5] || '-',
-                            status: '',
-                            fieldsDifferent: []
-                        };
-
-                        if (!clasificacionRow) {
-                            result.status = 'missing';
-                        } else {
-                            // Comparar cada campo
-                            const differences = [];
-                            
-                            if (invRow[0] !== clasificacionRow.idProveedor) differences.push('ID Proveedor');
-                            if (invRow[2] !== clasificacionRow.paquete) differences.push('Paquete');
-                            if (invRow[3] !== clasificacionRow.marca) differences.push('MARCA');
-                            if (invRow[4] !== clasificacionRow.genero) differences.push('GENERO');
-                            if (invRow[5] !== clasificacionRow.descripcion) differences.push('DESCRIPCIÓN');
-                            if (invRow[6] !== clasificacionRow.mundo) differences.push('MUNDO');
-                            if (invRow[7] !== clasificacionRow.talla1) differences.push('TALLA 1');
-                            if (invRow[8] !== clasificacionRow.talla2) differences.push('TALLA 2');
-                            if (invRow[9] !== clasificacionRow.cantidad) differences.push('CANTIDAD');
-                            if (invRow[10] !== clasificacionRow.parihuela) differences.push('PARIHUELA');
-                            if (invRow[11] !== clasificacionRow.caja) differences.push('CAJA');
-                            if (invRow[12] !== clasificacionRow.color) differences.push('COLOR');
-                            if (invRow[13] !== clasificacionRow.codigo) differences.push('CODIGO');
-
-                            if (differences.length > 0) {
-                                result.status = 'diff';
-                                result.fieldsDifferent = differences;
-                            } else {
-                                result.status = 'synced';
-                            }
-                        }
-
-                        results.push(result);
-                    });
-
-                    state.comparisonResults = results;
-                    this.displayResults();
-                },
-
-                displayResults() {
-                    // Calcular estadísticas
-                    const synced = state.comparisonResults.filter(r => r.status === 'synced').length;
-                    const diff = state.comparisonResults.filter(r => r.status === 'diff').length;
-                    const missing = state.comparisonResults.filter(r => r.status === 'missing').length;
-                    const total = state.comparisonResults.length;
-
-                    // Actualizar estadísticas
-                    document.getElementById('statSynced').textContent = synced;
-                    document.getElementById('statDiff').textContent = diff;
-                    document.getElementById('statMissing').textContent = missing;
-                    document.getElementById('statTotal').textContent = total;
-
-                    // Poblar selectores
-                    this.populateFilters();
-
-                    // Mostrar secciones
-                    document.getElementById('statsSection').style.display = 'block';
-                    document.getElementById('resultsSection').style.display = 'block';
-
-                    // Mostrar mensaje de éxito
-                    const statusDiv = document.getElementById('verificationStatus');
-                    statusDiv.innerHTML = `<div class="status-message status-success">✓ Comparación completada: ${total} registros analizados</div>`;
-
-                    // Renderizar tabla
-                    this.renderTable();
-                },
-
-                populateFilters() {
-                    // Poblar selector de Proveedor
-                    const proveedores = [...new Set(state.comparisonResults.map(r => r.idProveedor).filter(p => p && p !== '-'))].sort();
-                    const proveedorSelect = document.getElementById('verProveedorSelect');
-                    proveedorSelect.innerHTML = '<option value="">Todos los proveedores</option>';
-                    proveedores.forEach(p => {
-                        const option = document.createElement('option');
-                        option.value = p;
-                        option.textContent = p;
-                        proveedorSelect.appendChild(option);
-                    });
-
-                    // Poblar selector de Marca
-                    const marcas = [...new Set(state.comparisonResults.map(r => r.marca).filter(m => m && m !== '-'))].sort();
-                    const marcaSelect = document.getElementById('verMarcaSelect');
-                    marcaSelect.innerHTML = '<option value="">Todas las marcas</option>';
-                    marcas.forEach(m => {
-                        const option = document.createElement('option');
-                        option.value = m;
-                        option.textContent = m;
-                        marcaSelect.appendChild(option);
-                    });
-
-                    // Poblar selector de ID Detalle
-                    const idDetalles = state.comparisonResults.map(r => r.idDetalle).filter(id => id && id !== '-').sort();
-                    const searchSelect = document.getElementById('verSearchInput');
-                    searchSelect.innerHTML = '<option value="">Todos los ID Detalle</option>';
-                    idDetalles.forEach(id => {
-                        const option = document.createElement('option');
-                        option.value = id;
-                        option.textContent = id;
-                        searchSelect.appendChild(option);
-                    });
-                },
-
-                filterResults() {
-                    state.currentPage = 1;
-                    this.renderTable();
-                },
-
-                clearFilters() {
-                    document.getElementById('verProveedorSelect').value = '';
-                    document.getElementById('verStatusSelect').value = 'all';
-                    document.getElementById('verMarcaSelect').value = '';
-                    document.getElementById('verSearchInput').value = '';
-                    this.filterResults();
-                    UI.showToast('Filtros limpiados');
-                },
-
-                getFilteredResults() {
-                    let filtered = state.comparisonResults;
-
-                    // Filtro por estado
-                    const statusFilter = document.getElementById('verStatusSelect').value;
-                    if (statusFilter !== 'all') {
-                        filtered = filtered.filter(r => r.status === statusFilter);
-                    }
-
-                    // Filtro por proveedor
-                    const proveedorFilter = document.getElementById('verProveedorSelect').value;
-                    if (proveedorFilter) {
-                        filtered = filtered.filter(r => r.idProveedor === proveedorFilter);
-                    }
-
-                    // Filtro por marca
-                    const marcaFilter = document.getElementById('verMarcaSelect').value;
-                    if (marcaFilter) {
-                        filtered = filtered.filter(r => r.marca === marcaFilter);
-                    }
-
-                    // Filtro por ID Detalle
-                    const searchFilter = document.getElementById('verSearchInput').value;
-                    if (searchFilter) {
-                        filtered = filtered.filter(r => r.idDetalle === searchFilter);
-                    }
-
-                    return filtered;
-                },
-
-                renderTable() {
-                    const filtered = this.getFilteredResults();
-                    const tbody = document.getElementById('verificationTableBody');
-                    tbody.innerHTML = '';
-
-                    // Paginación
-                    const totalPages = Math.ceil(filtered.length / state.itemsPerPage);
-                    const start = (state.currentPage - 1) * state.itemsPerPage;
-                    const end = start + state.itemsPerPage;
-                    const pageResults = filtered.slice(start, end);
-
-                    // Renderizar filas
-                    pageResults.forEach(result => {
-                        const row = document.createElement('tr');
-                        
-                        let statusBadge = '';
-                        let statusText = '';
-                        
-                        if (result.status === 'synced') {
-                            statusBadge = '<span class="status-badge success">✅ Sincronizado</span>';
-                            statusText = '-';
-                        } else if (result.status === 'diff') {
-                            statusBadge = '<span class="status-badge warning">⚠️ Diferencias</span>';
-                            statusText = `<span class="fields-different">${result.fieldsDifferent.join(', ')}</span>`;
-                        } else if (result.status === 'missing') {
-                            statusBadge = '<span class="status-badge danger">❌ No Existe</span>';
-                            statusText = 'No existe en Clasificación';
-                        }
-
-                        row.innerHTML = `
-                            <td>${result.idDetalle}</td>
-                            <td>${result.idProveedor}</td>
-                            <td>${result.marca}</td>
-                            <td>${result.descripcion}</td>
-                            <td>${statusBadge}</td>
-                            <td>${statusText}</td>
-                        `;
-                        
-                        tbody.appendChild(row);
-                    });
-
-                    // Actualizar info de paginación
-                    document.getElementById('pageInfo').textContent = `Página ${state.currentPage} de ${totalPages || 1} (${filtered.length} registros)`;
-                },
-
-                previousPage() {
-                    if (state.currentPage > 1) {
-                        state.currentPage--;
-                        this.renderTable();
-                    }
-                },
-
-                nextPage() {
-                    const filtered = this.getFilteredResults();
-                    const totalPages = Math.ceil(filtered.length / state.itemsPerPage);
-                    
-                    if (state.currentPage < totalPages) {
-                        state.currentPage++;
-                        this.renderTable();
-                    }
-                },
-
-                exportToCSV() {
-                    if (state.comparisonResults.length === 0) {
-                        UI.showToast('⚠️ No hay datos para exportar');
-                        return;
-                    }
-
-                    const filtered = this.getFilteredResults();
-                    
-                    let csv = 'ID Detalle,ID Proveedor,Marca,Descripción,Estado,Campos Diferentes\n';
-                    
-                    filtered.forEach(result => {
-                        const status = result.status === 'synced' ? 'Sincronizado' : 
-                                     result.status === 'diff' ? 'Diferencias' : 
-                                     'No Existe';
-                        const fields = result.fieldsDifferent.join('; ');
-                        
-                        csv += `"${result.idDetalle}","${result.idProveedor}","${result.marca}","${result.descripcion}","${status}","${fields}"\n`;
-                    });
-
-                    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                    const link = document.createElement('a');
-                    const url = URL.createObjectURL(blob);
-                    
-                    link.setAttribute('href', url);
-                    link.setAttribute('download', `verificacion_${new Date().toISOString().slice(0,10)}.csv`);
-                    link.style.visibility = 'hidden';
-                    
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    UI.showToast('✓ CSV exportado exitosamente');
-                }
-            };
-
             function getSelections() {
                 const provider = state.selectedProvider;
                 const parihuela = state.selectedParihuela;
@@ -3601,7 +2982,6 @@
                 History,
                 UI,
                 Utils,
-                Verification,
                 state,
 
                 async generateLabels() {
@@ -3747,22 +3127,6 @@
         // EXPONER APP GLOBALMENTE
         window.App = App;
 
-        // FUNCIONES GLOBALES PARA GOOGLE API
-        window.gapiLoaded = function() {
-            console.log('GAPI loaded');
-            gapi.load('client', App.Auth.initializeGapiClient);
-        };
-
-        window.gisLoaded = function() {
-            console.log('GIS loaded');
-            App.state.gisInited = true;
-            // Llamar función interna si existe
-            if (App.Auth && App.Auth.maybeEnableButtons) {
-                App.Auth.maybeEnableButtons();
-            }
-        };
-
-
         // EVENT LISTENERS
         document.addEventListener('DOMContentLoaded', () => {
             // Cerrar menú al hacer click fuera
@@ -3826,3 +3190,4 @@
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 </body>
 </html>
+                     
