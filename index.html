@@ -856,36 +856,65 @@
             text-align: right;
         }
 
-        .rotulo-tallas-table {
-            width: 100%;
-            margin: 5pt auto;
-            border-collapse: collapse;
-            border: 1pt solid #333;
-            font-size: 9pt;
-        }
+.rotulo-tallas-table {
+    width: 758px;
+    margin: 5pt auto;
+    border-collapse: collapse;
+    border: 1px solid #333;
+    font-size: 9pt;
+    table-layout: fixed;
+}
 
-        .rotulo-tallas-table th {
-            background: #F0F0F0;
-            border: 1pt solid #333;
-            padding: 1pt;
-            text-align: center;
-            font-size: 9pt;
-            font-weight: bold;
-            height: 20pt;
-        }
+.rotulo-tallas-table th {
+    background: #F0F0F0;
+    border: 1px solid #333;
+    padding: 2px;
+    text-align: center;
+    font-size: 9pt;
+    font-weight: bold;
+    height: 20px;
+}
 
-        .rotulo-tallas-table td {
-            border: 1pt solid #333;
-            padding: 1pt;
-            text-align: center;
-            height: 70pt;
-            vertical-align: middle;
-            font-size: 12pt;
-        }
+.rotulo-tallas-table th:nth-child(1),
+.rotulo-tallas-table th:nth-child(5),
+.rotulo-tallas-table td:nth-child(1),
+.rotulo-tallas-table td:nth-child(5) {
+    width: 60px;
+}
 
-        .rotulo-sticker-col {
-            background: #FFFFFF;
-        }
+.rotulo-tallas-table th:nth-child(2),
+.rotulo-tallas-table th:nth-child(6),
+.rotulo-tallas-table td:nth-child(2),
+.rotulo-tallas-table td:nth-child(6) {
+    width: 60px;
+}
+
+.rotulo-tallas-table th:nth-child(3),
+.rotulo-tallas-table th:nth-child(7),
+.rotulo-tallas-table td:nth-child(3),
+.rotulo-tallas-table td:nth-child(7) {
+    width: 59px;
+}
+
+.rotulo-tallas-table th:nth-child(4),
+.rotulo-tallas-table th:nth-child(8),
+.rotulo-tallas-table td:nth-child(4),
+.rotulo-tallas-table td:nth-child(8) {
+    width: 200px;
+}
+
+.rotulo-tallas-table td {
+    border: 1px solid #333;
+    padding: 2px;
+    text-align: center;
+    height: 70px;
+    vertical-align: middle;
+    font-size: 12pt;
+}
+
+.rotulo-sticker-col {
+    background: #FFFFFF;
+}
 
         .tabs {
             display: flex;
