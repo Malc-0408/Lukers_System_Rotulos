@@ -3064,27 +3064,31 @@
                     const printArea = card.querySelector('.rotulo');
                     
                     const printWindow = window.open('', '_blank');
-                    const printStyles = `
-                        @page { margin: 3pt 12pt; }
-                        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-                        .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; }
-                        .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
-                        .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-                        .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
-                        .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-                        .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-                        .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-                        .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
-                        .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
-                        .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
-                        .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-                        .rotulo-codigo-table td { padding: 2pt; border: none; }
-                        .rotulo-codigo-col2 { text-align: right; }
-                        .rotulo-tallas-table { width: 100%; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
-                        .rotulo-tallas-table th { background: #F0F0F0; border: 1pt solid #333; padding: 1pt; text-align: center; font-weight: bold; height: 20pt; }
-                        .rotulo-tallas-table td { border: 1pt solid #333; padding: 1pt; text-align: center; height: 70pt; vertical-align: middle; font-size: 12pt; }
-                        .rotulo-sticker-col { background: #FFFFFF; }
-                    `;
+const printStyles = `
+    @page { margin: 3pt 12pt; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; }
+    .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
+    .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+    .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
+    .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+    .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+    .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+    .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
+    .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
+    .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
+    .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+    .rotulo-codigo-table td { padding: 2pt; border: none; }
+    .rotulo-codigo-col2 { text-align: right; }
+    .rotulo-tallas-table { width: 758px; margin: 5pt auto; border-collapse: collapse; border: 1px solid #333; font-size: 9pt; table-layout: fixed; }
+    .rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 2px; text-align: center; font-weight: bold; height: 20px; }
+    .rotulo-tallas-table th:nth-child(1), .rotulo-tallas-table th:nth-child(5), .rotulo-tallas-table td:nth-child(1), .rotulo-tallas-table td:nth-child(5) { width: 60px; }
+    .rotulo-tallas-table th:nth-child(2), .rotulo-tallas-table th:nth-child(6), .rotulo-tallas-table td:nth-child(2), .rotulo-tallas-table td:nth-child(6) { width: 60px; }
+    .rotulo-tallas-table th:nth-child(3), .rotulo-tallas-table th:nth-child(7), .rotulo-tallas-table td:nth-child(3), .rotulo-tallas-table td:nth-child(7) { width: 59px; }
+    .rotulo-tallas-table th:nth-child(4), .rotulo-tallas-table th:nth-child(8), .rotulo-tallas-table td:nth-child(4), .rotulo-tallas-table td:nth-child(8) { width: 200px; }
+    .rotulo-tallas-table td { border: 1px solid #333; padding: 2px; text-align: center; height: 70px; vertical-align: middle; font-size: 12pt; }
+    .rotulo-sticker-col { background: #FFFFFF; }
+`;
                     
                     printWindow.document.write('<!DOCTYPE html>');
                     printWindow.document.write('<html><head>');
@@ -3108,29 +3112,32 @@
                     }
 
                     const printWindow = window.open('', '_blank');
-                    const printStyles = `
-                        @page { margin: 3pt 12pt; }
-                        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-                        .rotulo { max-width: 210mm; margin: 0 auto 20pt auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; page-break-after: always; }
-                        .rotulo:last-child { page-break-after: auto; }
-                        .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
-                        .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-                        .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
-                        .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-                        .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-                        .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-                        .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
-                        .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
-                        .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
-                        .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-                        .rotulo-codigo-table td { padding: 2pt; border: none; }
-                        .rotulo-codigo-col2 { text-align: right; }
-                        .rotulo-tallas-table { width: 100%; margin: 5pt auto; border-collapse: collapse; border: 1pt solid #333; font-size: 9pt; }
-                        .rotulo-tallas-table th { background: #F0F0F0; border: 1pt solid #333; padding: 1pt; text-align: center; font-weight: bold; height: 20pt; }
-                        .rotulo-tallas-table td { border: 1pt solid #333; padding: 1pt; text-align: center; height: 70pt; vertical-align: middle; font-size: 12pt; }
-                        .rotulo-sticker-col { background: #FFFFFF; }
-                    `;
-                    
+const printStyles = `
+    @page { margin: 3pt 12pt; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .rotulo { max-width: 210mm; margin: 0 auto 20pt auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; page-break-after: always; }
+    .rotulo:last-child { page-break-after: auto; }
+    .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
+    .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+    .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
+    .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+    .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
+    .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+    .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
+    .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
+    .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
+    .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
+    .rotulo-codigo-table td { padding: 2pt; border: none; }
+    .rotulo-codigo-col2 { text-align: right; }
+    .rotulo-tallas-table { width: 758px; margin: 5pt auto; border-collapse: collapse; border: 1px solid #333; font-size: 9pt; table-layout: fixed; }
+    .rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 2px; text-align: center; font-weight: bold; height: 20px; }
+    .rotulo-tallas-table th:nth-child(1), .rotulo-tallas-table th:nth-child(5), .rotulo-tallas-table td:nth-child(1), .rotulo-tallas-table td:nth-child(5) { width: 60px; }
+    .rotulo-tallas-table th:nth-child(2), .rotulo-tallas-table th:nth-child(6), .rotulo-tallas-table td:nth-child(2), .rotulo-tallas-table td:nth-child(6) { width: 60px; }
+    .rotulo-tallas-table th:nth-child(3), .rotulo-tallas-table th:nth-child(7), .rotulo-tallas-table td:nth-child(3), .rotulo-tallas-table td:nth-child(7) { width: 59px; }
+    .rotulo-tallas-table th:nth-child(4), .rotulo-tallas-table th:nth-child(8), .rotulo-tallas-table td:nth-child(4), .rotulo-tallas-table td:nth-child(8) { width: 200px; }
+    .rotulo-tallas-table td { border: 1px solid #333; padding: 2px; text-align: center; height: 70px; vertical-align: middle; font-size: 12pt; }
+    .rotulo-sticker-col { background: #FFFFFF; }
+`;                    
                     printWindow.document.write('<!DOCTYPE html>');
                     printWindow.document.write('<html><head>');
                     printWindow.document.write('<meta charset="UTF-8">');
