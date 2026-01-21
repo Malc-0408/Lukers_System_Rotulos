@@ -26,9 +26,6 @@
             box-shadow: 0 0 30px rgba(0,0,0,0.3);
         }
 
-        /* ============================================
-           HEADER COMPACTO
-        ============================================ */
         .header-compact {
             background: linear-gradient(135deg, #1e88e5 0%, #42a5f5 100%);
             color: white;
@@ -132,14 +129,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .dropdown-header {
@@ -203,9 +194,6 @@
             margin: 10px;
         }
 
-        /* ============================================
-           MODALES
-        ============================================ */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -241,14 +229,8 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-header {
@@ -422,9 +404,6 @@
             box-shadow: 0 0 5px #28a745;
         }
 
-        /* ============================================
-           LAYOUT DOS COLUMNAS
-        ============================================ */
         .main-content {
             display: none;
         }
@@ -435,7 +414,6 @@
             height: calc(100vh - 60px);
         }
 
-        /* COLUMNA IZQUIERDA - CONFIGURACIÓN */
         .config-column {
             background: #f8f9fa;
             border-right: 2px solid #dee2e6;
@@ -662,7 +640,6 @@
             gap: 10px;
         }
 
-        /* COLUMNA DERECHA - PREVIEW */
         .preview-column {
             background: white;
             overflow-y: auto;
@@ -758,7 +735,6 @@
             transform: translateY(-2px);
         }
 
-        /* Estilos del rótulo (mantener los originales) */
         .rotulo {
             max-width: 100%;
             margin: 0 auto;
@@ -856,65 +832,65 @@
             text-align: right;
         }
 
-.rotulo-tallas-table {
-    width: 758px;
-    margin: 5pt auto;
-    border-collapse: collapse;
-    border: 1px solid #333;
-    font-size: 9pt;
-    table-layout: fixed;
-}
+        .rotulo-tallas-table {
+            width: 758px;
+            margin: 5pt auto;
+            border-collapse: collapse;
+            border: 1px solid #333;
+            font-size: 9pt;
+            table-layout: fixed;
+        }
 
-.rotulo-tallas-table th {
-    background: #F0F0F0;
-    border: 1px solid #333;
-    padding: 2px;
-    text-align: center;
-    font-size: 9pt;
-    font-weight: bold;
-    height: 20px;
-}
+        .rotulo-tallas-table th {
+            background: #F0F0F0;
+            border: 1px solid #333;
+            padding: 2px;
+            text-align: center;
+            font-size: 9pt;
+            font-weight: bold;
+            height: 20px;
+        }
 
-.rotulo-tallas-table th:nth-child(1),
-.rotulo-tallas-table th:nth-child(5),
-.rotulo-tallas-table td:nth-child(1),
-.rotulo-tallas-table td:nth-child(5) {
-    width: 60px;
-}
+        .rotulo-tallas-table th:nth-child(1),
+        .rotulo-tallas-table th:nth-child(5),
+        .rotulo-tallas-table td:nth-child(1),
+        .rotulo-tallas-table td:nth-child(5) {
+            width: 60px;
+        }
 
-.rotulo-tallas-table th:nth-child(2),
-.rotulo-tallas-table th:nth-child(6),
-.rotulo-tallas-table td:nth-child(2),
-.rotulo-tallas-table td:nth-child(6) {
-    width: 60px;
-}
+        .rotulo-tallas-table th:nth-child(2),
+        .rotulo-tallas-table th:nth-child(6),
+        .rotulo-tallas-table td:nth-child(2),
+        .rotulo-tallas-table td:nth-child(6) {
+            width: 60px;
+        }
 
-.rotulo-tallas-table th:nth-child(3),
-.rotulo-tallas-table th:nth-child(7),
-.rotulo-tallas-table td:nth-child(3),
-.rotulo-tallas-table td:nth-child(7) {
-    width: 59px;
-}
+        .rotulo-tallas-table th:nth-child(3),
+        .rotulo-tallas-table th:nth-child(7),
+        .rotulo-tallas-table td:nth-child(3),
+        .rotulo-tallas-table td:nth-child(7) {
+            width: 59px;
+        }
 
-.rotulo-tallas-table th:nth-child(4),
-.rotulo-tallas-table th:nth-child(8),
-.rotulo-tallas-table td:nth-child(4),
-.rotulo-tallas-table td:nth-child(8) {
-    width: 200px;
-}
+        .rotulo-tallas-table th:nth-child(4),
+        .rotulo-tallas-table th:nth-child(8),
+        .rotulo-tallas-table td:nth-child(4),
+        .rotulo-tallas-table td:nth-child(8) {
+            width: 200px;
+        }
 
-.rotulo-tallas-table td {
-    border: 1px solid #333;
-    padding: 2px;
-    text-align: center;
-    height: 100px;
-    vertical-align: middle;
-    font-size: 12pt;
-}
+        .rotulo-tallas-table td {
+            border: 1px solid #333;
+            padding: 2px;
+            text-align: center;
+            height: 100px;
+            vertical-align: middle;
+            font-size: 12pt;
+        }
 
-.rotulo-sticker-col {
-    background: #FFFFFF;
-}
+        .rotulo-sticker-col {
+            background: #FFFFFF;
+        }
 
         .tabs {
             display: flex;
@@ -950,7 +926,6 @@
             display: block;
         }
 
-        /* Análisis e Historial */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1060,14 +1035,8 @@
         }
 
         @keyframes slideUpToast {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .update-info {
@@ -1111,12 +1080,10 @@
                 grid-template-columns: 1fr;
                 height: auto;
             }
-
             .config-column {
                 border-right: none;
                 border-bottom: 2px solid #dee2e6;
             }
-
             .preview-column {
                 padding: 20px;
             }
@@ -1128,23 +1095,19 @@
                 gap: 10px;
                 padding: 10px 15px;
             }
-
             .header-right {
                 width: 100%;
                 justify-content: space-between;
             }
-
             .dropdown-menu {
                 right: auto;
                 left: 0;
                 width: 100%;
                 min-width: auto;
             }
-
             .parihuela-grid {
                 grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
             }
-
             .preview-info-grid {
                 grid-template-columns: 1fr;
             }
@@ -1162,7 +1125,6 @@
     <div class="toast" id="toast"></div>
 
     <div class="container">
-        <!-- HEADER COMPACTO -->
         <div class="header-compact">
             <div class="header-left">
                 <div>
@@ -1219,7 +1181,6 @@
             </div>
         </div>
 
-        <!-- MODAL LOGIN ADMIN -->
         <div class="modal-overlay" id="adminLoginModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1241,7 +1202,6 @@
             </div>
         </div>
 
-        <!-- MODAL CONFIGURACIÓN -->
         <div class="modal-overlay" id="configModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1264,6 +1224,11 @@
                                 <label class="form-label" for="spreadsheetId">ID de la Hoja de Cálculo:</label>
                                 <input type="text" id="spreadsheetId" class="form-input" placeholder="ID del Google Sheets" maxlength="100">
                             </div>
+                            <div class="form-group">
+                                <label class="form-label" for="sheetName">Nombre de la pestaña:</label>
+                                <input type="text" id="sheetName" class="form-input" placeholder="Ej: Clasificación" maxlength="100" value="Clasificación">
+                                <small style="color:#666;font-size:0.8em;">Nombre exacto de la pestaña en tu Google Sheets</small>
+                            </div>
                         </div>
                         <button class="btn btn-success btn-block" onclick="App.Auth.saveConfig()">💾 GUARDAR CONFIGURACIÓN</button>
 
@@ -1281,7 +1246,6 @@
             </div>
         </div>
 
-        <!-- CONTENIDO PRINCIPAL -->
         <div id="mainContent" class="main-content">
             <div class="tabs">
                 <button class="tab active" onclick="App.UI.switchTab(event, 'generator')">GENERADOR DE RÓTULOS</button>
@@ -1289,14 +1253,11 @@
                 <button class="tab" onclick="App.UI.switchTab(event, 'history')">HISTORIAL</button>
             </div>
 
-            <!-- TAB GENERADOR -->
             <div id="generatorTab" class="tab-content active">
                 <div class="two-column-layout">
-                    <!-- COLUMNA IZQUIERDA - CONFIGURACIÓN -->
                     <div class="config-column">
                         <h3>📋 CONFIGURACIÓN</h3>
 
-                        <!-- MODO -->
                         <div class="mode-selector-compact">
                             <h4>🏷️ TIPO DE RÓTULO</h4>
                             <div class="mode-buttons">
@@ -1305,7 +1266,6 @@
                             </div>
                         </div>
 
-                        <!-- PROVEEDOR -->
                         <div class="selection-section">
                             <h4>🏢 PROVEEDOR</h4>
                             <select class="large-select" id="proveedorSelect">
@@ -1313,13 +1273,11 @@
                             </select>
                         </div>
 
-                        <!-- PARIHUELA -->
                         <div class="selection-section" id="parihuselaSection" style="display: none;">
                             <h4>📦 PARIHUELA</h4>
                             <div class="parihuela-grid" id="parihulaGrid"></div>
                         </div>
 
-                        <!-- MÉTODO Y CAJAS -->
                         <div class="selection-section" id="methodSection" style="display: none;">
                             <h4>🎯 MÉTODO DE SELECCIÓN</h4>
                             <div class="method-tabs">
@@ -1328,14 +1286,12 @@
                                 <button class="method-tab" onclick="App.UI.switchMethod(3)">MÚLTIPLE</button>
                             </div>
 
-                            <!-- Método 1: Directa -->
                             <div class="method-content active" id="methodContent1">
                                 <select class="large-select" id="cajaDirecta">
                                     <option value="">-- Selecciona una caja --</option>
                                 </select>
                             </div>
 
-                            <!-- Método 2: Rango -->
                             <div class="method-content" id="methodContent2">
                                 <div class="caja-range">
                                     <div>
@@ -1353,7 +1309,6 @@
                                 </div>
                             </div>
 
-                            <!-- Método 3: Múltiple -->
                             <div class="method-content" id="methodContent3">
                                 <div style="margin-bottom: 10px;">
                                     <button class="btn btn-secondary" onclick="App.UI.selectAll()" style="margin-right: 5px; font-size: 0.8em;">Todos</button>
@@ -1364,7 +1319,6 @@
                             </div>
                         </div>
 
-                        <!-- ACCIONES -->
                         <div class="action-section" id="actionSection" style="display: none;">
                             <div class="action-buttons-vertical">
                                 <button class="btn btn-success btn-block" onclick="App.generateLabels()">
@@ -1378,7 +1332,6 @@
                         </div>
                     </div>
 
-                    <!-- COLUMNA DERECHA - PREVIEW -->
                     <div class="preview-column">
                         <div class="preview-header">
                             <h3>👁️ VISTA PREVIA</h3>
@@ -1419,7 +1372,6 @@
                 </div>
             </div>
 
-            <!-- TAB ANÁLISIS -->
             <div id="analysisTab" class="tab-content">
                 <div style="max-width: 1200px; margin: 0 auto; padding: 30px;">
                     <h3>📊 Análisis de Datos</h3>
@@ -1431,7 +1383,6 @@
                 </div>
             </div>
 
-            <!-- TAB HISTORIAL -->
             <div id="historyTab" class="tab-content">
                 <div style="max-width: 1200px; margin: 0 auto; padding: 30px;">
                     <h3>📜 Historial de Rótulos Generados</h3>
@@ -1454,6 +1405,7 @@
                 tokenClient: null,
                 spreadsheetId: '',
                 clientId: '',
+                sheetName: 'Clasificación',
                 data: null,
                 activeMethod: 1,
                 activeMode: 'original',
@@ -1468,7 +1420,6 @@
             const Config = {
                 DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
                 SCOPES: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-                RANGE: 'Clasificación!A:Z',
                 ADMIN_USER: 'mluzquinos',
                 ADMIN_PASS: 'Malc-0408'
             };
@@ -1513,10 +1464,12 @@
                     try {
                         const savedClientId = localStorage.getItem('lukers_client_id');
                         const savedSpreadsheetId = localStorage.getItem('lukers_spreadsheet_id');
+                        const savedSheetName = localStorage.getItem('lukers_sheet_name');
                         
                         if (savedClientId && savedSpreadsheetId) {
                             state.clientId = atob(savedClientId);
                             state.spreadsheetId = atob(savedSpreadsheetId);
+                            state.sheetName = savedSheetName ? atob(savedSheetName) : 'Clasificación';
                             UI.updateCompactStatus(false, 'Sistema configurado');
                         } else {
                             UI.updateCompactStatus(false, 'Sin configurar');
@@ -1554,10 +1507,14 @@
                     try {
                         const savedClientId = localStorage.getItem('lukers_client_id');
                         const savedSpreadsheetId = localStorage.getItem('lukers_spreadsheet_id');
+                        const savedSheetName = localStorage.getItem('lukers_sheet_name');
                         
                         if (savedClientId && savedSpreadsheetId) {
                             document.getElementById('clientId').value = atob(savedClientId);
                             document.getElementById('spreadsheetId').value = atob(savedSpreadsheetId);
+                        }
+                        if (savedSheetName) {
+                            document.getElementById('sheetName').value = atob(savedSheetName);
                         }
                     } catch (e) {
                         console.warn('Error cargando configuración:', e);
@@ -1567,6 +1524,7 @@
                 saveConfig() {
                     const clientId = document.getElementById('clientId').value.trim();
                     const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
+                    const sheetName = document.getElementById('sheetName').value.trim() || 'Clasificación';
 
                     if (!Validation.validateClientId(clientId) || !Validation.validateSpreadsheetId(spreadsheetId)) {
                         UI.showStatus('Por favor completa los campos correctamente', 'error');
@@ -1576,9 +1534,11 @@
                     try {
                         localStorage.setItem('lukers_client_id', btoa(clientId));
                         localStorage.setItem('lukers_spreadsheet_id', btoa(spreadsheetId));
+                        localStorage.setItem('lukers_sheet_name', btoa(sheetName));
                         
                         state.clientId = clientId;
                         state.spreadsheetId = spreadsheetId;
+                        state.sheetName = sheetName;
                         
                         UI.showStatus('Configuración guardada correctamente', 'success');
                         UI.showToast('✓ Credenciales guardadas exitosamente');
@@ -1620,6 +1580,7 @@
                 signInAdmin() {
                     const clientId = document.getElementById('clientId').value.trim();
                     const spreadsheetId = document.getElementById('spreadsheetId').value.trim();
+                    const sheetName = document.getElementById('sheetName').value.trim() || 'Clasificación';
 
                     if (!Validation.validateClientId(clientId)) {
                         UI.showStatus('Por favor ingresa un Client ID válido', 'error');
@@ -1632,6 +1593,7 @@
                     }
 
                     state.spreadsheetId = spreadsheetId;
+                    state.sheetName = sheetName;
 
                     try {
                         state.tokenClient = google.accounts.oauth2.initTokenClient({
@@ -1747,9 +1709,15 @@
                         UI.showSpinner(true);
                         UI.showStatus('Cargando datos...', 'success');
 
+                        // FIX: Construir el rango correctamente con comillas simples
+                        const sheetName = state.sheetName || 'Clasificación';
+                        const range = "'" + sheetName + "'!A:Z";
+                        
+                        console.log('Cargando rango:', range);
+
                         const response = await gapi.client.sheets.spreadsheets.values.get({
                             spreadsheetId: state.spreadsheetId,
-                            range: Config.RANGE
+                            range: range
                         });
 
                         const values = response.result.values;
@@ -1777,7 +1745,13 @@
 
                     } catch (error) {
                         console.error('Error cargando datos:', error);
-                        UI.showStatus('Error: ' + error.message, 'error');
+                        let errorMsg = 'Error: ';
+                        if (error.result && error.result.error) {
+                            errorMsg += error.result.error.message;
+                        } else {
+                            errorMsg += error.message || 'Error desconocido';
+                        }
+                        UI.showStatus(errorMsg, 'error');
                     } finally {
                         UI.showSpinner(false);
                     }
@@ -1836,27 +1810,22 @@
                                 return { parihuela, caja };
                             })
                             .sort((a, b) => {
-                                // Función auxiliar para ordenamiento natural
                                 const isNumeric = (str) => !isNaN(str) && !isNaN(parseFloat(str));
                                 
                                 const aParNum = isNumeric(a.parihuela);
                                 const bParNum = isNumeric(b.parihuela);
                                 
-                                // Si uno es número y el otro no, el número va primero
                                 if (aParNum && !bParNum) return -1;
                                 if (!aParNum && bParNum) return 1;
                                 
-                                // Si ambos son números, comparar numéricamente
                                 if (aParNum && bParNum) {
                                     const diffP = parseFloat(a.parihuela) - parseFloat(b.parihuela);
                                     if (diffP !== 0) return diffP;
                                 } else {
-                                    // Si ambos son texto, comparar alfabéticamente
                                     const diffP = a.parihuela.localeCompare(b.parihuela);
                                     if (diffP !== 0) return diffP;
                                 }
                                 
-                                // Ordenar cajas de la misma forma
                                 const aCajNum = isNumeric(a.caja);
                                 const bCajNum = isNumeric(b.caja);
                                 
@@ -1915,24 +1884,20 @@
                     const filtered = [];
                     const rows = state.dataIndex.byProvider[selection.proveedor] || [];
 
-                    // Normalizar la selección
                     const selParihuela = String(selection.parihuela || '').trim();
                     const selCaja = String(selection.caja || '').trim();
 
                     for (const rowIndex of rows) {
                         const row = state.data.values[rowIndex];
                         
-                        // Normalizar los valores del Sheet
                         const parihuela = String(row[state.data.cols['PARIHUELA']] || '').trim();
                         const caja = String(row[state.data.cols['CAJA']] || '').trim();
 
-                        // Comparación exacta
                         if (parihuela === selParihuela && caja === selCaja) {
                             filtered.push(row);
                         }
                     }
 
-                    // Debug: Si no encuentra datos, mostrar información útil
                     if (filtered.length === 0) {
                         console.warn('No se encontraron datos para:', {
                             proveedor: selection.proveedor,
@@ -1945,7 +1910,6 @@
                     return filtered;
                 },
 
-                // NUEVA FUNCIÓN: Obtener cajas de una parihuela específica
                 getCajasForParihuela(provider, parihuela) {
                     if (!state.data || !state.data.combinationsByProvider[provider]) {
                         return [];
@@ -1959,8 +1923,6 @@
                     return cajas;
                 }
             };
-
-// Continuación del código JavaScript...
 
             const LabelGenerator = {
                 async generate(selections) {
@@ -2651,8 +2613,6 @@
                 }
             };
 
-// Continuación - Sección UI...
-
             const UI = {
                 toggleUserMenu() {
                     const dropdown = document.getElementById('userDropdown');
@@ -2749,19 +2709,13 @@
                 },
 
                 switchTab(event, tabName) {
-                    document.querySelectorAll('.tab').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
+                    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
                     
                     event.target.classList.add('active');
                     document.getElementById(tabName + 'Tab').classList.add('active');
 
-                    if (tabName === 'history') {
-                        History.render();
-                    }
+                    if (tabName === 'history') History.render();
                 },
 
                 switchMethod(methodNum) {
@@ -2788,7 +2742,6 @@
                     });
                 },
 
-                // NUEVA FUNCIÓN: Cargar parihuelas como chips visuales
                 loadParihuelas(provider) {
                     const combinations = state.data.combinationsByProvider[provider] || [];
                     const parihuelas = [...new Set(combinations.map(c => c.parihuela))];
@@ -2802,10 +2755,7 @@
                         const chip = document.createElement('div');
                         chip.className = 'parihuela-chip';
                         chip.dataset.parihuela = parihuela;
-                        chip.innerHTML = `
-                            <div>${parihuela}</div>
-                            <div class="caja-count">${cajasCount} cajas</div>
-                        `;
+                        chip.innerHTML = `<div>${parihuela}</div><div class="caja-count">${cajasCount} cajas</div>`;
                         
                         chip.addEventListener('click', () => UI.selectParihuela(parihuela));
                         grid.appendChild(chip);
@@ -2814,41 +2764,26 @@
                     document.getElementById('parihuselaSection').style.display = 'block';
                 },
 
-                // NUEVA FUNCIÓN: Seleccionar una parihuela
                 selectParihuela(parihuela) {
-                    // Deseleccionar todas
-                    document.querySelectorAll('.parihuela-chip').forEach(chip => {
-                        chip.classList.remove('selected');
-                    });
+                    document.querySelectorAll('.parihuela-chip').forEach(chip => chip.classList.remove('selected'));
                     
-                    // Seleccionar la clickeada
                     const selectedChip = document.querySelector(`[data-parihuela="${parihuela}"]`);
-                    if (selectedChip) {
-                        selectedChip.classList.add('selected');
-                    }
+                    if (selectedChip) selectedChip.classList.add('selected');
                     
                     state.selectedParihuela = parihuela;
                     
-                    // Cargar cajas para esta parihuela
                     UI.loadCajasForParihuela(state.selectedProvider, parihuela);
                     
-                    // Mostrar sección de métodos
                     document.getElementById('methodSection').style.display = 'block';
                     document.getElementById('actionSection').style.display = 'block';
                 },
 
-                // NUEVA FUNCIÓN: Cargar cajas filtradas por parihuela
                 loadCajasForParihuela(provider, parihuela) {
                     const cajas = Data.getCajasForParihuela(provider, parihuela);
                     
-                    // Llenar select de método directo
                     UI.populateSelectSimple('cajaDirecta', cajas, '-- Selecciona una caja --');
-                    
-                    // Llenar selects de método rango
                     UI.populateSelectSimple('cajaDesde', cajas, 'Inicio');
                     UI.populateSelectSimple('cajaHasta', cajas, 'Fin');
-                    
-                    // Llenar checkboxes de método múltiple
                     UI.loadCheckboxList(provider, parihuela, cajas);
                 },
 
@@ -2891,23 +2826,18 @@
                 },
 
                 selectAll() {
-                    document.querySelectorAll('#checkboxList input[type="checkbox"]').forEach(cb => {
-                        cb.checked = true;
-                    });
+                    document.querySelectorAll('#checkboxList input[type="checkbox"]').forEach(cb => cb.checked = true);
                     UI.updateCounter();
                 },
 
                 selectNone() {
-                    document.querySelectorAll('#checkboxList input[type="checkbox"]').forEach(cb => {
-                        cb.checked = false;
-                    });
+                    document.querySelectorAll('#checkboxList input[type="checkbox"]').forEach(cb => cb.checked = false);
                     UI.updateCounter();
                 },
 
                 updateCounter() {
                     const count = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked').length;
-                    document.getElementById('selectionCounter').textContent = 
-                        `${count} seleccionada${count !== 1 ? 's' : ''}`;
+                    document.getElementById('selectionCounter').textContent = `${count} seleccionada${count !== 1 ? 's' : ''}`;
                 },
 
                 showPreview(count, provider, mode) {
@@ -2942,13 +2872,7 @@
 
             const Utils = {
                 escapeHtml(text) {
-                    const map = {
-                        '&': '&amp;',
-                        '<': '&lt;',
-                        '>': '&gt;',
-                        '"': '&quot;',
-                        "'": '&#039;'
-                    };
+                    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
                     return String(text).replace(/[&<>"']/g, m => map[m]);
                 }
             };
@@ -2958,18 +2882,12 @@
                 const parihuela = state.selectedParihuela;
                 const selections = [];
 
-                if (!provider || !parihuela) {
-                    return selections;
-                }
+                if (!provider || !parihuela) return selections;
 
                 if (state.activeMethod === 1) {
-                    // Método directo
                     const caja = document.getElementById('cajaDirecta').value;
-                    if (caja) {
-                        selections.push({ proveedor: provider, parihuela, caja });
-                    }
+                    if (caja) selections.push({ proveedor: provider, parihuela, caja });
                 } else if (state.activeMethod === 2) {
-                    // Método rango
                     const desde = document.getElementById('cajaDesde').value;
                     const hasta = document.getElementById('cajaHasta').value;
                     
@@ -2987,16 +2905,11 @@
                             return cajaNum >= desdeNum && cajaNum <= hastaNum;
                         });
                         
-                        inRange.forEach(caja => {
-                            selections.push({ proveedor: provider, parihuela, caja });
-                        });
+                        inRange.forEach(caja => selections.push({ proveedor: provider, parihuela, caja }));
                     }
                 } else if (state.activeMethod === 3) {
-                    // Método múltiple
                     const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
-                    checkboxes.forEach(cb => {
-                        selections.push({ proveedor: provider, parihuela, caja: cb.value });
-                    });
+                    checkboxes.forEach(cb => selections.push({ proveedor: provider, parihuela, caja: cb.value }));
                 }
 
                 return selections;
@@ -3017,28 +2930,17 @@
                     const provider = state.selectedProvider;
                     const parihuela = state.selectedParihuela;
 
-                    if (!provider) {
-                        UI.showStatus('Selecciona un proveedor', 'error');
-                        return;
-                    }
-
-                    if (!parihuela) {
-                        UI.showStatus('Selecciona una parihuela', 'error');
-                        return;
-                    }
+                    if (!provider) { UI.showStatus('Selecciona un proveedor', 'error'); return; }
+                    if (!parihuela) { UI.showStatus('Selecciona una parihuela', 'error'); return; }
 
                     const selections = getSelections();
-                    if (selections.length === 0) {
-                        UI.showStatus('No hay selecciones válidas', 'warning');
-                        return;
-                    }
+                    if (selections.length === 0) { UI.showStatus('No hay selecciones válidas', 'warning'); return; }
 
                     try {
                         UI.showSpinner(true);
                         const count = await LabelGenerator.generate(selections);
                         
                         if (count > 0) {
-                            const modoTexto = state.activeMode === 'concodigo' ? 'Código' : 'Original';
                             UI.showPreview(count, provider, state.activeMode);
                             UI.showStatus(`${count} rótulos generados correctamente`, 'success');
                             UI.showToast(`✓ ${count} rótulos generados`);
@@ -3059,52 +2961,6 @@
                     UI.showToast('Vista limpiada');
                 },
 
-                printSingle(button) {
-                    const card = button.closest('.rotulo-preview');
-                    const printArea = card.querySelector('.rotulo');
-                    
-                    const printWindow = window.open('', '_blank');
-const printStyles = `
-    @page { margin: 3pt 12pt; }
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .rotulo { max-width: 210mm; margin: 0 auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; }
-    .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
-    .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-    .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
-    .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-    .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-    .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-    .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
-    .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
-    .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
-    .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-    .rotulo-codigo-table td { padding: 2pt; border: none; }
-    .rotulo-codigo-col2 { text-align: right; }
-    .rotulo-tallas-table { width: 758px; margin: 5pt auto; border-collapse: collapse; border: 1px solid #333; font-size: 9pt; table-layout: fixed; }
-    .rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 2px; text-align: center; font-weight: bold; height: 20px; }
-    .rotulo-tallas-table th:nth-child(1), .rotulo-tallas-table th:nth-child(5), .rotulo-tallas-table td:nth-child(1), .rotulo-tallas-table td:nth-child(5) { width: 60px; }
-    .rotulo-tallas-table th:nth-child(2), .rotulo-tallas-table th:nth-child(6), .rotulo-tallas-table td:nth-child(2), .rotulo-tallas-table td:nth-child(6) { width: 60px; }
-    .rotulo-tallas-table th:nth-child(3), .rotulo-tallas-table th:nth-child(7), .rotulo-tallas-table td:nth-child(3), .rotulo-tallas-table td:nth-child(7) { width: 59px; }
-    .rotulo-tallas-table th:nth-child(4), .rotulo-tallas-table th:nth-child(8), .rotulo-tallas-table td:nth-child(4), .rotulo-tallas-table td:nth-child(8) { width: 200px; }
-    .rotulo-tallas-table td { border: 1px solid #333; padding: 2px; text-align: center; height: 100px; vertical-align: middle; font-size: 12pt; }
-    .rotulo-sticker-col { background: #FFFFFF; }
-`;
-                    
-                    printWindow.document.write('<!DOCTYPE html>');
-                    printWindow.document.write('<html><head>');
-                    printWindow.document.write('<meta charset="UTF-8">');
-                    printWindow.document.write('<title>Rotulo Lukers</title>');
-                    printWindow.document.write('<style>' + printStyles + '</style>');
-                    printWindow.document.write('</head><body>');
-                    printWindow.document.write(printArea.innerHTML);
-                    printWindow.document.write('<scr' + 'ipt>');
-                    printWindow.document.write('window.onload = function() { setTimeout(function() { window.print(); }, 100); };');
-                    printWindow.document.write('window.onafterprint = function() { window.close(); };');
-                    printWindow.document.write('</scr' + 'ipt>');
-                    printWindow.document.write('</body></html>');
-                    printWindow.document.close();
-                },
-
                 printAll() {
                     if (state.generatedLabels.length === 0) {
                         UI.showStatus('No hay rótulos para imprimir', 'warning');
@@ -3112,91 +2968,45 @@ const printStyles = `
                     }
 
                     const printWindow = window.open('', '_blank');
-const printStyles = `
-    @page { margin: 3pt 12pt; }
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .rotulo { max-width: 210mm; margin: 0 auto 20pt auto; background: white; border: 2pt solid #333; padding: 3pt 12pt; page-break-after: always; }
-    .rotulo:last-child { page-break-after: auto; }
-    .rotulo-titulo { text-align: center; font-size: 14pt; font-weight: bold; padding: 0; margin: 0; }
-    .rotulo-info-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-    .rotulo-info-table td { border: 1pt solid #333333; padding: 2pt 5pt; height: 20pt; }
-    .rotulo-info-header { background: #4472C4; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-    .rotulo-ubicacion-header { background: #E74C3C; color: #000000; font-weight: bold; text-align: center; font-size: 11pt; }
-    .rotulo-data-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-    .rotulo-data-table td { border: 0.5pt solid #666666; padding: 2pt 5pt; height: 18pt; }
-    .rotulo-section-title { text-align: center; font-size: 11pt; font-weight: bold; padding: 3pt 0; margin: 3pt 0; }
-    .rotulo-producto-title { text-align: center; font-size: 10pt; font-weight: bold; padding: 2pt 0 1pt 0; }
-    .rotulo-codigo-table { width: 100%; margin: 0 auto; border-collapse: collapse; font-size: 9pt; }
-    .rotulo-codigo-table td { padding: 2pt; border: none; }
-    .rotulo-codigo-col2 { text-align: right; }
-    .rotulo-tallas-table { width: 758px; margin: 5pt auto; border-collapse: collapse; border: 1px solid #333; font-size: 9pt; table-layout: fixed; }
-    .rotulo-tallas-table th { background: #F0F0F0; border: 1px solid #333; padding: 2px; text-align: center; font-weight: bold; height: 20px; }
-    .rotulo-tallas-table th:nth-child(1), .rotulo-tallas-table th:nth-child(5), .rotulo-tallas-table td:nth-child(1), .rotulo-tallas-table td:nth-child(5) { width: 60px; }
-    .rotulo-tallas-table th:nth-child(2), .rotulo-tallas-table th:nth-child(6), .rotulo-tallas-table td:nth-child(2), .rotulo-tallas-table td:nth-child(6) { width: 60px; }
-    .rotulo-tallas-table th:nth-child(3), .rotulo-tallas-table th:nth-child(7), .rotulo-tallas-table td:nth-child(3), .rotulo-tallas-table td:nth-child(7) { width: 59px; }
-    .rotulo-tallas-table th:nth-child(4), .rotulo-tallas-table th:nth-child(8), .rotulo-tallas-table td:nth-child(4), .rotulo-tallas-table td:nth-child(8) { width: 200px; }
-    .rotulo-tallas-table td { border: 1px solid #333; padding: 2px; text-align: center; height: 100px; vertical-align: middle; font-size: 12pt; }
-    .rotulo-sticker-col { background: #FFFFFF; }
-`;                    
-                    printWindow.document.write('<!DOCTYPE html>');
-                    printWindow.document.write('<html><head>');
-                    printWindow.document.write('<meta charset="UTF-8">');
-                    printWindow.document.write('<title>Rotulos Lukers - Impresión Múltiple</title>');
-                    printWindow.document.write('<style>' + printStyles + '</style>');
-                    printWindow.document.write('</head><body>');
+                    const printStyles = `@page{margin:3pt 12pt}body{font-family:Arial,sans-serif;margin:0;padding:0}.rotulo{max-width:210mm;margin:0 auto 20pt auto;background:white;border:2pt solid #333;padding:3pt 12pt;page-break-after:always}.rotulo:last-child{page-break-after:auto}.rotulo-titulo{text-align:center;font-size:14pt;font-weight:bold;padding:0;margin:0}.rotulo-info-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-info-table td{border:1pt solid #333333;padding:2pt 5pt;height:20pt}.rotulo-info-header{background:#4472C4;color:#000000;font-weight:bold;text-align:center;font-size:11pt}.rotulo-ubicacion-header{background:#E74C3C;color:#000000;font-weight:bold;text-align:center;font-size:11pt}.rotulo-data-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-data-table td{border:0.5pt solid #666666;padding:2pt 5pt;height:18pt}.rotulo-section-title{text-align:center;font-size:11pt;font-weight:bold;padding:3pt 0;margin:3pt 0}.rotulo-producto-title{text-align:center;font-size:10pt;font-weight:bold;padding:2pt 0 1pt 0}.rotulo-codigo-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-codigo-table td{padding:2pt;border:none}.rotulo-codigo-col2{text-align:right}.rotulo-tallas-table{width:758px;margin:5pt auto;border-collapse:collapse;border:1px solid #333;font-size:9pt;table-layout:fixed}.rotulo-tallas-table th{background:#F0F0F0;border:1px solid #333;padding:2px;text-align:center;font-weight:bold;height:20px}.rotulo-tallas-table th:nth-child(1),.rotulo-tallas-table th:nth-child(5),.rotulo-tallas-table td:nth-child(1),.rotulo-tallas-table td:nth-child(5){width:60px}.rotulo-tallas-table th:nth-child(2),.rotulo-tallas-table th:nth-child(6),.rotulo-tallas-table td:nth-child(2),.rotulo-tallas-table td:nth-child(6){width:60px}.rotulo-tallas-table th:nth-child(3),.rotulo-tallas-table th:nth-child(7),.rotulo-tallas-table td:nth-child(3),.rotulo-tallas-table td:nth-child(7){width:59px}.rotulo-tallas-table th:nth-child(4),.rotulo-tallas-table th:nth-child(8),.rotulo-tallas-table td:nth-child(4),.rotulo-tallas-table td:nth-child(8){width:200px}.rotulo-tallas-table td{border:1px solid #333;padding:2px;text-align:center;height:100px;vertical-align:middle;font-size:12pt}.rotulo-sticker-col{background:#FFFFFF}`;
                     
-                    const rotulos = document.querySelectorAll('.rotulo-preview .rotulo');
-                    rotulos.forEach(rotulo => {
+                    printWindow.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Rotulos Lukers</title><style>' + printStyles + '</style></head><body>');
+                    
+                    document.querySelectorAll('.rotulo-preview .rotulo').forEach(rotulo => {
                         printWindow.document.write(rotulo.outerHTML);
                     });
                     
-                    printWindow.document.write('<scr' + 'ipt>');
-                    printWindow.document.write('window.onload = function() { setTimeout(function() { window.print(); }, 200); };');
-                    printWindow.document.write('window.onafterprint = function() { window.close(); };');
-                    printWindow.document.write('</scr' + 'ipt>');
-                    printWindow.document.write('</body></html>');
+                    printWindow.document.write('<scr' + 'ipt>window.onload=function(){setTimeout(function(){window.print()},200)};window.onafterprint=function(){window.close()}</scr' + 'ipt></body></html>');
                     printWindow.document.close();
-                },
+                }
             };
         })();
 
-        // EXPONER APP GLOBALMENTE
         window.App = App;
 
-        // EVENT LISTENERS
         document.addEventListener('DOMContentLoaded', () => {
-            // Cerrar menú al hacer click fuera
             document.addEventListener('click', (e) => {
                 const userMenu = document.getElementById('userMenuBtn');
                 const dropdown = document.getElementById('userDropdown');
                 
-                if (userMenu && dropdown && 
-                    !userMenu.contains(e.target) && 
-                    !dropdown.contains(e.target)) {
+                if (userMenu && dropdown && !userMenu.contains(e.target) && !dropdown.contains(e.target)) {
                     window.App.UI.closeUserMenu();
                 }
             });
 
-            // Cerrar modales al hacer click fuera
             document.querySelectorAll('.modal-overlay').forEach(modal => {
                 modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.remove('active');
-                    }
+                    if (e.target === modal) modal.classList.remove('active');
                 });
             });
 
-            // Login admin con Enter
             const adminPass = document.getElementById('adminPass');
             if (adminPass) {
                 adminPass.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        window.App.Auth.adminLogin();
-                    }
+                    if (e.key === 'Enter') window.App.Auth.adminLogin();
                 });
             }
             
-            // NUEVO: Selector de proveedor
             document.getElementById('proveedorSelect').addEventListener('change', (e) => {
                 const provider = e.target.value;
                 
@@ -3208,12 +3018,9 @@ const printStyles = `
                 }
             });
 
-            // Botones de modo
             document.querySelectorAll('.mode-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('.mode-btn').forEach(b => {
-                        b.classList.remove('active');
-                    });
+                    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     window.App.state.activeMode = this.dataset.mode;
                     window.App.UI.showToast('Modo: ' + this.textContent);
