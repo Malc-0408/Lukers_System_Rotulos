@@ -833,7 +833,7 @@
         }
 
         .rotulo-tallas-table {
-            width: 758px;
+            width: 100%;
             margin: 5pt auto;
             border-collapse: collapse;
             border: 1px solid #333;
@@ -855,37 +855,37 @@
         .rotulo-tallas-table th:nth-child(5),
         .rotulo-tallas-table td:nth-child(1),
         .rotulo-tallas-table td:nth-child(5) {
-            width: 60px;
+            width: 8%;
         }
 
         .rotulo-tallas-table th:nth-child(2),
         .rotulo-tallas-table th:nth-child(6),
         .rotulo-tallas-table td:nth-child(2),
         .rotulo-tallas-table td:nth-child(6) {
-            width: 60px;
+            width: 8%;
         }
 
         .rotulo-tallas-table th:nth-child(3),
         .rotulo-tallas-table th:nth-child(7),
         .rotulo-tallas-table td:nth-child(3),
         .rotulo-tallas-table td:nth-child(7) {
-            width: 59px;
+            width: 9%;
         }
 
         .rotulo-tallas-table th:nth-child(4),
         .rotulo-tallas-table th:nth-child(8),
         .rotulo-tallas-table td:nth-child(4),
         .rotulo-tallas-table td:nth-child(8) {
-            width: 200px;
+            width: 25%;
         }
 
         .rotulo-tallas-table td {
             border: 1px solid #333;
             padding: 2px;
             text-align: center;
-            height: 100px;
+            height: 80px;
             vertical-align: middle;
-            font-size: 12pt;
+            font-size: 11pt;
         }
 
         .rotulo-sticker-col {
@@ -2268,32 +2268,33 @@
                     const filtered = Data.filterData(selection);
                     const groups = LabelGenerator.groupData(filtered);
                     
-                    const marginTop = 3;
-                    const marginLeft = 12;
+                    const marginTop = 10;
+                    const marginLeft = 15;
+                    const pageWidth = 571; // Ancho útil A4 con márgenes
                     
                     let yPos = marginTop;
                     
-                    pdf.setFontSize(14);
+                    pdf.setFontSize(13);
                     pdf.setFont('helvetica', 'bold');
-                    pdf.text('ROTULO DE CAJA - ALMACEN RD50', 297.5, yPos + 15, { align: 'center' });
+                    pdf.text('ROTULO DE CAJA - ALMACEN RD50', 295, yPos + 15, { align: 'center' });
                     yPos += 20;
                     
                     pdf.setDrawColor(51, 51, 51);
                     pdf.setLineWidth(1);
                     
                     pdf.setFillColor(68, 114, 196);
-                    pdf.rect(marginLeft, yPos, 285, 20, 'FD');
+                    pdf.rect(marginLeft, yPos, 280, 20, 'FD');
                     pdf.setFillColor(231, 76, 60);
-                    pdf.rect(marginLeft + 285, yPos, 286, 20, 'FD');
+                    pdf.rect(marginLeft + 280, yPos, 280, 20, 'FD');
                     
-                    pdf.setFontSize(11);
+                    pdf.setFontSize(10);
                     pdf.setTextColor(255, 255, 255);
-                    pdf.text('INFORMACIÓN DE LA CAJA', marginLeft + 142.5, yPos + 13, { align: 'center' });
-                    pdf.text('UBICACIÓN DEL PRODUCTO', marginLeft + 285 + 143, yPos + 13, { align: 'center' });
+                    pdf.text('INFORMACIÓN DE LA CAJA', marginLeft + 140, yPos + 13, { align: 'center' });
+                    pdf.text('UBICACIÓN DEL PRODUCTO', marginLeft + 280 + 140, yPos + 13, { align: 'center' });
                     yPos += 20;
                     
                     pdf.setTextColor(0, 0, 0);
-                    pdf.setFontSize(9);
+                    pdf.setFontSize(8);
                     pdf.setFont('helvetica', 'normal');
                     pdf.setDrawColor(102, 102, 102);
                     pdf.setLineWidth(0.5);
@@ -2302,45 +2303,45 @@
                     const fecha = new Date().toLocaleDateString('es-ES', { month: '2-digit', year: 'numeric' });
                     const validador = LabelGenerator.getValidator(groups);
                     
-                    pdf.rect(marginLeft, yPos, 285, 18);
-                    pdf.rect(marginLeft + 285, yPos, 286, 18);
-                    pdf.text(`Proveedor: ${selection.proveedor}`, marginLeft + 5, yPos + 12);
-                    pdf.text(`Parihuela: ${selection.parihuela}`, marginLeft + 285 + 5, yPos + 12);
-                    yPos += 18;
+                    pdf.rect(marginLeft, yPos, 280, 16);
+                    pdf.rect(marginLeft + 280, yPos, 280, 16);
+                    pdf.text(`Proveedor: ${selection.proveedor}`, marginLeft + 5, yPos + 11);
+                    pdf.text(`Parihuela: ${selection.parihuela}`, marginLeft + 280 + 5, yPos + 11);
+                    yPos += 16;
                     
-                    pdf.rect(marginLeft, yPos, 285, 18);
-                    pdf.rect(marginLeft + 285, yPos, 286, 18);
-                    pdf.text(`Validador: ${validador}`, marginLeft + 5, yPos + 12);
-                    pdf.text(`Caja: ${selection.caja}`, marginLeft + 285 + 5, yPos + 12);
-                    yPos += 18;
+                    pdf.rect(marginLeft, yPos, 280, 16);
+                    pdf.rect(marginLeft + 280, yPos, 280, 16);
+                    pdf.text(`Validador: ${validador}`, marginLeft + 5, yPos + 11);
+                    pdf.text(`Caja: ${selection.caja}`, marginLeft + 280 + 5, yPos + 11);
+                    yPos += 16;
                     
-                    pdf.rect(marginLeft, yPos, 285, 18);
-                    pdf.rect(marginLeft + 285, yPos, 286, 18);
-                    pdf.text(`Fecha: ${fecha}`, marginLeft + 5, yPos + 12);
-                    pdf.text(`Total Stock: ${totalStock}`, marginLeft + 285 + 5, yPos + 12);
-                    yPos += 25;
+                    pdf.rect(marginLeft, yPos, 280, 16);
+                    pdf.rect(marginLeft + 280, yPos, 280, 16);
+                    pdf.text(`Fecha: ${fecha}`, marginLeft + 5, yPos + 11);
+                    pdf.text(`Total Stock: ${totalStock}`, marginLeft + 280 + 5, yPos + 11);
+                    yPos += 22;
                     
                     const byGenero = LabelGenerator.groupByGenero(groups);
                     
                     for (const [genero, items] of Object.entries(byGenero)) {
                         yPos += 5;
-                        pdf.setFontSize(11);
+                        pdf.setFontSize(10);
                         pdf.setFont('helvetica', 'bold');
-                        pdf.text(`=== ${genero} ===`, 297.5, yPos, { align: 'center' });
+                        pdf.text(`=== ${genero} ===`, 295, yPos, { align: 'center' });
                         yPos += 10;
                         
                         const uniqueProducts = LabelGenerator.groupUniqueProducts(items);
                         
                         for (const product of Object.values(uniqueProducts)) {
-                            pdf.setFontSize(10);
-                            pdf.text(`${product.descripcion} | ${product.mundo} | ${product.marca}`, 297.5, yPos, { align: 'center' });
+                            pdf.setFontSize(9);
+                            pdf.text(`${product.descripcion} | ${product.mundo} | ${product.marca}`, 295, yPos, { align: 'center' });
                             yPos += 8;
                             
                             if (state.activeMode === 'concodigo' && (product.codigo || product.color)) {
-                                pdf.setFontSize(9);
+                                pdf.setFontSize(8);
                                 pdf.setFont('helvetica', 'normal');
                                 pdf.text(`CODIGO: ${product.codigo || 'N/A'}`, marginLeft, yPos);
-                                pdf.text(`COLOR: ${product.color || 'N/A'}`, marginLeft + 571, yPos, { align: 'right' });
+                                pdf.text(`COLOR: ${product.color || 'N/A'}`, marginLeft + 560, yPos, { align: 'right' });
                                 yPos += 10;
                                 pdf.setFont('helvetica', 'bold');
                             }
@@ -2355,26 +2356,27 @@
                     pdf.setDrawColor(51, 51, 51);
                     pdf.setLineWidth(1);
                     
-                    const colWidths = [45, 45, 44, 150, 45, 45, 44, 150];
-                    const rowHeight = 100;
-                    const headerHeight = 20;
+                    const tableWidth = 571; // Ancho total disponible en A4 con márgenes
+                    const colWidths = [45, 45, 50, 145, 45, 45, 50, 145]; // Total = 570
+                    const rowHeight = 70;
+                    const headerHeight = 18;
                     
-                    pdf.setFontSize(9);
+                    pdf.setFontSize(8);
                     pdf.setFont('helvetica', 'bold');
                     
                     const headers = ['T-1', 'T-2', 'CANT', 'Sticker', 'T-1', 'T-2', 'CANT', 'Sticker'];
                     let xPos = x;
                     
                     for (let i = 0; i < headers.length; i++) {
-                        pdf.setFillColor(255, 255, 255);
+                        pdf.setFillColor(240, 240, 240);
                         pdf.rect(xPos, y, colWidths[i], headerHeight, 'FD');
-                        pdf.text(headers[i], xPos + colWidths[i]/2, y + 13, { align: 'center' });
+                        pdf.text(headers[i], xPos + colWidths[i]/2, y + 12, { align: 'center' });
                         xPos += colWidths[i];
                     }
                     y += headerHeight;
                     
                     pdf.setFont('helvetica', 'normal');
-                    pdf.setFontSize(12);
+                    pdf.setFontSize(10);
                     
                     if (tallas.length === 0) {
                         xPos = x;
@@ -2382,7 +2384,7 @@
                             pdf.setFillColor(255, 255, 255);
                             pdf.rect(xPos, y, colWidths[i], rowHeight, 'FD');
                             if (i !== 3 && i !== 7) {
-                                pdf.text('-', xPos + colWidths[i]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                pdf.text('-', xPos + colWidths[i]/2, y + rowHeight/2 + 3, { align: 'center' });
                             }
                             xPos += colWidths[i];
                         }
@@ -2396,17 +2398,17 @@
                             
                             pdf.setFillColor(255, 255, 255);
                             pdf.rect(xPos, y, colWidths[0], rowHeight, 'FD');
-                            pdf.text(t1.talla1 || '-', xPos + colWidths[0]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            pdf.text(t1.talla1 || '-', xPos + colWidths[0]/2, y + rowHeight/2 + 3, { align: 'center' });
                             xPos += colWidths[0];
                             
                             pdf.setFillColor(255, 255, 255);
                             pdf.rect(xPos, y, colWidths[1], rowHeight, 'FD');
-                            pdf.text(t1.talla2 || '-', xPos + colWidths[1]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            pdf.text(t1.talla2 || '-', xPos + colWidths[1]/2, y + rowHeight/2 + 3, { align: 'center' });
                             xPos += colWidths[1];
                             
                             pdf.setFillColor(255, 255, 255);
                             pdf.rect(xPos, y, colWidths[2], rowHeight, 'FD');
-                            pdf.text(String(t1.cantidad || '0'), xPos + colWidths[2]/2, y + rowHeight/2 + 4, { align: 'center' });
+                            pdf.text(String(t1.cantidad || '0'), xPos + colWidths[2]/2, y + rowHeight/2 + 3, { align: 'center' });
                             xPos += colWidths[2];
                             
                             pdf.setFillColor(255, 255, 255);
@@ -2416,17 +2418,17 @@
                             if (t2) {
                                 pdf.setFillColor(255, 255, 255);
                                 pdf.rect(xPos, y, colWidths[4], rowHeight, 'FD');
-                                pdf.text(t2.talla1 || '-', xPos + colWidths[4]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                pdf.text(t2.talla1 || '-', xPos + colWidths[4]/2, y + rowHeight/2 + 3, { align: 'center' });
                                 xPos += colWidths[4];
                                 
                                 pdf.setFillColor(255, 255, 255);
                                 pdf.rect(xPos, y, colWidths[5], rowHeight, 'FD');
-                                pdf.text(t2.talla2 || '-', xPos + colWidths[5]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                pdf.text(t2.talla2 || '-', xPos + colWidths[5]/2, y + rowHeight/2 + 3, { align: 'center' });
                                 xPos += colWidths[5];
                                 
                                 pdf.setFillColor(255, 255, 255);
                                 pdf.rect(xPos, y, colWidths[6], rowHeight, 'FD');
-                                pdf.text(String(t2.cantidad || '0'), xPos + colWidths[6]/2, y + rowHeight/2 + 4, { align: 'center' });
+                                pdf.text(String(t2.cantidad || '0'), xPos + colWidths[6]/2, y + rowHeight/2 + 3, { align: 'center' });
                                 xPos += colWidths[6];
                                 
                                 pdf.setFillColor(255, 255, 255);
@@ -2968,7 +2970,7 @@
                     }
 
                     const printWindow = window.open('', '_blank');
-                    const printStyles = `@page{margin:3pt 12pt}body{font-family:Arial,sans-serif;margin:0;padding:0}.rotulo{max-width:210mm;margin:0 auto 20pt auto;background:white;border:2pt solid #333;padding:3pt 12pt;page-break-after:always}.rotulo:last-child{page-break-after:auto}.rotulo-titulo{text-align:center;font-size:14pt;font-weight:bold;padding:0;margin:0}.rotulo-info-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-info-table td{border:1pt solid #333333;padding:2pt 5pt;height:20pt}.rotulo-info-header{background:#4472C4;color:#000000;font-weight:bold;text-align:center;font-size:11pt}.rotulo-ubicacion-header{background:#E74C3C;color:#000000;font-weight:bold;text-align:center;font-size:11pt}.rotulo-data-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-data-table td{border:0.5pt solid #666666;padding:2pt 5pt;height:18pt}.rotulo-section-title{text-align:center;font-size:11pt;font-weight:bold;padding:3pt 0;margin:3pt 0}.rotulo-producto-title{text-align:center;font-size:10pt;font-weight:bold;padding:2pt 0 1pt 0}.rotulo-codigo-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-codigo-table td{padding:2pt;border:none}.rotulo-codigo-col2{text-align:right}.rotulo-tallas-table{width:758px;margin:5pt auto;border-collapse:collapse;border:1px solid #333;font-size:9pt;table-layout:fixed}.rotulo-tallas-table th{background:#F0F0F0;border:1px solid #333;padding:2px;text-align:center;font-weight:bold;height:20px}.rotulo-tallas-table th:nth-child(1),.rotulo-tallas-table th:nth-child(5),.rotulo-tallas-table td:nth-child(1),.rotulo-tallas-table td:nth-child(5){width:60px}.rotulo-tallas-table th:nth-child(2),.rotulo-tallas-table th:nth-child(6),.rotulo-tallas-table td:nth-child(2),.rotulo-tallas-table td:nth-child(6){width:60px}.rotulo-tallas-table th:nth-child(3),.rotulo-tallas-table th:nth-child(7),.rotulo-tallas-table td:nth-child(3),.rotulo-tallas-table td:nth-child(7){width:59px}.rotulo-tallas-table th:nth-child(4),.rotulo-tallas-table th:nth-child(8),.rotulo-tallas-table td:nth-child(4),.rotulo-tallas-table td:nth-child(8){width:200px}.rotulo-tallas-table td{border:1px solid #333;padding:2px;text-align:center;height:100px;vertical-align:middle;font-size:12pt}.rotulo-sticker-col{background:#FFFFFF}`;
+                    const printStyles = `@page{margin:10pt 15pt}body{font-family:Arial,sans-serif;margin:0;padding:0}.rotulo{max-width:100%;margin:0 auto 15pt auto;background:white;border:2pt solid #333;padding:5pt 10pt;page-break-after:always}.rotulo:last-child{page-break-after:auto}.rotulo-titulo{text-align:center;font-size:13pt;font-weight:bold;padding:0;margin:0}.rotulo-info-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-info-table td{border:1pt solid #333333;padding:2pt 5pt;height:18pt}.rotulo-info-header{background:#4472C4;color:#000000;font-weight:bold;text-align:center;font-size:10pt}.rotulo-ubicacion-header{background:#E74C3C;color:#000000;font-weight:bold;text-align:center;font-size:10pt}.rotulo-data-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:9pt}.rotulo-data-table td{border:0.5pt solid #666666;padding:2pt 5pt;height:16pt}.rotulo-section-title{text-align:center;font-size:10pt;font-weight:bold;padding:3pt 0;margin:3pt 0}.rotulo-producto-title{text-align:center;font-size:9pt;font-weight:bold;padding:2pt 0 1pt 0}.rotulo-codigo-table{width:100%;margin:0 auto;border-collapse:collapse;font-size:8pt}.rotulo-codigo-table td{padding:2pt;border:none}.rotulo-codigo-col2{text-align:right}.rotulo-tallas-table{width:100%;margin:5pt auto;border-collapse:collapse;border:1px solid #333;font-size:8pt;table-layout:fixed}.rotulo-tallas-table th{background:#F0F0F0;border:1px solid #333;padding:2px;text-align:center;font-weight:bold;height:18px}.rotulo-tallas-table th:nth-child(1),.rotulo-tallas-table th:nth-child(5),.rotulo-tallas-table td:nth-child(1),.rotulo-tallas-table td:nth-child(5){width:8%}.rotulo-tallas-table th:nth-child(2),.rotulo-tallas-table th:nth-child(6),.rotulo-tallas-table td:nth-child(2),.rotulo-tallas-table td:nth-child(6){width:8%}.rotulo-tallas-table th:nth-child(3),.rotulo-tallas-table th:nth-child(7),.rotulo-tallas-table td:nth-child(3),.rotulo-tallas-table td:nth-child(7){width:9%}.rotulo-tallas-table th:nth-child(4),.rotulo-tallas-table th:nth-child(8),.rotulo-tallas-table td:nth-child(4),.rotulo-tallas-table td:nth-child(8){width:25%}.rotulo-tallas-table td{border:1px solid #333;padding:2px;text-align:center;height:70px;vertical-align:middle;font-size:10pt}.rotulo-sticker-col{background:#FFFFFF}`;
                     
                     printWindow.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Rotulos Lukers</title><style>' + printStyles + '</style></head><body>');
                     
